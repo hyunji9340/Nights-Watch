@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{81F29B8F-CCD1-4815-9709-48297BE602D0}|Default">
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Views/GameStartPage.xaml" Line="1" Column="1" />
+      <File FileName="Views/GameStartPage.xaml.cs" Line="20" Column="3" />
+      <File FileName="Views/ScorePage.xaml" Line="1" Column="1" />
+      <File FileName="Views/ScorePage.xaml.cs" Line="1" Column="1" />
+      <File FileName="Views/BattlePage.xaml" Line="1" Column="1" />
+      <File FileName="Views/BattlePage.xaml.cs" Line="1" Column="1" />
+      <File FileName="App.xaml.cs" Line="50" Column="7" />
+      <File FileName="Views/ItemDetailPage.xaml" Line="1" Column="1" />
+      <File FileName="Views/MyInfo.xaml" Line="1" Column="1" />
+      <File FileName="App.xaml" Line="1" Column="1" />
+      <File FileName="Views/MyInfo.xaml.cs" Line="23" Column="1" />
+      <File FileName="Views/MonsterPage.xaml" Line="1" Column="1" />
+      <File FileName="Views/MonsterPage.xaml.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.XamarinProject.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.FB193929-2B6B-4433-A15A-7F3FDAE8032B" />
+  <MultiItemStartupConfigurations />
+</Properties>
