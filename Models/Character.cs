@@ -8,7 +8,8 @@ namespace XamarinProject.Models
     {
         string Name { get; set; }
         int Level { get; set; }
-        int Health { get; set; }
+        int maxHealth { get; set; }
+        int curHealth { get; set; }
         int Experience { get; set; }
         int Strength { get; set; }
         int Dexterity { get; set; }
@@ -20,7 +21,8 @@ namespace XamarinProject.Models
         {
             Name = "";
             Level = 1;
-            Health = 20;
+            maxHealth = 20;
+            curHealth = 20;
             Experience = 0;
             Strength = 1;
             Dexterity = 1;
@@ -28,10 +30,11 @@ namespace XamarinProject.Models
             Speed = 1;
         }
 
-        bool isDead() { return (Health <= 0); }
+        bool isDead() { return (curHealth <= 0); }
         void levelUp()
         {
-            Health += 5;
+            maxHealth += 5;
+            curHealth = maxHealth;
             Strength++;
             Dexterity++;
             Agility++;
