@@ -13,11 +13,11 @@ namespace XamarinProject
 		{
 			InitializeComponent();
 
-			Item = new Item
-			{
-				Text = "Item name",
-				Description = "This is a nice description"
-			};
+			//Item = new Item
+			//{
+			//	Text = "Item name",
+			//	Description = "This is a nice description"
+			//};
 
 			BindingContext = this;
 		}

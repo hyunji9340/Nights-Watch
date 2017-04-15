@@ -1,5 +1,5 @@
 ﻿using System;
-namespace GroupProject
+namespace XamarinProject
 {
 	public class Character
 	{
@@ -13,7 +13,7 @@ namespace GroupProject
 		public int Dexterity { get; set; }
 		public int Agility { get; set; }
 		public int Speed { get; set; }
-		public Items[] Inventory { get; set; }
+		public Item[] Inventory { get; set; }
 
 		// constructor
 		public Character()
@@ -53,9 +53,9 @@ namespace GroupProject
 		}
 
 
-		void addItem(Items item)
+		void addItem(Item item)
 		{
-			item = new GroupProject.Items();
+			item = new Item();
 			item.type = "Sword/RightHand";
 			item.name = "The Shiny Blade of Dragon Slaying";
 			item.description = "This sword slays dragons yo.";
