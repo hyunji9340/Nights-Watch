@@ -10,10 +10,9 @@ namespace XamarinProject
 	public class ItemDetailViewModel : BaseViewModel
 	{
 		public Items Item { get; set; }
-		public ItemDetailViewModel(Items item = null)
+		public ItemDetailViewModel(Items items = null)
 		{
-			Title = item.Text;
-			Item = item;
+			Title = items.description;
 		}
 
 		int quantity = 1;
