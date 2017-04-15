@@ -112,5 +112,6 @@ C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\Xama
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\Xamarin.Forms.Platform.Android.dll.mdb
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\Xamarin.Forms.Xaml.dll.mdb
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\XamarinProject.Droid.dll.mdb
+C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\XamarinProject.Droid.Views.CharacterInfo.xaml.g.cs
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\XamarinProject.Droid.dll.mdb
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\bin\Debug\XamarinProject.Droid.dll.mdb

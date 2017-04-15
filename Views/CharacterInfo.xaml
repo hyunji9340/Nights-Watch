@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinProject.Views.CharacterInfo">
+    <StackLayout BackgroundColor="Black">
+        <Label Text="Character Info" HorizontalOptions="Center" FontSize="24" TextColor="White"></Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Character: " ForegroundColor ="White"/>
+                        <Span Text="[CHARACTER NAME]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Level: " ForegroundColor ="White" />
+                        <Span Text="[CHARACTER LEVEL]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Experience: " ForegroundColor="White" />
+                        <Span Text="[CURRENT EXP] / " ForegroundColor ="White"/>
+                        <Span Text="[MAX EXP]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Health: "  ForegroundColor="White" />
+                        <Span Text="[CURRENT HEALTH] / " ForegroundColor ="White"/>
+                        <Span Text ="[MAX HEALTH]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        
+        <Label  HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Strength: " ForegroundColor="White" />
+                        <Span Text="[CHARACTER STRENGTH]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Defense: " ForegroundColor="White" />
+                        <Span Text="[CHARACTER DEFENSE]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Speed: " ForegroundColor="White" />
+                        <Span Text="[CHARACTER SPEED]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Agility: " ForegroundColor="White" />
+                        <Span Text="[CHARACTER AGILITY]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label HorizontalOptions="Start">
+            <Label.FormattedText>
+                <FormattedString >
+                    <FormattedString.Spans>
+                        <Span Text="Dexterity: " ForegroundColor="White" />
+                        <Span Text="[CHARACTER DEXTERITY]" ForegroundColor ="White"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label Text="Items" HorizontalOptions="Start" TextColor="White"/>
+        <ListView x:Name="characterItemList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    
+                    <TextCell Text="{Binding Title}"
+                     Detail="{Binding Subtitle}" />
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+    </StackLayout>
+</ContentPage>

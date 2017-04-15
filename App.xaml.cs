@@ -50,7 +50,7 @@ namespace XamarinProject
 					{
 						Title = "Browse" // Browse
 					},
-					new NavigationPage(new AboutPage())
+					new NavigationPage(new Views.CharacterInfo())
 					{
 						Title = "About" // About
 					},

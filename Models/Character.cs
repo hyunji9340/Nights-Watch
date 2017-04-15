@@ -15,6 +15,7 @@ namespace XamarinProject.Models
         int Dexterity { get; set; }
         int Agility { get; set; }
         int Speed { get; set; }
+        int Defense { get; set; }
         Item[] Inventory { get; set; }
 
         public Character()
@@ -28,6 +29,7 @@ namespace XamarinProject.Models
             Dexterity = 1;
             Agility = 1;
             Speed = 1;
+            Defense = 1;
         }
 
         bool isDead() { return (curHealth <= 0); }
@@ -39,6 +41,7 @@ namespace XamarinProject.Models
             Dexterity++;
             Agility++;
             Speed++;
+            Defense++;
         }
 
 
@@ -55,6 +58,9 @@ namespace XamarinProject.Models
 
         void addItem(Item item)
         {
+            // An item would be either passed in or randomly selected from the overall item list. 
+            // A new item object would be instantiated and the details of the item would be copied over.
+            // The new item object is then placed into the character's invetory[].
             item = new XamarinProject.Item();
             item.Id = "Sword/RightHand";
             item.Text = "The Shiny Blade of Dragon Slaying";

@@ -24,6 +24,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ItemsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AboutPage.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CharacterInfo.xaml.cs">
+      <DependentUpon>CharacterInfo.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ItemDetailPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ItemsPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml.cs" />
@@ -79,6 +83,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\BattlePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CharacterInfo.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

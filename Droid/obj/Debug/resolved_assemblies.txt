@@ -28,6 +28,9 @@ C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\Syst
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\mscorlib.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.ComponentModel.Composition.dll
+C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Xml.ReaderWriter.dll
+C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.ComponentModel.dll
+C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Reflection.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Dynamic.Runtime.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.ObjectModel.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Linq.Expressions.dll
@@ -36,14 +39,12 @@ C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\Syst
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Globalization.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Collections.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Text.RegularExpressions.dll
-C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Xml.ReaderWriter.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Xml.XDocument.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Xml.Linq.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.Serialization.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.ServiceModel.Internals.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Threading.Tasks.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.Serialization.Primitives.dll
-C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Reflection.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.Extensions.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Text.Encoding.Extensions.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Linq.dll
@@ -56,5 +57,4 @@ C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\Mono
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Resources.ResourceManager.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.InteropServices.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Net.Primitives.dll
-C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.ComponentModel.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\android\assets\System.Collections.Concurrent.dll
