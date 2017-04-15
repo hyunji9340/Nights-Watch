@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinProject.MonsterPage" Title="Monsters">
-	<ContentPage.Content>
-		<Label Text="This is Monster page" VerticalOptions="Center" HorizontalOptions="Center"></Label>
-	</ContentPage.Content>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinProject.MonsterPage">
+	<ListView x:Name="MonsterListView" >
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<ViewCell>
+					<StackLayout Orientation="Horizontal" Padding="5">
+						<StackLayout HorizontalOptions="CenterAndExpand">
+							<Label Text="{Binding name}" />
+						</StackLayout>
+						<Label Text="Detail" HorizontalOptions="End" TextColor="Blue"/>
+					</StackLayout>
+				</ViewCell>
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</ListView>
 </ContentPage>
