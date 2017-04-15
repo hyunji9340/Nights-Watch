@@ -8,18 +8,18 @@ namespace XamarinProject
 {
 	public class ItemsViewModel : BaseViewModel
 	{
-		public ObservableRangeCollection<Item> Items { get; set; }
+		public ObservableRangeCollection<Items> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()
 		{
 			Title = "Items"; // Browse
-			Items = new ObservableRangeCollection<Item>();
+			Items = new ObservableRangeCollection<Items>();
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-			MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+			MessagingCenter.Subscribe<NewItemPage, Items>(this, "AddItem", async (obj, item) =>
 			{
-				var _item = item as Item;
+				var _item = item as Items;
 				Items.Add(_item);
 				await DataStore.AddItemAsync(_item);
 			});
