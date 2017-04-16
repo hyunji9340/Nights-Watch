@@ -7,7 +7,7 @@ namespace XamarinProject
 		/// <summary>
 		/// Get the azure service instance
 		/// </summary>
-		public IDataStore<Items> DataStore => DependencyService.Get<IDataStore<Items>>();
+		//public IDataStore<Items> DataStore => DependencyService.Get<IDataStore<Items>>();
 
 		bool isBusy = false;
 		public bool IsBusy

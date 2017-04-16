@@ -100,6 +100,8 @@ class MonoPackageManager_Resources {
 		/* We need to ensure that "XamarinProject.Droid.dll" comes first in this list. */
 		"XamarinProject.Droid.dll",
 		"FormsViewGroup.dll",
+		"Microsoft.VisualStudio.TestPlatform.TestFramework.dll",
+		"Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll",
 		"Newtonsoft.Json.dll",
 		"Plugin.Connectivity.Abstractions.dll",
 		"Plugin.Connectivity.dll",

@@ -8,21 +8,21 @@ namespace XamarinProject
 {
 	public class ItemsViewModel : BaseViewModel
 	{
-		public ObservableRangeCollection<Items> Items { get; set; }
+		//public ObservableRangeCollection<Items> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()
 		{
-			Title = "Items"; // Browse
-			Items = new ObservableRangeCollection<Items>();
-			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+			//Title = "Items"; // Browse
+			//Items = new ObservableRangeCollection<Items>();
+			//LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-			MessagingCenter.Subscribe<NewItemPage, Items>(this, "AddItem", async (obj, item) =>
-			{
-				var _item = item as Items;
-				Items.Add(_item);
-				await DataStore.AddItemAsync(_item);
-			});
+			//MessagingCenter.Subscribe<NewItemPage, Items>(this, "AddItem", async (obj, item) =>
+			//{
+			//	var _item = item as Items;
+			//	Items.Add(_item);
+			//	await DataStore.AddItemAsync(_item);
+			//});
 		}
 
 		async Task ExecuteLoadItemsCommand()
@@ -34,9 +34,9 @@ namespace XamarinProject
 
 			try
 			{
-				Items.Clear();
-				var items = await DataStore.GetItemsAsync(true);
-				Items.ReplaceRange(items);
+				//Items.Clear();
+				//var items = await DataStore.GetItemsAsync(true);
+				//Items.ReplaceRange(items);
 			}
 			catch (Exception ex)
 			{

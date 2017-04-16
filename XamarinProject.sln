@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinProject.Droid", "Dro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinProject.MobileAppService", "MobileAppService\XamarinProject.MobileAppService.csproj", "{831533D8-B00A-46C9-A791-4B9693C0278D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD_Unit_Tests", "..\DnD_Unit_Tests\DnD_Unit_Tests.csproj", "{801F0FAC-DD0E-4488-B463-94F705192E87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD_Unit_Tests", "DnD_Unit_Tests\DnD_Unit_Tests.csproj", "{801F0FAC-DD0E-4488-B463-94F705192E87}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
