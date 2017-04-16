@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using XamarinProject;
 
-namespace DnD_Unit_tests
+namespace DnD_Unit_Tests
 {
     [TestClass]
     public class ItemTest
