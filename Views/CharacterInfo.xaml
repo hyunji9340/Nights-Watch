@@ -102,8 +102,15 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     
+                    <!-- 
+                    
+                    This needs to be changed to be a template for the class defined in the controller for this view.
+                    Not sure if the custom cell class in the controller for this view is in the right spot.
+                    
                     <TextCell Text="{Binding Title}"
                      Detail="{Binding Subtitle}" />
+                    
+                    -->
                     
                 </DataTemplate>
             </ListView.ItemTemplate>
