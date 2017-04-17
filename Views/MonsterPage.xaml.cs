@@ -13,7 +13,7 @@ namespace XamarinProject
 		{
 			InitializeComponent();
 			PopulateMonsters();
-			MonsterListView.ItemsSource = monsters;
+			//MonsterListView.ItemsSource = monsters;
 		}
 
 		public void PopulateMonsters() 
@@ -24,11 +24,11 @@ namespace XamarinProject
 			Monster monster3 = new Monster();
 			Monster monster4 = new Monster();
 			Monster monster5 = new Monster();
-			monster1.name = "monster1";
-			monster2.name = "mosnter2";
-			monster3.name = "monster3";
-			monster4.name = "monster4";
-			monster5.name = "monster5";
+			monster1.Name = "monster1";
+			monster2.Name = "mosnter2";
+			monster3.Name = "monster3";
+			monster4.Name = "monster4";
+			monster5.Name = "monster5";
 			monsters.Add(monster1);
 			monsters.Add(monster2);
 			monsters.Add(monster3);
@@ -47,7 +47,7 @@ namespace XamarinProject
 			//await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(monster)));
 
 			// Manually deselect item
-			MonsterListView.SelectedItem = null;
+			//MonsterListView.SelectedItem = null;
 		}
 
 	}

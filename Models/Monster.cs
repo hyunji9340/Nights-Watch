@@ -4,21 +4,21 @@ namespace XamarinProject
     public class Monster
     {
         //fields
-        public string name { get; set; }
-        public int rating { get; set; }
-        public int health { get; set; }
+        public string Name { get; set; }
+        public int Rating { get; set; }
+        public int Health { get; set; }
         public int xpValue { get; set; }
         public int Strength { get; set; }
         public int Dexterity { get; set; }
         public int Agility { get; set; }
         public int Speed { get; set; }
-
+        public int Item { get; set; }
         // constructor
         public Monster()
         {
-            name = "";
-            rating = 1;
-            health = 20;
+            Name = "";
+            Rating = 1;
+            Health = 20;
             xpValue = 0;
             Strength = 1;
             Dexterity = 1;
@@ -26,7 +26,15 @@ namespace XamarinProject
             Speed = 1;
         }
 
-        bool isDead() { return (health <= 0); }
+        public bool isDead()
+        {
+            return (Health <= 0);
+        }
+
+        public void takeDamage(int damage)
+        {
+            Health -= damage;
+        }
 
     }
 }
