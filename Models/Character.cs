@@ -27,13 +27,18 @@ namespace XamarinProject
 			Dexterity = 1;
 			Agility = 1;
 			Speed = 1;
+            monstersKilled = 0;
             Inventory = new Item[7];
 		}
 
-		public bool isDead() { return (curHealth <= 0); }
+        public bool isDead()
+        {
+            return (Health <= 0);
+        }
 
 		public void levelUp()
 		{
+            Level++;
 			Health += 5;
 			curHealth = Health;
 			Strength++;
@@ -44,7 +49,7 @@ namespace XamarinProject
 
         public void takeDamage(int damage)
         {
-            //Health -= damage;
+            Health -= damage;
         }
 
         public void addExperience(int gain)
@@ -52,15 +57,15 @@ namespace XamarinProject
 			Experience += gain;
 			if (Experience > 10) //10 is used in this case, will be replaced by global xp thresholds
 			{
-				//levelUp();
-				//Experience -= 10;
-			}
+                levelUp();
+                Experience -= 10;
+            }
 		}
 
 
 		public void addItem(Item item)
 		{
-            if (Inventory[item.slot].description == "")
+            if (Inventory[item.slot] == null)
 			    Inventory[item.slot] = item;
             else
             {

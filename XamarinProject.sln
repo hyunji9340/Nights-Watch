@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "XamarinProject", "XamarinProject.shproj", "{68DD2B0F-B2E5-4C86-90B4-0264D72F27A2}"
 EndProject
@@ -39,6 +39,7 @@ Global
 		{81F29B8F-CCD1-4815-9709-48297BE602D0}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{AEB9920E-CEE1-41F1-91AD-4907E61EBE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEB9920E-CEE1-41F1-91AD-4907E61EBE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB9920E-CEE1-41F1-91AD-4907E61EBE9F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{AEB9920E-CEE1-41F1-91AD-4907E61EBE9F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{AEB9920E-CEE1-41F1-91AD-4907E61EBE9F}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{AEB9920E-CEE1-41F1-91AD-4907E61EBE9F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU

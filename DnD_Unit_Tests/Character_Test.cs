@@ -62,7 +62,7 @@ namespace DnD_Unit_Tests
         {
             Character hero = new Character();
             hero.monstersKilled++;
-            Assert.IsTrue(hero.monstersKilled > 1);
+            Assert.IsTrue(hero.monstersKilled > 0);
         }
 
         [TestMethod]

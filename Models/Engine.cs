@@ -6,6 +6,9 @@ namespace XamarinProject.Models
 {
     class Engine
     {
+
+
+
         /***********************resource declarations***************************
          public characater list
          public monster list
