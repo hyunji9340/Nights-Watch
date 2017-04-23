@@ -9,17 +9,20 @@ namespace XamarinProject
 	public partial class BattlePage : ContentPage
 	{
         BattleViewModel BattleEngine;
+        int counter;
 
 		public BattlePage()
 		{
 			InitializeComponent();
 
             BindingContext = BattleEngine = new BattleViewModel();
+
+            counter = 0;
 		}
 
-        async void step_Clicked(object sender, EventArgs e)
+        async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewItemPage());
+            BattleEngine.UpdateAction(ref counter);
         }
     }
 }

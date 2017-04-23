@@ -8,7 +8,7 @@
 			<Label Text="CPSC - 5910 SQ" FontSize="Medium" />
 			<Label Text="The Night's Watch" FontSize="Medium" />
 			<Label Text="{Binding StringFormat='Date/Time - {0}'}" FontSize="Medium" />
-			<Label Text="Student - Hyunji Nam" FontSize="Medium" />
+			<Label Text="Student - Hyunji Nam, Anthony Absher, Austin Ishii, Zachary Powers" FontSize="Medium" />
 			<Button Text="Let's start the game!" BorderWidth="1" BorderColor="Blue" FontSize="20" Margin="0, 20, 0, 0" Clicked="playGameBtnClicked"></Button>
 		</StackLayout>
 	</ContentPage.Content>
