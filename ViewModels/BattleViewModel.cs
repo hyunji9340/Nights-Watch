@@ -5,6 +5,7 @@ using System.Text;
 
 namespace XamarinProject.ViewModels
 {
+
     public class BattleViewModel : INotifyPropertyChanged
     {
         Character char1;
@@ -12,7 +13,7 @@ namespace XamarinProject.ViewModels
         Character char3;
         Character char4;
         List<Item> item_dictionary;
-
+        public ObservableRangeCollection<String> actions;
         public string action;
 
         public BattleViewModel()
@@ -23,28 +24,34 @@ namespace XamarinProject.ViewModels
             char4 = new Character();
             item_dictionary = new List<Item>();
             action = "Game starting...";
+            actions = new ObservableRangeCollection<string>();
         }
 
-        public string Action
+        public void Enque(string move)
+        {
+            if (actions.Count >= 11)
+                actions.RemoveAt(actions.Count - 1);
+            actions.Insert(0, move);
+        }
+
+        public ObservableRangeCollection<string> Actions
         {
             get
             {
-                return action;
+                return actions;
             }
             set
             {
-                if (action != value)
-                {
-                    action = value;
-                    OnPropertyChanged("Action");
-                }
+                    actions = value;
+                    OnPropertyChanged("Actions");
             }
         }
 
+
         public void UpdateAction(ref int counter)
         {
-            action = counter.ToString() + "\n";
-            OnPropertyChanged("Action");
+            Enque(counter.ToString());
+            OnPropertyChanged("Actions");
             counter++;
         }
 
