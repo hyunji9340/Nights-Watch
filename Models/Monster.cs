@@ -26,6 +26,40 @@ namespace XamarinProject
             Speed = 1;
         }
 
+        public Monster(string name)
+        {
+            Name = name;
+            Rating = 1;
+            Health = 20;
+            xpValue = 0;
+            Strength = 1;
+            Dexterity = 1;
+            Agility = 1;
+            Speed = 1;
+        }
+        public Monster(Monster monster)
+        {
+            Name = monster.Name;
+            Rating = monster.Rating;
+            Health = monster.Health;
+            xpValue = monster.xpValue;
+            Strength = monster.Strength;
+            Dexterity = monster.Dexterity;
+            Agility = monster.Agility;
+            Speed = monster.Speed;
+        }
+
+        public void setMonsterLevel(int level)
+        {
+            Rating = 1 * level;
+            Health = 20 * level;
+            xpValue = 10 * level;
+            Strength = 1 * level;
+            Dexterity = 1 * level;
+            Agility = 1 * level;
+            Speed = 1 * level;
+        }
+
         public bool isDead()
         {
             return (Health <= 0);
@@ -34,6 +68,11 @@ namespace XamarinProject
         public void takeDamage(int damage)
         {
             Health -= damage;
+        }
+
+        public int Attack()
+        {
+            return Strength + Rating;
         }
 
     }

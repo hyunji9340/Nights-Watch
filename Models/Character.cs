@@ -11,7 +11,7 @@ namespace XamarinProject
 		public int Experience { get; set; }
 		public int Strength { get; set; }
 		public int Dexterity { get; set; }
-		public int Agility { get; set; }
+		public int Defense { get; set; }
 		public int Speed { get; set; }
 		public Item[] Inventory { get; set; }
         public int monstersKilled { get; set; }
@@ -25,12 +25,34 @@ namespace XamarinProject
 			Experience = 0;
 			Strength = 1;
 			Dexterity = 1;
-			Agility = 1;
+			Defense = 1;
 			Speed = 1;
             monstersKilled = 0;
-            Inventory = new Item[7];
+            Inventory = new Item[4];
 		}
 
+        public Character(String name)
+        {
+            Name = name;
+            Level = 1;
+            Health = 20;
+            curHealth = 20;
+            Experience = 0;
+            Strength = 1;
+            Dexterity = 1;
+            Defense = 1;
+            Speed = 1;
+            monstersKilled = 0;
+            Inventory = new Item[4];
+        }
+
+        public int Attack()
+        {
+            int attack = Strength;
+            if (Inventory[1] != null)
+                attack += Inventory[1].rating;
+            return attack;
+        }
         public bool isDead()
         {
             return (Health <= 0);
@@ -43,7 +65,7 @@ namespace XamarinProject
 			curHealth = Health;
 			Strength++;
 			Dexterity++;
-			Agility++;
+			Defense++;
 			Speed++;
 		}
 

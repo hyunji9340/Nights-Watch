@@ -8,21 +8,21 @@ namespace XamarinProject
 {
 	public partial class BattlePage : ContentPage
 	{
-        BattleViewModel BattleEngine;
+        BattleViewModel BattleEngineView;
         int counter;
 
 		public BattlePage()
 		{
 			InitializeComponent();
 
-            BindingContext = BattleEngine = new BattleViewModel();
+            BindingContext = BattleEngineView = new BattleViewModel();
 
             counter = 0;
 		}
 
         async void Button_Clicked(object sender, EventArgs e)
         {
-            BattleEngine.UpdateAction(ref counter);
+            BattleEngineView.UpdateAction(ref counter);
         }
     }
 }

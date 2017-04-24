@@ -13,7 +13,18 @@ namespace XamarinProject
 		// default constructor that doesn't take any arguments
 		public Item() { }
 
-		public Item(String name, String description, int rating, String type, int slot)
+
+        //copy constructor
+        public Item(Item item)
+        {
+            name = item.name;
+            description = item.description;
+            rating = item.rating;
+            type = item.type;
+            slot = item.slot;
+        }
+
+        public Item(String name, String description, int rating, String type, int slot)
 		{
 
 			this.name = name;
