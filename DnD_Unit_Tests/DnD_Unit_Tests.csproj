@@ -52,6 +52,7 @@
     <Compile Include="Item_Test.cs" />
     <Compile Include="Character_Test.cs" />
     <Compile Include="Monster_Test.cs" />
+    <Compile Include="BattleEngine_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

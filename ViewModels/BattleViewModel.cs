@@ -75,6 +75,7 @@ namespace XamarinProject.ViewModels
                 new Item("Chainmail", "It's Bulletproof", 3, "Defense", 2),
                 new Item("Feather Shorts", "It's so light", 7, "Speed", 3)
             };
+
             monster_dictionary = new List<Monster>()
             {
                 new Monster("Goblin"),
@@ -83,6 +84,7 @@ namespace XamarinProject.ViewModels
                 new Monster("White-Walker"),
                 new Monster("Wildling")
             };
+
         }
 
         public void Enque(string log)

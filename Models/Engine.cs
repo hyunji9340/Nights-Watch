@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XamarinProject.Models
 {
-    class Engine
+    public class Engine
     {
         /***********************resource declarations***************************/
         public List<Character> characterList;
