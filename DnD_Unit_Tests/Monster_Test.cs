@@ -19,7 +19,7 @@ namespace DnD_Unit_Tests
         public void MonsterAliveDeadAfterTakingDamage()
         {
             Monster monster = new Monster();
-            monster.takeDamage(10);
+            monster.takeDamage(5);
             Assert.IsFalse(monster.isDead());
         }
 
