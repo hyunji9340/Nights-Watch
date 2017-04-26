@@ -1,9 +1,11 @@
 ﻿using System;
-namespace XamarinProject
+using System.ComponentModel;
+
+namespace GroupProject_DD
 {
-	public class Item
+	public class Item 
 	{
-		// fields
+		// fields 
 		public String name { get; set; }
 		public String description { get; set; }
 		public int rating { get; set; }
@@ -14,19 +16,18 @@ namespace XamarinProject
 		public Item() { }
 
 
-        //copy constructor
-        public Item(Item item)
-        {
-            name = item.name;
-            description = item.description;
-            rating = item.rating;
-            type = item.type;
-            slot = item.slot;
-        }
-
-        public Item(String name, String description, int rating, String type, int slot)
+		//copy constructor
+		public Item(Item item)
 		{
+			name = item.name;
+			description = item.description;
+			rating = item.rating;
+			type = item.type;
+			slot = item.slot;
+		}
 
+		public Item(String name, String description, int rating, String type, int slot)
+		{
 			this.name = name;
 			this.description = description;
 			this.rating = rating;

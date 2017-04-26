@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using Xamarin.Forms;
-using XamarinProject.ViewModels;
 
-namespace XamarinProject
+namespace GroupProject_DD
 {
 	public partial class BattlePage : ContentPage
 	{
-        BattleViewModel BattleEngineView;
-        int counter;
+		private BattleViewModel BattleEngineView;
+		private int counter;
 
 		public BattlePage()
 		{
 			InitializeComponent();
-
-            BindingContext = BattleEngineView = new BattleViewModel();
-
-            counter = 0;
+			BindingContext = BattleEngineView = new BattleViewModel();
+			counter = 0;
 		}
 
-        async void Button_Clicked(object sender, EventArgs e)
-        {
-            BattleEngineView.UpdateAction(ref counter);
-        }
-    }
+		async void Button_Clicked(object sender, EventArgs e)
+		{
+			BattleEngineView.UpdateAction(ref counter);
+		}
+	}
 }
+

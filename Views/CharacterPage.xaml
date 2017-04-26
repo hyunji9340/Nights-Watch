@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.CharacterPage" Title="Character List">
+	<StackLayout Spacing="10" x:Name="layout">
+      <Button Text="Create Character" VerticalOptions="Center" HorizontalOptions="Center" FontSize="40" BackgroundColor="Lime" Margin="20" Clicked="AddCharacterBtnClicked"/>
+		<ListView x:Name="CharacterListView" ItemSelected="OnCharacterSelected" ItemsSource="{Binding Path=Characters}">
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<ViewCell>
+					<StackLayout Orientation="Horizontal" Padding="5">
+						<StackLayout HorizontalOptions="CenterAndExpand">
+							<Label Text="{Binding Name}" />
+						</StackLayout>
+						<Label Text="Detail" HorizontalOptions="End" TextColor="Blue"/>
+					</StackLayout>
+				</ViewCell>
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</ListView>
+    </StackLayout>
+</ContentPage>

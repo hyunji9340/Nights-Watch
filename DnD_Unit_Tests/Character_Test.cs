@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using XamarinProject;
+using GroupProject_DD;
 
 
 namespace DnD_Unit_Tests
@@ -65,25 +65,25 @@ namespace DnD_Unit_Tests
             Assert.IsTrue(hero.monstersKilled > 0);
         }
 
-        [TestMethod]
-        public void characterAddedItem()
-        {
-            Character hero = new Character();
-            Item item = new Item("sword", "it's a sword", 1, "sword", 1);
-            hero.addItem(item);
-            Assert.AreSame(item, hero.Inventory[item.slot]);
-        }
+        //[TestMethod]
+        //public void characterAddedItem()
+        //{
+        //    Character hero = new Character();
+        //    Item item = new Item("sword", "it's a sword", 1, "sword", 1);
+        //    hero.addItem(item);
+        //    Assert.AreSame(item, hero.Inventory[item.slot]);
+        //}
 
-        [TestMethod]
-        public void characterAddedBetterItem()
-        {
-            Character hero = new Character();
-            Item sword = new Item("sword", "it's a sword", 1, "sword", 1);
-            Item betterSword = new Item("better sword", "it's a better sword", 2, "sword", 1);
-            hero.addItem(sword);
-            hero.addItem(betterSword);
-            Assert.AreSame(betterSword, hero.Inventory[1]);
-        }
+        //[TestMethod]
+        //public void characterAddedBetterItem()
+        //{
+        //    Character hero = new Character();
+        //    Item sword = new Item("sword", "it's a sword", 1, "sword", 1);
+        //    Item betterSword = new Item("better sword", "it's a better sword", 2, "sword", 1);
+        //    hero.addItem(sword);
+        //    hero.addItem(betterSword);
+        //    Assert.AreSame(betterSword, hero.Inventory[1]);
+        //}
 
     }
 }

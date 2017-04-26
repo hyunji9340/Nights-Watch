@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using XamarinProject;
-using XamarinProject.Models;
+using GroupProject_DD;
 
 namespace DnD_Unit_Tests
 {
@@ -39,11 +38,11 @@ namespace DnD_Unit_Tests
             };
             monster_dictionary = new List<Monster>()
             {
-                new Monster("Goblin"),
-                new Monster("Skeleton"),
-                new Monster("Troll"),
-                new Monster("White-Walker"),
-                new Monster("Wildling")
+                new Monster(),
+                new Monster(),
+                new Monster(),
+                new Monster(),
+                new Monster()
             };
             BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary);
         }

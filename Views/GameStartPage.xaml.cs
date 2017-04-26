@@ -3,49 +3,47 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace XamarinProject
+namespace GroupProject_DD
 {
 	public partial class GameStartPage : ContentPage
 	{
+		private CharacterController characterController;
+		private CharacterDetailPage characterDetailPage;
+
+
 		public GameStartPage()
 		{
 			InitializeComponent();
+			characterController = new CharacterController(); 
 		}
 
-		// character
-		async void characterClicked(object sender, EventArgs e)
+		protected override void OnAppearing()
 		{
-			await Navigation.PushAsync(new CharactersPage());
+			base.OnAppearing();
+			this.BindingContext = this.characterController;
 		}
 
-		// monster
-		async void monsterClicked(object sender, EventArgs e)
+		// This method directs a detail page for a specific item
+		async void OnCharacterSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			await Navigation.PushAsync(new MonsterPage());
+			var character = args.SelectedItem as Character;
+
+			if (character == null)
+				return;
+
+			this.characterDetailPage = new CharacterDetailPage(new CharacterDetailViewModel(character));
+			characterDetailPage.setCharacterController(characterController);
+
+			await Navigation.PushAsync(this.characterDetailPage);
+
+			// Manually deselect item
+			CharacterListView.SelectedItem = null;
 		}
 
-		// item
-		async void itemClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new ItemsPage());
-		}
-
-		// battle
-		async void battleClicked(object sender, EventArgs e)
+		async void GoBtnClicked(object sender, System.EventArgs e)
 		{
 			await Navigation.PushAsync(new BattlePage());
 		}
 
-		// score
-		async void scoreClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new ScorePage());
-		}
-
-		// inventory
-		async void inventoryClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new InventoryPage());
-		}
 	}
 }

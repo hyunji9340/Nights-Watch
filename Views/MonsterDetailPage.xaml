@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.MonsterDetailPage" Title="{Binding Title}">
+	<StackLayout Spacing="20" Padding="15">
+		<Label Text="{Binding Monster.Name, StringFormat='Name: {0}'}" FontSize="Medium" />
+		<Label Text="{Binding Monster.Rating, StringFormat='Rating: {0}'}" FontSize="Medium" />
+		<Label Text="{Binding Monster.Strength, StringFormat='Strength: {0}'}" FontSize="Medium" />
+		<Label Text="{Binding Monster.Dexterity, StringFormat='Dexterity: {0}'}" FontSize="Medium" />
+		<Label Text="{Binding Monster.Agility, StringFormat='Agility: {0}'}" FontSize="Medium" />
+		<Label Text="{Binding Monster.Speed, StringFormat='Speed: {0}'}" FontSize="Medium" />
+		<Button Text="Update Item" Clicked="UpdateBtnClicked" FontSize="30" BackgroundColor="Lime" TextColor="Black"/>
+		<Button Text="Detele Item" Clicked="DeleteBtnClicked" FontSize="30" BackgroundColor="Lime" TextColor="Black"/>
+	</StackLayout>
+</ContentPage>
+
