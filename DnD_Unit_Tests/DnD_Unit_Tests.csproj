@@ -58,7 +58,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\GroupProject_DD\GroupProject_DD.csproj">
+    <ProjectReference Include="..\GroupProject_DD.csproj">
       <Project>{92035e3c-59dc-4b25-b329-5be0264150c8}</Project>
       <Name>GroupProject_DD</Name>
     </ProjectReference>

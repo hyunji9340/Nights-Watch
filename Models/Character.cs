@@ -131,47 +131,47 @@ namespace GroupProject_DD
 			}
 		}
 
-		/*
-		// constructor
-		public Character()
-		{
-			Name = "";
-			Level = 1;
-			Health = 20;
-			curHealth = 20;
-			Experience = 0;
-			Strength = 1;
-			Dexterity = 1;
-			Defense = 1;
-			Speed = 1;
-			monstersKilled = 0;
-			torsoItem = new Item();
-			headItem = new Item();
-			rightArmItem = new Item();
-			leftArmItem = new Item();
-			legsItem = new Item();
-		}
 
-		public Character(String name)
-		{
-			Name = name;
-			Level = 1;
-			Health = 20;
-			curHealth = 20;
-			Experience = 0;
-			Strength = 1;
-			Dexterity = 1;
-			Defense = 1;
-			Speed = 1;
-			monstersKilled = 0;
-			torsoItem = new Item();
-			headItem = new Item();
-			rightArmItem = new Item();
-			leftArmItem = new Item();
-			legsItem = new Item();
-		}
-		
-		*/
+        //constructor
+        public Character()
+        {
+            Name = "";
+            Level = 1;
+            Health = 20;
+            curHealth = 20;
+            Experience = 0;
+            Strength = 1;
+            Dexterity = 1;
+            Defense = 1;
+            Speed = 1;
+            monstersKilled = 0;
+            //torsoItem = new Item();
+            //headItem = new Item();
+            //rightArmItem = new Item();
+            //leftArmItem = new Item();
+            //legsItem = new Item();
+        }
+
+        public Character(String name)
+        {
+            Name = name;
+            Level = 1;
+            Health = 20;
+            curHealth = 20;
+            Experience = 0;
+            Strength = 1;
+            Dexterity = 1;
+            Defense = 1;
+            Speed = 1;
+            monstersKilled = 0;
+            //torsoItem = new Item();
+            //headItem = new Item();
+            //rightArmItem = new Item();
+            //leftArmItem = new Item();
+            //legsItem = new Item();
+        }
+
+
 
         public int Attack()
   		{

@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("XamarinProject.Droid.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("GroupProject_DD.Droid.Resource", IsApplication=true)]
 
-namespace XamarinProject.Droid
+namespace GroupProject_DD.Droid
 {
 	
 	
@@ -26,7 +26,7 @@ namespace XamarinProject.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::XamarinProject.Droid.Resource.Attribute.actionBarSize;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::GroupProject_DD.Droid.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation
@@ -2200,17 +2200,8 @@ namespace XamarinProject.Droid
 			// aapt resource value: 0x7f0200a0
 			public const int mr_ic_play_light = 2130837664;
 			
-			// aapt resource value: 0x7f0200a4
-			public const int notification_template_icon_bg = 2130837668;
-			
 			// aapt resource value: 0x7f0200a1
-			public const int profile_generic = 2130837665;
-			
-			// aapt resource value: 0x7f0200a2
-			public const int slideout = 2130837666;
-			
-			// aapt resource value: 0x7f0200a3
-			public const int xamarin_logo = 2130837667;
+			public const int notification_template_icon_bg = 2130837665;
 			
 			static Drawable()
 			{

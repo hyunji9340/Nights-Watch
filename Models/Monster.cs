@@ -9,6 +9,7 @@ namespace GroupProject_DD
 	{
 		public Monster()
 		{
+            Health = 15;
 		}
 
 		private int _id;
