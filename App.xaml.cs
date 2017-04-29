@@ -7,9 +7,9 @@ namespace GroupProject_DD
 		public App()
 		{
 			InitializeComponent();
-
-			//MainPage = new GroupProject_DDPage();
-			MainPage = new NavigationPage(new StudentsInfoPage());
+            DependencyService.Get<IAudioPlayerService>().Play("prelude.mp3");
+            //MainPage = new GroupProject_DDPage();
+            MainPage = new NavigationPage(new StudentsInfoPage());
 		}
 
 		protected override void OnStart()
@@ -19,8 +19,9 @@ namespace GroupProject_DD
 
 		protected override void OnSleep()
 		{
-			// Handle when your app sleeps
-		}
+            DependencyService.Get<IAudioPlayerService>().Pause();
+            // Handle when your app sleeps
+        }
 
 		protected override void OnResume()
 		{

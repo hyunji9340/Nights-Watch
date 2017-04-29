@@ -90,3 +90,5 @@ C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.dll
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.pdb
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\GroupProject_DD.dll.mdb
+C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.dll.mdb
+C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\GroupProject_DD.dll.mdb
