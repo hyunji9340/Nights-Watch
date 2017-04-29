@@ -7,7 +7,7 @@
         <StackLayout>
             <Button Text="Step" 
                 Clicked="Button_Clicked" />
-            <Label Text="This is Battle page" 
+            <Label Text="This is the Battle Page" 
                VerticalOptions="Center" 
                HorizontalOptions="Center"></Label>
             <ListView x:Name="ActionsListView"
@@ -35,6 +35,35 @@
                    Font="20"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"/>
+            <ListView x:Name="CharacterListView"
+				ItemsSource="{Binding CharacterReadout}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                IsPullToRefreshEnabled="false"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="1">
+                                <Label Text="{Binding Name}"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    FontSize="16"/>
+                                <Label Text="{Binding Level}"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    FontSize="16"/>
+                                <Label Text="{Binding curHealth}"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    FontSize="16"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

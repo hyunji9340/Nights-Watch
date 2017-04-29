@@ -43,14 +43,14 @@ namespace GroupProject_DD
 			}
 		}
 
-		private int _Vitality;
-		public int Vitality
+		private int _Health;
+		public int Health
 		{
-			get { return _Vitality; }
+			get { return _Health; }
 			set
 			{
-				_Vitality = value;
-				OnPropertyChanged(nameof(Vitality));
+				_Health = value;
+				OnPropertyChanged(nameof(Health));
 			}
 		}
 
@@ -137,8 +137,8 @@ namespace GroupProject_DD
         {
             Name = "";
             Level = 1;
-            Vitality = 20;
-            curHealth = 20;
+            Health = 20;
+            curHealth = Health;
             Experience = 0;
             Strength = 1;
             Dexterity = 1;
@@ -156,8 +156,8 @@ namespace GroupProject_DD
         {
             Name = name;
             Level = 1;
-            Vitality = 20;
-            curHealth = 20;
+            Health = 20;
+            curHealth = Health;
             Experience = 0;
             Strength = 1;
             Dexterity = 1;
@@ -183,14 +183,14 @@ namespace GroupProject_DD
 
 		public bool isDead()
 		{
-			return (Vitality <= 0);
+			return (Health <= 0);
 		}
 
 		public void levelUp()
 		{
 			Level++;
-			Vitality += 5;
-			curHealth = Vitality;
+			Health += 5;
+			curHealth = Health;
 			Strength++;
 			Dexterity++;
 			Defense++;
@@ -199,7 +199,7 @@ namespace GroupProject_DD
 
   		public void takeDamage(int damage)
 		{
-			Vitality -= damage;
+			curHealth -= damage;
 		}
 
 		public void addExperience(int gain)

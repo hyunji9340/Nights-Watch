@@ -21,7 +21,8 @@ namespace GroupProject_DD
 		List<Monster> monster_dictionary;
         List<Monster> activeMonsterList;
 		public ObservableCollection<String> actions;
-		public string action;
+        public ObservableCollection<Character> CharacterReadoutList;
+        public string action;
 		Engine BattleEngine;
 		bool steplock;
 
@@ -66,7 +67,12 @@ namespace GroupProject_DD
 			IEnumerable < Character > allCharactersInDB= characterController.GetAllItems();
 			// convert ienumerable to array
 			this.CharacterList = allCharactersInDB.ToList();
-			IEnumerable<Monster> allMonstersInDB = monsterController.GetAllMonsters();
+            CharacterReadoutList = new ObservableCollection<Character>();
+            foreach (Character hero in CharacterList)
+            {
+                CharacterReadoutList.Add(hero);
+            }
+            IEnumerable<Monster> allMonstersInDB = monsterController.GetAllMonsters();
 			this.monster_dictionary = allMonstersInDB.ToList();
 
 			item_dictionary = new List<Item>()
@@ -110,6 +116,15 @@ namespace GroupProject_DD
             {
                 OnPropertyChanged("MonsterCount");
                 return "Monsters remaining: " + BattleEngine.monsterList.Count;
+            }
+        }
+
+        public ObservableCollection<Character> CharacterReadout
+        {
+            get
+            {
+                OnPropertyChanged("CharacterReadout");
+                return CharacterReadoutList;
             }
         }
 

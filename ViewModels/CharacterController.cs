@@ -27,25 +27,9 @@ namespace GroupProject_DD
 
 		public void AddNewCharacters() 
 		{
-			Character character1 = new Character();
-			character1.Name = "character1";
-			character1.curHealth = 10;
-			character1.Defense = 10;
-			character1.Dexterity = 10;
-			character1.Experience = 0;
-			character1.Vitality = 100;
-			character1.Level = 1;
-			character1.monstersKilled = 0;
+			Character character1 = new Character("Andrew");
 
-			Character character2 = new Character();
-			character2.Name = "character2";
-			character2.curHealth = 10;
-			character2.Defense = 10;
-			character2.Dexterity = 10;
-			character2.Experience = 0;
-			character2.Vitality = 100;
-			character2.Level = 1;
-			character2.monstersKilled = 0;
+			Character character2 = new Character("Simon");
 
 			this.Characters.Add(character1);
 			this.Characters.Add(character2);
