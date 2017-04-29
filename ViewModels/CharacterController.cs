@@ -33,7 +33,7 @@ namespace GroupProject_DD
 			character1.Defense = 10;
 			character1.Dexterity = 10;
 			character1.Experience = 0;
-			character1.Health = 100;
+			character1.Vitality = 100;
 			character1.Level = 1;
 			character1.monstersKilled = 0;
 
@@ -43,7 +43,7 @@ namespace GroupProject_DD
 			character2.Defense = 10;
 			character2.Dexterity = 10;
 			character2.Experience = 0;
-			character2.Health = 100;
+			character2.Vitality = 100;
 			character2.Level = 1;
 			character2.monstersKilled = 0;
 

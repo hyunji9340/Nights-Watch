@@ -19,6 +19,7 @@ namespace GroupProject_DD
 		List<Item> item_dictionary;
 		List<Character> CharacterList;
 		List<Monster> monster_dictionary;
+        List<Monster> activeMonsterList;
 		public ObservableCollection<String> actions;
 		public string action;
 		Engine BattleEngine;
@@ -50,8 +51,8 @@ namespace GroupProject_DD
 
 		public void getMonsterList()
 		{
-			List<Monster> monsterlist = BattleEngine.currentMonsterList();
-			foreach (Monster monster in monsterlist)
+            activeMonsterList = BattleEngine.currentMonsterList();
+			foreach (Monster monster in activeMonsterList)
 			{
 				Enque("Level " + monster.Rating + " " + monster.Name);
 			}
@@ -103,8 +104,16 @@ namespace GroupProject_DD
 			}
 		}
 
+        public string MonsterCount
+        {
+            get
+            {
+                OnPropertyChanged("MonsterCount");
+                return "Monsters remaining: " + BattleEngine.monsterList.Count;
+            }
+        }
 
-		public void UpdateAction(ref int counter)
+        public void UpdateAction(ref int counter)
 		{
 			if (!BattleEngine.evaluateMonsterList())
 			{

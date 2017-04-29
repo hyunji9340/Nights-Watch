@@ -35,9 +35,9 @@ namespace DnD_Unit_Tests
         public void characterTakesDamageAndDies()
         {
             Character hero = new Character();
-            int health_placeholder = hero.Health;
+            int health_placeholder = hero.Vitality;
             hero.takeDamage(10);
-            Assert.AreNotSame(hero.Health, health_placeholder);
+            Assert.AreNotSame(hero.Vitality, health_placeholder);
         }
 
         [TestMethod]
