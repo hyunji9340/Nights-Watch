@@ -130,8 +130,19 @@ namespace GroupProject_DD
 				OnPropertyChanged(nameof(monstersKilled));
 			}
 		}
-
-
+        private float healthstatus;
+        public float HealthStatus
+        {
+            set
+            {
+                healthstatus = value;
+                OnPropertyChanged(nameof(HealthStatus));
+            }
+            get
+            {
+                return healthstatus;
+            }
+        }
         //constructor
         public Character()
         {
@@ -145,6 +156,7 @@ namespace GroupProject_DD
             Defense = 1;
             Speed = 1;
             monstersKilled = 0;
+            HealthStatus = 1;
             //torsoItem = new Item();
             //headItem = new Item();
             //rightArmItem = new Item();
@@ -164,6 +176,7 @@ namespace GroupProject_DD
             Defense = 1;
             Speed = 1;
             monstersKilled = 0;
+            HealthStatus = 1;
             //torsoItem = new Item();
             //headItem = new Item();
             //rightArmItem = new Item();
@@ -195,11 +208,13 @@ namespace GroupProject_DD
 			Dexterity++;
 			Defense++;
 			Speed++;
-		}
+            HealthStatus = 1;
+        }
 
   		public void takeDamage(int damage)
 		{
 			curHealth -= damage;
+            HealthStatus = (float)curHealth / (float)Health;
 		}
 
 		public void addExperience(int gain)

@@ -46,19 +46,41 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="1">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
                                 <Label Text="{Binding Name}"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="16"/>
+                                    FontSize="20"/>
+                                <Label Text="Level: "
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    FontSize="20"/>
                                 <Label Text="{Binding Level}"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="16"/>
-                                <Label Text="{Binding curHealth}"
+                                    FontSize="20"/>
+                                <Label Text="HP: "
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="16"/>
+                                    FontSize="20"/>
+                                <Label Text="{Binding curHealth}"
+                                       LineBreakMode="NoWrap"
+                                       HorizontalOptions="EndAndExpand"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    FontSize="20"/>
+                                <Label Text=" / "
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                       HorizontalOptions="StartAndExpand"
+                                    FontSize="20"/>
+                                <Label Text="{Binding Health}"
+                                       LineBreakMode="NoWrap"
+                                       Style="{DynamicResource ListItemTextStyle}"
+                                       HorizontalOptions="StartAndExpand"
+                                    FontSize="20"/>
+                                <ProgressBar Progress="{Binding HealthStatus}"
+                                             HorizontalOptions="StartAndExpand"
+                                             Scale="2"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
