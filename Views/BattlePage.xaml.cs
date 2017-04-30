@@ -14,7 +14,9 @@ namespace GroupProject_DD
 		public BattlePage()
 		{
 			InitializeComponent();
-			BindingContext = BattleEngineView = new BattleViewModel();
+            DependencyService.Get<IAudioPlayerService>().Pause();
+            DependencyService.Get<IAudioPlayerService>().Play("prelude");
+            BindingContext = BattleEngineView = new BattleViewModel();
 			counter = 0;
             rand = new Random();
             

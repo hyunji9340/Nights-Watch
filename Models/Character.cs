@@ -1,13 +1,18 @@
 ﻿using System;
 using SQLite;
 using System.ComponentModel;
+using System.Collections.Generic;
+using GroupProject_DD.Models;
 
 namespace GroupProject_DD
 {
 	[Table("Characters")]
 	public class Character : INotifyPropertyChanged
 	{
-		private int _id;
+
+        public Dictionary<string, Item> Inventory;
+
+        private int _id;
 		[PrimaryKey, AutoIncrement]
 		public int Id
 		{
@@ -160,11 +165,14 @@ namespace GroupProject_DD
             Speed = 1;
             monstersKilled = 0;
             HealthStatus = 1;
-            //torsoItem = new Item();
-            //headItem = new Item();
-            //rightArmItem = new Item();
-            //leftArmItem = new Item();
-            //legsItem = new Item();
+            Inventory = new Dictionary<string, Item>()
+            {
+                {Bodypart.Head, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.AttkArm, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.DefArm, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Head)}
+            };
         }
 
         public Character(String name)
@@ -180,11 +188,14 @@ namespace GroupProject_DD
             Speed = 1;
             monstersKilled = 0;
             HealthStatus = 1;
-            //torsoItem = new Item();
-            //headItem = new Item();
-            //rightArmItem = new Item();
-            //leftArmItem = new Item();
-            //legsItem = new Item();
+            Inventory = new Dictionary<string, Item>()
+            {
+                {Bodypart.Head, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.AttkArm, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.DefArm, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Head)},
+                {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Head)}
+            };
         }
 
         public void ResetStatus()
@@ -196,8 +207,6 @@ namespace GroupProject_DD
         public int Attack()
   		{
 			int attack = Strength;
-			//if  (Inventory[1] != null)
-  				//attack += Inventory[1].rating;
   			return attack;
   		}
 

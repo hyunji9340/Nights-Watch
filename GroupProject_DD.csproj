@@ -69,6 +69,7 @@
       <DependentUpon>GroupProject_DDPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="IAudioPlayerService.cs" />
+    <Compile Include="Models\Bodypart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\ISQLiteDb.cs" />
     <Compile Include="Views\StudentsInfoPage.xaml.cs">

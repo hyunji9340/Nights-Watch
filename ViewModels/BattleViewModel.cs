@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Linq;
+using GroupProject_DD.Models;
 
 namespace GroupProject_DD
 {
@@ -77,15 +78,15 @@ namespace GroupProject_DD
 
 			item_dictionary = new List<Item>()
 			{
-				new Item("Sword", "Typical Sword", 1, "Strength", 1),
-				new Item("Leather Armor", "Torso Protection", 2, "Strength", 2),
-				new Item("Stupid Helmet", "It's dumb", 1, "Defense", 0),
-				new Item("Mythril Pants", "Heavy", 5, "Speed", 3),
-				new Item("Silver Sword", "Elegant Sword", 4, "Strength", 1),
-				new Item("Silver Helmet", "Elegant Helmet", 4, "Defense", 0),
-				new Item("Bronze Armor", "Rustic", 3, "Defense", 2),
-				new Item("Chainmail", "It's Bulletproof", 3, "Defense", 2),
-				new Item("Feather Shorts", "It's so light", 7, "Speed", 3)
+				new Item("Sword", "Typical Sword", 2, Bodypart.AttkArm),
+				new Item("Leather Armor", "Torso Protection", 1, Bodypart.Torso),
+				new Item("Stupid Helmet", "It's dumb", 1, Bodypart.Head),
+				new Item("Mythril Sheild", "Heavy", 5, Bodypart.DefArm),
+				new Item("Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm),
+				new Item("Silver Helmet", "Elegant Helmet", 4, Bodypart.Head),
+				new Item("Bronze Armor", "Rustic", 4, Bodypart.Torso),
+				new Item("Chainmail", "It's Bulletproof", 4, Bodypart.Torso),
+				new Item("Winged Boots", "It's so light", 7, Bodypart.Feet)
 			};
 
 		}

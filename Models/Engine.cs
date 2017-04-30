@@ -76,15 +76,18 @@ namespace GroupProject_DD
 
 		public List<string> Volley()
 		{
+            //pop front hero and front monster off their respective queues
 			List<string> actions = new List<string>();
 			string action;
 			Character hero = characterList[0];
 			Monster monster = monsterList[0];
 			characterList.RemoveAt(0);
 			monsterList.RemoveAt(0);
+            //Whoever has fastest speed gets first hit, benefit if kills opponent -> returns to queue with no damage taken
 			int heroAttk = hero.Attack(); 
 			int monsterAttk = monster.Attack(); 
 			monster.takeDamage(heroAttk); 
+
 			if (monster.isDead())
 			{
 				action = hero.Name + " killed " + monster.Name + " with " + heroAttk.ToString() + " damage.";
