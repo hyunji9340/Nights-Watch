@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Plugin.Vibrate;
 
 namespace GroupProject_DD
 {
@@ -65,6 +66,14 @@ namespace GroupProject_DD
 				return false;
 		}
 
+        public void PlayerStatusReset()
+        {
+            foreach (Character hero in characterList)
+            {
+                hero.ResetStatus();
+            }
+        }
+
 		public List<string> Volley()
 		{
 			List<string> actions = new List<string>();
@@ -80,6 +89,9 @@ namespace GroupProject_DD
 			{
 				action = hero.Name + " killed " + monster.Name + " with " + heroAttk.ToString() + " damage.";
 				actions.Add(action);
+                //character pick up item off of monster dead body
+                hero.addExperience(monster.xpValue);
+                characterList.Add(hero);
 			}
 			else
 			{
@@ -89,8 +101,11 @@ namespace GroupProject_DD
 				if (hero.isDead())
 				{
 					action = monster.Name + " killed " + hero.Name + " with " + monsterAttk.ToString() + " damage.";
-					actions.Add(action);
+                    actions.Add(action);
+                    action = "**************" + hero.Name + " died**************";
+                    actions.Add(action);
 					characterDeadList.Add(hero);
+                    CrossVibrate.Current.Vibration();
 				}
 				else
 				{

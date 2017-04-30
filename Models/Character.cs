@@ -143,6 +143,9 @@ namespace GroupProject_DD
                 return healthstatus;
             }
         }
+
+
+
         //constructor
         public Character()
         {
@@ -184,7 +187,11 @@ namespace GroupProject_DD
             //legsItem = new Item();
         }
 
-
+        public void ResetStatus()
+        {
+            curHealth = Health;
+            HealthStatus = 1;
+        }
 
         public int Attack()
   		{
@@ -196,7 +203,7 @@ namespace GroupProject_DD
 
 		public bool isDead()
 		{
-			return (Health <= 0);
+			return (curHealth <= 0);
 		}
 
 		public void levelUp()
@@ -220,10 +227,10 @@ namespace GroupProject_DD
 		public void addExperience(int gain)
 		{
 			Experience += gain;
-			if (Experience > 10) //10 is used in this case, will be replaced by global xp thresholds
+			if (Experience > (10*Level)) //10 is used in this case, will be replaced by global xp thresholds
 			{
 				levelUp();
-				Experience -= 10;
+				Experience = 0;
 			}
 		}
 		/*

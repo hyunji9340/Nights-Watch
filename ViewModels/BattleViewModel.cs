@@ -129,26 +129,28 @@ namespace GroupProject_DD
         }
 
         public void UpdateAction(ref int counter)
-		{
-			if (!BattleEngine.evaluateMonsterList())
-			{
-				BattleEngine.IncrementDungeonLevel();
-				BattleEngine.generateMonsterList(BattleEngine.dungeonLevel);
-				Enque("");
-				Enque("");
-			}
-			if (BattleEngine.evaluateCharacterList())
-			{
-				List<string> actionList = BattleEngine.Volley();
-				foreach (string _action in actionList)
-				{
-					Enque(_action);
-				}
-			}
-			else
-				Enque("All characters are dead....");
-			OnPropertyChanged("Actions");
-		}
+        {
+            if (!BattleEngine.evaluateMonsterList())//all monsters are dead
+            {
+                Enque(BattleEngine.IncrementDungeonLevel());
+                BattleEngine.PlayerStatusReset();
+                BattleEngine.generateMonsterList(BattleEngine.dungeonLevel);
+                Enque("");
+                Enque("");
+            }
+            if (BattleEngine.evaluateCharacterList())//characters still alive
+            {
+                List<string> actionList = BattleEngine.Volley();
+                foreach (string _action in actionList)
+                {
+                    Enque(_action);
+                }
+            }
+            else
+                Enque("All characters are dead....");
+
+            OnPropertyChanged("Actions");
+        }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

@@ -4,6 +4,7 @@
   <uses-sdk android:minSdkVersion="15" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.VIBRATE" />
   <application android:label="GroupProject_DD" android:name="android.app.Application" android:allowBackup="true" android:icon="@drawable/icon" android:debuggable="true">
     <activity android:configChanges="orientation|screenSize" android:icon="@drawable/icon" android:label="GroupProject_DD.Droid" android:theme="@style/MyTheme" android:name="md54d9bc5ae17932221da8778056f038845.MainActivity">
       <intent-filter>
