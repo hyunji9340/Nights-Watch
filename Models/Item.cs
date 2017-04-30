@@ -11,7 +11,7 @@ namespace GroupProject_DD
 	{
         //tier is ranged from 1 - 10 based on how dominate an item can be
         Random rand;
-        public Dictionary<string, int> Attribute;
+        public Dictionary<string, int> Attributes;
         public string bodyassignment;
 		// fields 
 		public String name { get; set; }
@@ -19,11 +19,6 @@ namespace GroupProject_DD
 		public int tier { get; set; }
 		public String type { get; set; }
 		public int slot { get; set; }
-
-        // default constructor that doesn't take any arguments
-        //used to store temporary empty inventory
-        public Item()
-        { }
 
 
 		//copy constructor
@@ -34,8 +29,9 @@ namespace GroupProject_DD
 			tier = item.tier;
             bodyassignment = item.bodyassignment;
 			slot = item.slot;
-            Attribute = new Dictionary<string, int>(item.Attribute);
+            Attributes = new Dictionary<string, int>(item.Attributes);
             rand = new Random();
+            
         }
 
         public void setAttributes(int tier)
@@ -96,11 +92,11 @@ namespace GroupProject_DD
                 defense = rand.Next(0, tier / 2);
                 agility = rand.Next(tier, tier * 2);
             }
-            Attribute.Add("str", strength);
-            Attribute.Add("dex", dexterity);
-            Attribute.Add("def", defense);
-            Attribute.Add("HP", health);
-            Attribute.Add("Agl", agility);
+            Attributes.Add("str", strength);
+            Attributes.Add("dex", dexterity);
+            Attributes.Add("def", defense);
+            Attributes.Add("HP", health);
+            Attributes.Add("agl", agility);
         }
 
         /*
@@ -117,8 +113,9 @@ namespace GroupProject_DD
 			this.description = description;
 			this.tier = Tier;
 			this.bodyassignment = body;
-            Attribute = new Dictionary<string, int>();
+            Attributes = new Dictionary<string, int>();
             rand = new Random();
+            setAttributes(tier);
         }
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GroupProject_DD;
+using GroupProject_DD.Models;
 
 namespace DnD_Unit_Tests
 {
@@ -18,7 +19,7 @@ namespace DnD_Unit_Tests
         [TestMethod]
         public void Item_Argument_Constructor()
         {
-            Item item = new Item("Unicorn Helmet", "Made from dead Unicorns", 3, "Head", 0);
+            Item item = new Item("Winged Boots", "It's so light", 7, Bodypart.Feet);
             Assert.AreSame(item, item);
         }
     }

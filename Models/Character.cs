@@ -135,6 +135,7 @@ namespace GroupProject_DD
 				OnPropertyChanged(nameof(monstersKilled));
 			}
 		}
+
         private float healthstatus;
         public float HealthStatus
         {
@@ -149,7 +150,19 @@ namespace GroupProject_DD
             }
         }
 
-
+        private int agility;
+        public int Agility
+        {
+            set
+            {
+                agility = value;
+                OnPropertyChanged(nameof(Agility));
+            }
+            get
+            {
+                return agility;
+            }
+        }
 
         //constructor
         public Character()
@@ -242,20 +255,109 @@ namespace GroupProject_DD
 				Experience = 0;
 			}
 		}
-		/*
-		public void addItem(Item item)
-		{
-			if (Inventory[item.slot] == null)
-			  	Inventory[item.slot] = item;
-  			else
-			{
-				if (Inventory[item.slot].rating <= item.rating)
-  					Inventory[item.slot] = item;
-			}
 
-		}
-		*/
-		public event PropertyChangedEventHandler PropertyChanged;
+        public void evaluateNewItem(Item item)
+        {
+            /*locate item slot in inventory*/
+            Item temp_Item;
+            Inventory.TryGetValue(item.bodyassignment, out temp_Item);
+
+            /*slot is empty, fill with new item found*/
+            if (temp_Item.name == "Empty")
+            {
+                discardItem(temp_Item);
+                equipItem(item);
+            }
+            else/*slot is already filled, evaluate better item (new or old)*/
+            {
+                /*new item is better, discard old item, else ignore new item*/
+                if (temp_Item.tier <= item.tier)
+                {
+                    discardItem(temp_Item);
+                    equipItem(item);
+                    verifyHealth();
+                }
+            }
+        }
+
+        public void equipItem(Item item)
+        {
+            Inventory.Add(item.bodyassignment, item);
+            addAttributes(item);
+        }
+
+        public void discardItem(Item item)
+        {
+            removeAttributes(item);
+            Inventory.Remove(item.bodyassignment);
+            /*
+            Could be scenario where max health is now lower than current health
+            eavlutate whether to reset current health value; 
+            */
+        }
+
+        public void verifyHealth()
+        {
+            if (Health < curHealth)
+                curHealth = Health;
+        }
+
+        public void removeAttributes(Item item)
+        {
+            foreach (KeyValuePair<string, int> attribute in item.Attributes)
+            {
+                if (attribute.Key == "str")
+                {
+                    Strength -= attribute.Value;
+                }
+                else if (attribute.Key == "dex")
+                {
+                    Dexterity -= attribute.Value;
+                }
+                else if (attribute.Key == "def")
+                {
+                    Defense -= attribute.Value;
+                }
+                else if (attribute.Key == "HP")
+                {
+                    Health -= attribute.Value;
+                }
+                else if (attribute.Key == "agl")
+                {
+                    Agility -= attribute.Value;
+                }
+            }
+        }
+
+        public void addAttributes(Item item)
+        {
+            foreach (KeyValuePair<string, int> attribute in item.Attributes)
+            {
+                if (attribute.Key == "str")
+                {
+                    Strength += attribute.Value;
+                }
+                else if (attribute.Key == "dex")
+                {
+                    Dexterity += attribute.Value;
+                }
+                else if (attribute.Key == "def")
+                {
+                    Defense += attribute.Value;
+                }
+                else if (attribute.Key == "HP")
+                {
+                    Health += attribute.Value;
+                }
+                else if (attribute.Key == "agl")
+                {
+                    Agility += attribute.Value;
+                }
+            }
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string propertyName)
 		{
 			this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
