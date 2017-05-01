@@ -8,7 +8,7 @@
 		<Label Text="{Binding Monster.Agility, StringFormat='Agility: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Speed, StringFormat='Speed: {0}'}" FontSize="Medium" />
 		<Button Text="Update Item" Clicked="UpdateBtnClicked" FontSize="30" BackgroundColor="Lime" TextColor="Black"/>
-		<Button Text="Detele Item" Clicked="DeleteBtnClicked" FontSize="30" BackgroundColor="Lime" TextColor="Black"/>
+		<Button Text="Delete Item" Clicked="DeleteBtnClicked" FontSize="30" BackgroundColor="Red" TextColor="Black"/>
 	</StackLayout>
 </ContentPage>
 

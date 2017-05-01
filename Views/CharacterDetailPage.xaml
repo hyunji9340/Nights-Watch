@@ -9,6 +9,6 @@
 		<Label Text="{Binding Character.Defense, StringFormat='Defense: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Character.Speed, StringFormat='Speed: {0}'}" FontSize="Medium" />
 		<Button Text="Update Item" Clicked="UpdateBtnClicked" FontSize="30" BackgroundColor="Lime" TextColor="Black"/>
-		<Button Text="Detele Item" Clicked="DeleteBtnClicked" FontSize="30" BackgroundColor="Lime" TextColor="Black"/>
+		<Button Text="Delete Item" Clicked="DeleteBtnClicked" FontSize="30" BackgroundColor="Red" TextColor="Black"/>
 	</StackLayout>
 </ContentPage>
