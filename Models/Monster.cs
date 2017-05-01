@@ -38,13 +38,13 @@ namespace GroupProject_DD
 			}
 		}
 
-		private int _Rating;
+		private int _Level;
 		public int Level
 		{
-			get { return _Rating; }
+			get { return _Level; }
 			set
 			{
-				_Rating = value;
+				_Level = value;
 				OnPropertyChanged(nameof(Level));
 			}
 		}

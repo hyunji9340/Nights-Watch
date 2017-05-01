@@ -33,15 +33,15 @@ namespace GroupProject_DD
 
 		public BattleViewModel()
 		{
-			/**********For Developer Mode (*Fixed Character and Item List*)**********/
-			devStartup();
-			/**********************************************************************/
-			action = "Game starting...";
-			actions = new ObservableCollection<string>();
-			steplock = false;
-			BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary);
-			startGameLoop(true);
-		}
+            /**********For Developer Mode (*Fixed Character and Item List*)**********/
+            devStartup();
+            /**********************************************************************/
+            action = "Game starting...";
+            actions = new ObservableCollection<string>();
+            steplock = false;
+            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary);
+            startGameLoop(true);
+        }
 
 		public void startGameLoop(bool manual_mode)
 		{

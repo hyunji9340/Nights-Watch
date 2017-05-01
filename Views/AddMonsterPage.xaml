@@ -5,8 +5,8 @@
 		<StackLayout Spacing="20" Padding="10">
 			<Label Text="Name" FontSize="Medium" />
 			<Entry Text="{Binding monster.Name}" FontSize="Small" />
-			<Label Text="Rating" FontSize="Medium" />
-			<Entry Text="{Binding monster.Rating}" FontSize="Small" Margin="0" />
+			<Label Text="Level" FontSize="Medium" />
+			<Entry Text="{Binding monster.Level}" FontSize="Small" Margin="0" />
 			<Label Text="Health" FontSize="Medium" />
 			<Entry Text="{Binding monster.Health}" FontSize="Small" Margin="0" />
 			<Label Text="Strength" FontSize="Medium" />
@@ -14,7 +14,7 @@
 			<Label Text="Dexterity" FontSize="Medium" />
 			<Entry Text="{Binding monster.Dexterity}" FontSize="Small" Margin="0" />
 			<Label Text="Agility" FontSize="Medium" />
-			<Entry Text="{Binding monster.agility}" FontSize="Small" Margin="0" />
+			<Entry Text="{Binding monster.Agility}" FontSize="Small" Margin="0" />
 			<Label Text="Speed" FontSize="Medium" />
 			<Entry Text="{Binding monster.Speed}" FontSize="Small" Margin="0" />
 			<Button Text="Save" FontSize="30" BackgroundColor="Lime" TextColor="Black" Clicked="SaveClicked"/>
