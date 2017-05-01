@@ -4,19 +4,19 @@
 		<Grid BackgroundColor="Black" Margin="0" Padding="0">
   			<Grid.RowDefinitions>
 				<RowDefinition Height="2*" />
+				<RowDefinition Height="1.5*" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="1.5*" />
 				<RowDefinition Height="2*" />
   			</Grid.RowDefinitions>
   			<Grid.ColumnDefinitions>
-    			<ColumnDefinition Width="*" />
-    			<ColumnDefinition Width="*" />
+    			<ColumnDefinition Width="3*" />
+    			<ColumnDefinition Width="3*" />
   			</Grid.ColumnDefinitions>
 			<Image Source="http://nerdist.com/wp-content/uploads/2013/05/dungeons-and-dragons-banner.jpg" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />
-  			<Button Text="CHARACTER" Grid.Row="2" Grid.Column="0" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="CharacterBtnClicked"/>
-  			<Button Text="MONSTER" Grid.Row="2" Grid.Column="1" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="MonsterBtnClicked"/>
-			<Button Text="START THE GAME!" Grid.Row="3" Grid.Column="0" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Grid.ColumnSpan="2" Clicked="StartGameBtnClicked"/>
+  			<Button Text="CHARACTER" Grid.Row="1" Grid.Column="0" TextColor="Red" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="CharacterBtnClicked"/>
+  			<Button Text="MONSTER" Grid.Row="1" Grid.Column="1" TextColor="Red" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="MonsterBtnClicked"/>
+			<Button Text="START THE GAME!" Grid.Row="3" Grid.Column="0" TextColor="Red" BorderColor="Aqua" BorderWidth="1" Margin="20" Grid.ColumnSpan="2" Clicked="StartGameBtnClicked"/>
 			<Image Source="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/NEW-TO-DnD_What-is-DnD_Subsection_Hero_140718.jpg?itok=5pBlzVTc" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />		
 		</Grid>
 	</ContentPage.Content>
