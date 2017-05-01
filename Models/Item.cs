@@ -57,7 +57,7 @@ namespace GroupProject_DD
                 dexterity = rand.Next(tier, tier*2);
                 health = rand.Next(0, tier / 2);
                 strength = rand.Next(0, tier / 2);
-                defense = rand.Next(tier - tier / 2, tier);
+                defense = rand.Next(tier - (tier / 2), tier);
                 agility = rand.Next(0, tier / 2);
             }
             else if (bodyassignment == Bodypart.AttkArm)//Strength, Agility
@@ -66,12 +66,12 @@ namespace GroupProject_DD
                 health = rand.Next(0, tier / 2);
                 strength = rand.Next(tier, tier * 2);
                 defense = rand.Next(0, tier / 2);
-                agility = rand.Next(tier - tier / 2, tier);
+                agility = rand.Next(tier - (tier / 2), tier);
             }
             else if (bodyassignment == Bodypart.DefArm)//Defense, Health
             {
                 dexterity = rand.Next(0, tier / 2);
-                health = rand.Next(tier - tier / 2, tier);
+                health = rand.Next(tier - (tier / 2), tier);
                 strength = rand.Next(0, tier / 2);
                 defense = rand.Next(tier, tier * 2);
                 agility = rand.Next(0, tier / 2);
@@ -81,12 +81,12 @@ namespace GroupProject_DD
                 dexterity = rand.Next(0, tier / 2);
                 health = rand.Next(tier, tier * 2);
                 strength = rand.Next(0, tier / 2);
-                defense = rand.Next(tier - tier / 2, tier);
+                defense = rand.Next(tier - (tier / 2), tier);
                 agility = rand.Next(0, tier / 2);
             }
             else if (bodyassignment == Bodypart.Feet)//Agility, Dexterity
             {
-                dexterity = rand.Next(tier - tier / 2, tier);
+                dexterity = rand.Next(tier - (tier / 2), tier);
                 health = rand.Next(0, tier / 2);
                 strength = rand.Next(0, tier / 2);
                 defense = rand.Next(0, tier / 2);
@@ -99,14 +99,6 @@ namespace GroupProject_DD
             Attributes.Add("agl", agility);
         }
 
-        /*
-         * type can only be one of the following, controlled by Bodypart class
-                "HEAD"
-                "ATTK_ARM"
-                "DEF_ARM"
-                "TORSO"
-                "FEET"
-        */
         public Item(String name, String description, int Tier, string body)
 		{
 			this.name = name;

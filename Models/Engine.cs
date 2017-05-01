@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Plugin.Vibrate;
+using GroupProject_DD.Models;
 
 namespace GroupProject_DD
 {
@@ -25,13 +26,36 @@ namespace GroupProject_DD
 			characterDeadList = new List<Character>();
 			dungeonLevel = 0;
 			rand = new Random();
-		}
+
+        }
 
 		public string IncrementDungeonLevel()
 		{
 			dungeonLevel++;
 			return "********* Entering Dungeon Level = " + dungeonLevel + " *********";
 		}
+
+        public bool CharacterIsFaster()
+        {
+            if (characterList.Count > 0 && monsterList.Count > 0)
+            {
+                if (characterList[0].Speed >= monsterList[0].Speed)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
+        public void sortListBySpeed(List<ICreature> creature)
+        {
+            List<Character> sorted = new List<Character>();
+            //while (characterList.Count > 0)
+            //{
+
+            //}
+        }
 
 		public string generateMonsterList(int dungeonLevel)
 		{
@@ -50,7 +74,7 @@ namespace GroupProject_DD
 			return monsterList;
 		}
 
-		public bool evaluateCharacterList()
+		public bool areAnyCharactersAlive()
 		{
 			if (characterList.Count > 0)
 				return true;
@@ -58,7 +82,7 @@ namespace GroupProject_DD
 				return false;
 		}
 
-		public bool evaluateMonsterList()
+		public bool areAnyMonstersAlive()
 		{
 			if (monsterList.Count > 0)
 				return true;
@@ -74,75 +98,103 @@ namespace GroupProject_DD
             }
         }
 
-		public List<string> Volley()
+        public float dodgePercentile(int Agility, int oppDex, int oppLvL)
+        {
+
+            return (float)Agility / (float)(oppDex * oppLvL + 100) ;
+        }
+
+        public bool dodged(float dodge, float chance)
+        {
+            return chance <= dodge;
+        }
+
+
+        public List<string> Volley()
 		{
             //pop front hero and front monster off their respective queues
 			List<string> actions = new List<string>();
 			string action;
+            int dmg = 0;
+            float dodge_rating;
+            bool characterGoesFirst = CharacterIsFaster();
 			Character hero = characterList[0];
 			Monster monster = monsterList[0];
 			characterList.RemoveAt(0);
 			monsterList.RemoveAt(0);
             //Whoever has fastest speed gets first hit, benefit if kills opponent -> returns to queue with no damage taken
-			int heroAttk = hero.Attack(); 
+            if (true)//characterGoesFirst)
+            {
+                //Hero attacks monster
+                float dodgeRating = dodgePercentile(monster.Agility, hero.Dexterity, hero.Level);
+                actions.Add("dodged rating " + dodgeRating.ToString());
+                if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
+                {
+                    dmg = monster.takeDamage(hero.Attack());
+                    actions.Add(monster.Name + " took "+ dmg +" from " + hero.Name);
+                }
+                else// successfully dodged
+                {
+                    actions.Add(monster.Name + " dodged attack from " + hero.Name);
+                }
+                //monster attacks hero, if monster is still alive
+                if (monster.isDead())
+                {
+                    action = hero.Name + " killed " + monster.Name + " with " + dmg + " damage.";
+                    actions.Add(action);
+                    //character pick up item off of monster dead body
+                    if (hero.addExperience(monster.xpValue))
+                    {
+                        actions.Add(hero.Name + " Leveled up!!!!!!!");
+                    }
+                    characterList.Add(hero);
+                }
+                else//monster still alive, monster attacks hero
+                {
+                    dodgeRating = dodgePercentile(monster.Agility, hero.Dexterity, hero.Level);
+                    actions.Add("dodged rating " + dodgeRating.ToString());
+                    if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
+                    {
+                        dmg = hero.takeDamage(monster.Attack());
+                        actions.Add(monster.Name + " hit " + hero.Name + " with " + dmg + " damage.");
+                    }
+                    else
+                    {
+                        actions.Add(hero.Name + " dodged attack from " + monster.Name);
+                    }
+                    if (hero.isDead())
+                    {
+                        action = monster.Name + " killed " + hero.Name + " with " + dmg + " damage.";
+                        actions.Add(action);
+                        action = "**************" + hero.Name + " died**************";
+                        actions.Add(action);
+                        characterDeadList.Add(hero);
+                        CrossVibrate.Current.Vibration();
+                    }
+                    else
+                    {
+                        characterList.Add(hero);
+                    }
+                    monsterList.Add(monster);
+                }
+            }
+            else//monster goes first
+            {
+
+            }
+
 			int monsterAttk = monster.Attack(); 
-			monster.takeDamage(heroAttk); 
+			monster.takeDamage(hero.Attack()); 
 
 			if (monster.isDead())
 			{
-				action = hero.Name + " killed " + monster.Name + " with " + heroAttk.ToString() + " damage.";
-				actions.Add(action);
-                //character pick up item off of monster dead body
-                hero.addExperience(monster.xpValue);
-                characterList.Add(hero);
+				
 			}
 			else
 			{
-				action = hero.Name + " hit " + monster.Name + " with " + heroAttk.ToString() + " damage.";
-				actions.Add(action);
-				hero.takeDamage(monsterAttk);
-				if (hero.isDead())
-				{
-					action = monster.Name + " killed " + hero.Name + " with " + monsterAttk.ToString() + " damage.";
-                    actions.Add(action);
-                    action = "**************" + hero.Name + " died**************";
-                    actions.Add(action);
-					characterDeadList.Add(hero);
-                    CrossVibrate.Current.Vibration();
-				}
-				else
-				{
-					action = monster.Name + " hit " + hero.Name + " with " + monsterAttk.ToString() + " damage.";
-					actions.Add(action);
-					characterList.Add(hero);
-				}
-				monsterList.Add(monster);
+				
 			}
 			return actions;
 		}
-
-		/*
-		public eplore_dungeon(dungeon_level)
-		{
-		generate a bunch of dungeon_level monster and put them in the list
-		while (monster list is isn't empty and character list isn't empty)
-			   battle(characterlist top, monsterlist top)
-			   if characterlist top is dead
-				   add character to dead list
-			   else
-				   put character at back of the list
-		start(dungeon_level++)
-		}
-
-		public battle(character, monster)
-		{
-		   monster.health -= charater.strength
-		   if (monster isn't dead)
-			   character.health -= monster.health
-		   else
-			   character.addexp(monster.exp)
-			   character.addItem(monster.item)
-		}
-		*/
 	}
 }

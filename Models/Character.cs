@@ -240,20 +240,23 @@ namespace GroupProject_DD
             HealthStatus = 1;
         }
 
-  		public void takeDamage(int damage)
+  		public int takeDamage(int damage)
 		{
 			curHealth -= damage;
             HealthStatus = (float)curHealth / (float)Health;
+            return damage;
 		}
 
-		public void addExperience(int gain)
+		public bool addExperience(int gain)
 		{
 			Experience += gain;
 			if (Experience > (10*Level)) //10 is used in this case, will be replaced by global xp thresholds
 			{
 				levelUp();
 				Experience = 0;
+                return true;
 			}
+            return false;
 		}
 
         public void evaluateNewItem(Item item)

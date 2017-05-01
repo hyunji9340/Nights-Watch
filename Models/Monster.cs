@@ -1,6 +1,7 @@
 ﻿using System;
 using SQLite;
 using System.ComponentModel;
+using GroupProject_DD.Models;
 
 namespace GroupProject_DD
 {
@@ -38,13 +39,13 @@ namespace GroupProject_DD
 		}
 
 		private int _Rating;
-		public int Rating
+		public int Level
 		{
 			get { return _Rating; }
 			set
 			{
 				_Rating = value;
-				OnPropertyChanged(nameof(Rating));
+				OnPropertyChanged(nameof(Level));
 			}
 		}
 
@@ -118,9 +119,9 @@ namespace GroupProject_DD
 
 		public void setMonsterLevel(int level)
 		{
-			Rating = 1 * level;
-			Health = 20 * level;
-			xpValue = 10 * level;
+			Level = 1 * level;
+			Health = 15 * level;
+			xpValue = 5 * level;
 			Strength = 1 * level;
 			Dexterity = 1 * level;
 			Agility = 1 * level;
@@ -132,14 +133,15 @@ namespace GroupProject_DD
 			return (Health <= 0);
 		}
 
-		public void takeDamage(int damage)
+		public int takeDamage(int damage)
 		{
 			Health -= damage;
+            return damage;
 		}
 
 		public int Attack()
 		{
-			return Strength + Rating;
+			return Strength + Level;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

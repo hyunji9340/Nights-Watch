@@ -66,7 +66,7 @@ namespace DnD_Unit_Tests
         [TestMethod]
         public void CharactersAreAlive()
         {
-            Assert.IsTrue(BattleEngine.evaluateCharacterList());
+            Assert.IsTrue(BattleEngine.areAnyCharactersAlive());
         }
 
         [TestMethod]
@@ -74,14 +74,14 @@ namespace DnD_Unit_Tests
         {
             while (BattleEngine.characterList.Count > 0)
                 BattleEngine.characterList.RemoveAt(0);
-            Assert.IsFalse(BattleEngine.evaluateCharacterList());
+            Assert.IsFalse(BattleEngine.areAnyCharactersAlive());
         }
 
         [TestMethod]
         public void MonstersAreAlive()
         {
             BattleEngine.generateMonsterList(2);
-            Assert.IsTrue(BattleEngine.evaluateMonsterList());
+            Assert.IsTrue(BattleEngine.areAnyMonstersAlive());
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace DnD_Unit_Tests
         {
             while (BattleEngine.monsterList.Count > 0)
                 BattleEngine.monsterList.RemoveAt(0);
-            Assert.IsFalse(BattleEngine.evaluateMonsterList());
+            Assert.IsFalse(BattleEngine.areAnyMonstersAlive());
         }
     }
 }

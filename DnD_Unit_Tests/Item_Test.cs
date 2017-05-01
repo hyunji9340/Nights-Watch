@@ -11,12 +11,6 @@ namespace DnD_Unit_Tests
         Item item;
 
         [TestMethod]
-        public void Item_Default_Constructor()
-        {
-            item = new Item();
-        }
-
-        [TestMethod]
         public void Item_Argument_Constructor()
         {
             Item item = new Item("Winged Boots", "It's so light", 7, Bodypart.Feet);
