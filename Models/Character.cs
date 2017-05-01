@@ -259,7 +259,7 @@ namespace GroupProject_DD
             return false;
 		}
 
-        public void evaluateNewItem(Item item)
+        public bool evaluateNewItem(Item item)
         {
             /*locate item slot in inventory*/
             Item temp_Item;
@@ -270,6 +270,7 @@ namespace GroupProject_DD
             {
                 discardItem(temp_Item);
                 equipItem(item);
+                return true;
             }
             else/*slot is already filled, evaluate better item (new or old)*/
             {
@@ -279,8 +280,10 @@ namespace GroupProject_DD
                     discardItem(temp_Item);
                     equipItem(item);
                     verifyHealth();
+                    return true;
                 }
             }
+            return false;
         }
 
         public void equipItem(Item item)

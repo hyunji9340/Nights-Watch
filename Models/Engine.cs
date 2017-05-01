@@ -65,7 +65,9 @@ namespace GroupProject_DD
 			{
 				monsterList.Add(monster_dictionary[rand.Next(monster_dictionary.Count)]);
 				monsterList[i].setMonsterLevel(dungeonLevel);
-			}
+                if (rand.Next(99) % 2 == 0)
+                    monsterList[i].addItem(new Item(item_dictionary[rand.Next(item_dictionary.Count)]));
+            }
 			return "There are " + num_monsters.ToString() + " monsters in this dungeon.";
 		}
 
@@ -127,11 +129,11 @@ namespace GroupProject_DD
             {
                 //Hero attacks monster
                 float dodgeRating = dodgePercentile(monster.Agility, hero.Dexterity, hero.Level);
-                actions.Add("dodged rating " + dodgeRating.ToString());
                 if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
                 {
                     dmg = monster.takeDamage(hero.Attack());
-                    actions.Add(monster.Name + " took "+ dmg +" from " + hero.Name);
+                    
+                    actions.Add(monster.Name + " took "+ dmg +" damage from " + hero.Name);
                 }
                 else// successfully dodged
                 {
@@ -142,6 +144,13 @@ namespace GroupProject_DD
                 {
                     action = hero.Name + " killed " + monster.Name + " with " + dmg + " damage.";
                     actions.Add(action);
+                    if (monster.hasItem())
+                    {
+                        Item droppedItem = monster.discardItem();
+                        if (hero.evaluateNewItem(droppedItem))
+                            action = hero.Name + " equipped " + droppedItem.name + ", was dropped by " + monster.Name;
+                        actions.Add(action);
+                    }
                     //character pick up item off of monster dead body
                     if (hero.addExperience(monster.xpValue))
                     {
@@ -152,7 +161,6 @@ namespace GroupProject_DD
                 else//monster still alive, monster attacks hero
                 {
                     dodgeRating = dodgePercentile(monster.Agility, hero.Dexterity, hero.Level);
-                    actions.Add("dodged rating " + dodgeRating.ToString());
                     if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
                     {
                         dmg = hero.takeDamage(monster.Attack());
@@ -182,18 +190,6 @@ namespace GroupProject_DD
             {
 
             }
-
-			int monsterAttk = monster.Attack(); 
-			monster.takeDamage(hero.Attack()); 
-
-			if (monster.isDead())
-			{
-				
-			}
-			else
-			{
-				
-			}
 			return actions;
 		}
 	}

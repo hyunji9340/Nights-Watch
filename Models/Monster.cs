@@ -115,9 +115,9 @@ namespace GroupProject_DD
 			}
 		}
 
-		public int Item { get; set; }
+        private Item item { get; set; }
 
-		public void setMonsterLevel(int level)
+        public void setMonsterLevel(int level)
 		{
 			Level = 1 * level;
 			Health = 15 * level;
@@ -139,7 +139,27 @@ namespace GroupProject_DD
             return damage;
 		}
 
-		public int Attack()
+        public void addItem(Item item)
+        {
+            this.item = item;
+        }
+
+        public Item discardItem()
+        {
+            Item temp = new Item(item);
+            item = null;
+            return temp;
+        }
+
+        public bool hasItem()
+        {
+            if (item == null)
+                return false;
+            else
+                return true;
+        }
+
+        public int Attack()
 		{
 			return Strength + Level;
 		}

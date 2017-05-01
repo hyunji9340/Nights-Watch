@@ -113,8 +113,10 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Xamarin.Forms.Xaml.dll
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.pdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.pdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.xml
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.Abstractions.pdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.Abstractions.xml
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.Abstractions.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\System.Reactive.Core.xml
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\System.Reactive.Interfaces.xml
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\System.Reactive.Linq.xml
@@ -144,8 +146,6 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xhdpi\icon.
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xxhdpi\icon.png
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\R.cs.flag
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\uploadflags.txt
-C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.dll.mdb
-C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Plugin.Vibrate.Abstractions.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.Droid.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\Java.Interop.dll.mdb
