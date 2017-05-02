@@ -181,10 +181,10 @@ namespace GroupProject_DD
             Inventory = new Dictionary<string, Item>()
             {
                 {Bodypart.Head, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.AttkArm, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.DefArm, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Head)}
+                {Bodypart.AttkArm, new Item("Empty", "", 0, Bodypart.AttkArm)},
+                {Bodypart.DefArm, new Item("Empty", "", 0, Bodypart.DefArm)},
+                {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Torso)},
+                {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Feet)}
             };
         }
 
