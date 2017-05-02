@@ -121,7 +121,7 @@ namespace GroupProject_DD
 		{
 			Level = 1 * level;
 			Health = 15 * level;
-			xpValue = 5 * level;
+			xpValue = 15 * level;
 			Strength = 1 * level;
 			Dexterity = 1 * level;
 			Agility = 1 * level;

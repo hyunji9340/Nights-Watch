@@ -65,7 +65,7 @@ namespace GroupProject_DD
 			{
 				monsterList.Add(monster_dictionary[rand.Next(monster_dictionary.Count)]);
 				monsterList[i].setMonsterLevel(dungeonLevel);
-                if (rand.Next(99) % 2 == 0)
+                if (rand.Next(99) % 1 == 0)
                     monsterList[i].addItem(new Item(item_dictionary[rand.Next(item_dictionary.Count)]));
             }
 			return "There are " + num_monsters.ToString() + " monsters in this dungeon.";
