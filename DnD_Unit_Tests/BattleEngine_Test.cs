@@ -45,7 +45,15 @@ namespace DnD_Unit_Tests
                 new Monster(),
                 new Monster()
             };
+
             BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary);
+        }
+
+        [TestMethod]
+        public void MonsterGeneration()
+        {
+            BattleEngine.generateMonsterList(BattleEngine.dungeonLevel);
+            Assert.IsTrue(BattleEngine.currentMonsterList().Count > 0);
         }
 
         [TestMethod]
@@ -57,11 +65,23 @@ namespace DnD_Unit_Tests
         }
 
         [TestMethod]
-        public void MonsterGeneration()
+        public void CharacterIsFasterThanMonster()
         {
-            BattleEngine.generateMonsterList(BattleEngine.dungeonLevel);
-            Assert.IsTrue(BattleEngine.currentMonsterList().Count > 0);
+            BattleEngine.generateMonsterList(1);
+            BattleEngine.characterList[0].Speed = 20;
+            BattleEngine.monsterList[0].Speed = 15;
+            Assert.IsTrue(BattleEngine.CharacterIsFaster());
         }
+
+        [TestMethod]
+        public void MonsterIsFasterThanCharacter()
+        {
+            BattleEngine.generateMonsterList(1);
+            BattleEngine.characterList[0].Speed = 10;
+            BattleEngine.monsterList[0].Speed = 15;
+            Assert.IsFalse(BattleEngine.CharacterIsFaster());
+        }
+
 
         [TestMethod]
         public void CharactersAreAlive()
@@ -90,6 +110,26 @@ namespace DnD_Unit_Tests
             while (BattleEngine.monsterList.Count > 0)
                 BattleEngine.monsterList.RemoveAt(0);
             Assert.IsFalse(BattleEngine.areAnyMonstersAlive());
+        }
+
+        [TestMethod]
+        public void CharacterStatsReset()
+        {
+            BattleEngine.characterList[0].curHealth = 0;
+            BattleEngine.PlayerStatusReset();
+            Assert.IsTrue(BattleEngine.characterList[0].curHealth > 0);
+        }
+
+        [TestMethod]
+        public void DodgedAttack()
+        {
+            Assert.IsTrue(BattleEngine.dodged(0.5f, 0.4f));
+        }
+
+        [TestMethod]
+        public void DidntDodgeAttack()
+        {
+            Assert.IsFalse(BattleEngine.dodged(0.6f, 0.7f));
         }
     }
 }

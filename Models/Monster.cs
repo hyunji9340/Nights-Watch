@@ -146,9 +146,7 @@ namespace GroupProject_DD
 
         public Item discardItem()
         {
-            Item temp = new Item(item);
-            item = null;
-            return temp;
+            return item;
         }
 
         public bool hasItem()
