@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.GameStartPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.GameStartPage" BackgroundColor="White">
 	<ContentPage.Content>
 		<Grid  Margin="0" Padding="0">
   			<Grid.RowDefinitions>
@@ -11,15 +11,15 @@
     			<ColumnDefinition Width="*" />
     			<ColumnDefinition Width="*" />
   			</Grid.ColumnDefinitions>
-  			<Button Text="AUTO" Grid.Row="0" Grid.Column="0" TextColor="Black" BorderColor="Aqua" BorderWidth="1" Margin="20" BackgroundColor="Lime"/>
-  			<Button Text="MANUEL" Grid.Row="0" Grid.Column="1" TextColor="Black" BorderColor="Aqua" BorderWidth="1" Margin="20" BackgroundColor="Lime"/>
+  			<Button Text="AUTO" Grid.Row="0" Grid.Column="0" TextColor="White" BorderColor="Aqua" BorderWidth="1" Margin="20" BackgroundColor="Maroon"/>
+  			<Button Text="MANUAL" Grid.Row="0" Grid.Column="1" TextColor="White" BorderColor="Aqua" BorderWidth="1" Margin="20" BackgroundColor="Maroon"/>
 			<ListView x:Name="CharacterListView" ItemSelected="OnCharacterSelected" ItemsSource="{Binding Path=Characters}" Grid.Row="1" Grid.ColumnSpan="2">
 			<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
 					<StackLayout Orientation="Horizontal" Padding="5">
 						<StackLayout HorizontalOptions="CenterAndExpand">
-							<Label Text="{Binding Name}" />
+							<Label Text="{Binding Name}"  TextColor="Black"/>
 						</StackLayout>
 						<Label Text="Detail" HorizontalOptions="End" TextColor="Blue"/>
 					</StackLayout>
@@ -27,7 +27,7 @@
 			</DataTemplate>
 			</ListView.ItemTemplate>
 			</ListView>
-			<Button Text="START!" Grid.Row="2" Grid.Column="0" TextColor="Black" BackgroundColor="Lime" BorderColor="Aqua" BorderWidth="1" Margin="20"  Grid.ColumnSpan="2" Clicked="GoBtnClicked"/>
+			<Button Text="START!" Grid.Row="2" Grid.Column="0" BackgroundColor="Maroon" TextColor="White" BorderRadius="5" Margin="20"  Grid.ColumnSpan="2" Clicked="GoBtnClicked"/>
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>

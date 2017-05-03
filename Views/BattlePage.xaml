@@ -6,10 +6,10 @@
 	<ContentPage.Content>
         <StackLayout>
             <Button Text="Step" 
-                Clicked="Button_Clicked" />
-            <Label Text="This is the Battle Page" 
+                Clicked="Button_Clicked" BackgroundColor="Maroon" TextColor="White" BorderRadius="5"/>
+            <!--<Label Text="This is the Battle Page" 
                VerticalOptions="Center" 
-               HorizontalOptions="Center"></Label>
+               HorizontalOptions="Center"></Label>-->
             <ListView x:Name="ActionsListView"
 				ItemsSource="{Binding Actions}"
                 VerticalOptions="FillAndExpand"
@@ -25,16 +25,23 @@
                                 <Label Text="{Binding}"
                        LineBreakMode="NoWrap"
                        Style="{DynamicResource ListItemTextStyle}"
-                       FontSize="16"/>
+                       FontSize="16" TextColor="Black"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Label Text="   ------------------------------------------------------------------------------------" />
             <Label Text="{Binding MonsterCount, UpdateSourceEventName=PropertyChanged}"
                    Font="20"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"/>
+            <Label Text="    ------------------------------------------------------------------------------------" />
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="NAME" HorizontalOptions="StartAndExpand" WidthRequest="80" FontAttributes="Bold"/>
+                <Label Text="LEVEL" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                <Label Text="HEALTH" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
+            </StackLayout>
             <ListView x:Name="CharacterListView"
 				ItemsSource="{Binding CharacterReadout}"
                 VerticalOptions="FillAndExpand"
@@ -43,46 +50,61 @@
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
                       SeparatorVisibility="None">
+                
                 <ListView.ItemTemplate>
+                    
                     <DataTemplate>
+
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Spacing="10">
+
                                 <Label Text="{Binding Name}"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="20"/>
-                                <Label Text="Level: "
+                                    FontSize="20" 
+                                    HorizontalOptions="Start"
+                                    WidthRequest="125"/>
+                                <!--  <Label Text="Level: "
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="20"/>
+                                    FontSize="20"/>-->
                                 <Label Text="{Binding Level}"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="20"/>
-                                <Label Text="HP: "
+                                    FontSize="20" 
+                                    HorizontalOptions="CenterAndExpand"
+                                       WidthRequest="40"/>
+                                <!--<Label Text="HP: "
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="20"/>
+                                    FontSize="20"/>-->
                                 <Label Text="{Binding curHealth}"
                                        LineBreakMode="NoWrap"
-                                       HorizontalOptions="EndAndExpand"
+                                       HorizontalOptions="End"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                    FontSize="20"/>
+                                    FontSize="10" 
+                                       />
                                 <Label Text=" / "
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
-                                       HorizontalOptions="StartAndExpand"
-                                    FontSize="20"/>
+                                       HorizontalOptions="Center"
+                                    FontSize="10"
+                                       />
                                 <Label Text="{Binding Health}"
                                        LineBreakMode="NoWrap"
                                        Style="{DynamicResource ListItemTextStyle}"
-                                       HorizontalOptions="StartAndExpand"
-                                    FontSize="20"/>
+                                       HorizontalOptions="Start"
+                                    FontSize="10"
+                                       />
                                 <ProgressBar Progress="{Binding HealthStatus}"
-                                             HorizontalOptions="StartAndExpand"
-                                             Scale="2"/>
+                                             HorizontalOptions="CenterAndExpand"
+                                             Scale="2"
+                                             WidthRequest="35"/>
+
+
                             </StackLayout>
                         </ViewCell>
+
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
