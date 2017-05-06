@@ -3,6 +3,7 @@
 	<StackLayout Spacing="20" Padding="15">
 		<Label Text="{Binding Monster.Name, StringFormat='Name: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Level, StringFormat='Level: {0}'}" FontSize="Medium" />
+        <Label Text="{Binding Monster.curHealth, StringFormat='Health: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Strength, StringFormat='Strength: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Dexterity, StringFormat='Dexterity: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Agility, StringFormat='Agility: {0}'}" FontSize="Medium" />

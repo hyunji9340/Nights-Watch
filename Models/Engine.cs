@@ -6,34 +6,34 @@ using GroupProject_DD.Models;
 
 namespace GroupProject_DD
 {
-	public class Engine
-	{
-		/***********************resource declarations***************************/
-		public List<ICreature> characterList;
-		public List<ICreature> monsterList;
-		public List<ICreature> characterDeadList;
-		public List<Item> item_dictionary;
-		public List<Monster> monster_dictionary;
-		public int dungeonLevel;
-		Random rand;
+    public class Engine
+    {
+        /***********************resource declarations***************************/
+        public List<ICreature> characterList;
+        public List<ICreature> monsterList;
+        public List<ICreature> characterDeadList;
+        public List<Item> item_dictionary;
+        public List<Monster> monster_dictionary;
+        public int dungeonLevel;
+        Random rand;
 
-		public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary)
-		{
-			characterList = charList;
+        public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary)
+        {
+            characterList = charList;
             item_dictionary = itemDictionary;
-			monster_dictionary = monsterDictionary;
-			monsterList = new List<ICreature>();
-			characterDeadList = new List<ICreature>();
-			dungeonLevel = 0;
-			rand = new Random();
+            monster_dictionary = monsterDictionary;
+            monsterList = new List<ICreature>();
+            characterDeadList = new List<ICreature>();
+            dungeonLevel = 0;
+            rand = new Random();
 
         }
 
-		public string IncrementDungeonLevel()
-		{
-			dungeonLevel++;
-			return "********* Entering Dungeon Level = " + dungeonLevel + " *********";
-		}
+        public string IncrementDungeonLevel()
+        {
+            dungeonLevel++;
+            return "********* Entering Dungeon Level = " + dungeonLevel + " *********";
+        }
 
         public bool CharacterIsFaster()
         {
@@ -48,50 +48,64 @@ namespace GroupProject_DD
                 return false;
         }
 
-        public void sortListBySpeed(List<ICreature> creature)
+        public void sortLists()
         {
-            List<Character> sorted = new List<Character>();
-            //while (characterList.Count > 0)
-            //{
-
-            //}
+            characterList = sortListBySpeed(characterList);
+            monsterList = sortListBySpeed(monsterList);
         }
 
-		public string generateMonsterList(int dungeonLevel)
-		{
+        public List<ICreature> sortListBySpeed(List<ICreature> creature)
+        {
+            List<ICreature> sorted = new List<ICreature>();
+            while (creature.Count > 0)
+            {
+                int HighestSpeedIndex = 0;
+                for (int i = 0; i < creature.Count; i++)
+                    if (creature[i].Speed >= creature[HighestSpeedIndex].Speed)
+                        HighestSpeedIndex = i;
+                ICreature holder = creature[HighestSpeedIndex];
+                creature.RemoveAt(HighestSpeedIndex);
+                sorted.Add(holder);
+            }
+            creature = sorted;
+            return creature;
+        }
 
-			int num_monsters = rand.Next(1, 4) + dungeonLevel;
-			for (int i = 0; i < num_monsters; i++)
-			{
+        public string generateMonsterList(int dungeonLevel)
+        {
+
+            int num_monsters = rand.Next(1, 4) + dungeonLevel;
+            for (int i = 0; i < num_monsters; i++)
+            {
                 Monster monster = new Monster(monster_dictionary[rand.Next(monster_dictionary.Count)]);
-                monster.setMonsterLevel(dungeonLevel);
+                monster.setMonsterLevel(dungeonLevel + rand.Next(1, 3));
                 if (rand.Next(99) % 1 == 0)//percentage to spawn with an item
                     monster.addItem(new Item(item_dictionary[rand.Next(item_dictionary.Count)]));
-                monsterList.Add(monster_dictionary[rand.Next(monster_dictionary.Count)]); 
+                monsterList.Add(monster);
             }
-			return "There are " + num_monsters.ToString() + " monsters in this dungeon.";
-		}
+            return "There are " + num_monsters.ToString() + " monsters in this dungeon.";
+        }
 
-		public List<ICreature> currentMonsterList()
-		{
-			return monsterList;
-		}
+        public List<ICreature> currentMonsterList()
+        {
+            return monsterList;
+        }
 
-		public bool areAnyCharactersAlive()
-		{
-			if (characterList.Count > 0)
-				return true;
-			else
-				return false;
-		}
+        public bool areAnyCharactersAlive()
+        {
+            if (characterList.Count > 0)
+                return true;
+            else
+                return false;
+        }
 
-		public bool areAnyMonstersAlive()
-		{
-			if (monsterList.Count > 0)
-				return true;
-			else
-				return false;
-		}
+        public bool areAnyMonstersAlive()
+        {
+            if (monsterList.Count > 0)
+                return true;
+            else
+                return false;
+        }
 
         public void PlayerStatusReset()
         {
@@ -104,7 +118,7 @@ namespace GroupProject_DD
         public float dodgePercentile(int Agility, int oppDex, int oppLvL)
         {
 
-            return (float)Agility / (float)(oppDex * oppLvL + 100) ;
+            return (float)Agility / (float)(oppDex * oppLvL + 100);
         }
 
         public bool dodged(float dodge, float chance)
@@ -113,85 +127,99 @@ namespace GroupProject_DD
         }
 
 
-        public List<string> Volley()
-		{
+        public List<string> Volley(bool characterAttackingFirst)
+        {
             //pop front hero and front monster off their respective queues
-			List<string> actions = new List<string>();
-			string action;
-            int dmg = 0;
+            List<string> actions = new List<string>();
+            string action;
             float dodge_rating;
-            bool characterGoesFirst = CharacterIsFaster();
-			Character hero = characterList[0] as Character;
-			Monster monster = monsterList[0] as Monster;
-			characterList.RemoveAt(0);
-			monsterList.RemoveAt(0);
-            //Whoever has fastest speed gets first hit, benefit if kills opponent -> returns to queue with no damage taken
-            if (true)//characterGoesFirst)
+            ICreature hero = characterList[0] as Character;
+            ICreature monster = monsterList[0] as Monster;
+            characterList.RemoveAt(0);
+            monsterList.RemoveAt(0);
+            bool DidDefenderDie;
+            if (characterAttackingFirst)
             {
-                //Hero attacks monster
-                float dodgeRating = dodgePercentile(monster.Agility, hero.Dexterity, hero.Level);
-                if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
+                DidDefenderDie = Swing(hero, monster, actions);
+                //Attack back if not dead
+                if (!DidDefenderDie)
                 {
-                    dmg = monster.takeDamage(hero.Attack());
-                    
-                    actions.Add(monster.Name + " took "+ dmg +" damage from " + hero.Name);
-                }
-                else// successfully dodged
-                {
-                    actions.Add(monster.Name + " dodged attack from " + hero.Name);
-                }
-                //monster attacks hero, if monster is still alive
-                if (monster.isDead())
-                {
-                    action = hero.Name + " killed " + monster.Name + " with " + dmg + " damage.";
-                    actions.Add(action);
-                    if (monster.hasItem())
-                    {
-                        Item droppedItem = monster.discardItem();
-                        if (hero.evaluateNewItem(droppedItem))
-                            action = hero.Name + " equipped " + droppedItem.name + ", was dropped by " + monster.Name;
-                        actions.Add(action);
-                    }
-                    //character pick up item off of monster dead body
-                    if (hero.addExperience(monster.Experience))
-                    {
-                        actions.Add(hero.Name + " Leveled up!!!!!!!");
-                    }
-                    characterList.Add(hero);
-                }
-                else//monster still alive, monster attacks hero
-                {
-                    dodgeRating = dodgePercentile(monster.Agility, hero.Dexterity, hero.Level);
-                    if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
-                    {
-                        dmg = hero.takeDamage(monster.Attack());
-                        actions.Add(monster.Name + " hit " + hero.Name + " with " + dmg + " damage.");
-                    }
-                    else
-                    {
-                        actions.Add(hero.Name + " dodged attack from " + monster.Name);
-                    }
-                    if (hero.isDead())
-                    {
-                        action = monster.Name + " killed " + hero.Name + " with " + dmg + " damage.";
-                        actions.Add(action);
-                        action = "**************" + hero.Name + " died**************";
-                        actions.Add(action);
-                        characterDeadList.Add(hero);
-                        CrossVibrate.Current.Vibration();
-                    }
-                    else
-                    {
-                        characterList.Add(hero);
-                    }
-                    monsterList.Add(monster);
+                    Swing(monster, hero, actions);
                 }
             }
-            else//monster goes first
+            else
             {
+                DidDefenderDie = Swing(monster, hero, actions);
+                //Attack back if not dead
+                if (!DidDefenderDie)
+                {
+                    Swing(hero, monster, actions);
+                }
+            }
+            //attacks complete
+            if (hero.isDead())
+            {
+                action = "**************" + hero.Name + " died**************";
+                actions.Add(action);
+                hero.curHealth = 0;
+                characterDeadList.Add(hero);
+                CrossVibrate.Current.Vibration();
+            }
 
+            if (monster.isDead())
+            {
+                Monster _monster = monster as Monster;
+                Character _hero = hero as Character;
+                if (_monster.hasItem())
+                {
+                    Item droppedItem = _monster.discardItem();
+                    if (_hero.evaluateNewItem(droppedItem))
+                    {
+                        action = hero.Name + " equipped " + droppedItem.name + ", was dropped by " + monster.Name;
+                        actions.Add(action);
+                    }
+                }
+                //character pick up item off of monster dead body
+                if (_hero.addExperience(monster.Experience))
+                {
+                    actions.Add(_hero.Name + " Leveled up!!!!!!!");
+                }
             }
-			return actions;
-		}
-	}
+
+
+            if (!monster.isDead())
+            {
+                monsterList.Add(monster);
+            }
+            if (!hero.isDead())
+            {
+                characterList.Add(hero);
+            }
+            return actions;
+        }
+
+        private bool Swing(ICreature Attacker, ICreature Defender, List<string> actions)
+        {
+            int dmg = 0;
+            float dodgeRating = dodgePercentile(Attacker.Agility, Defender.Dexterity, Defender.Level);
+            if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
+            {
+                dmg = Defender.takeDamage(Attacker.Attack());
+            }
+            else// successfully dodged
+            {
+                actions.Add(Defender.Name + " dodged attack from " + Attacker.Name);
+            }
+            if (Defender.isDead())
+            {
+                actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
+                return true;
+            }
+            else
+            {
+                actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                return false;
+            }
+        }
+    }
 }

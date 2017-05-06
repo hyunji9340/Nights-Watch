@@ -8,7 +8,7 @@
 			<Label Text="Level" FontSize="Medium" />
 			<Entry Text="{Binding monster.Level}" FontSize="Small" Margin="0" />
 			<Label Text="Health" FontSize="Medium" />
-			<Entry Text="{Binding monster.Health}" FontSize="Small" Margin="0" />
+			<Entry Text="{Binding monster.curHealth}" FontSize="Small" Margin="0" />
 			<Label Text="Strength" FontSize="Medium" />
 			<Entry Text="{Binding monster.Strength}" FontSize="Small" Margin="0" />
 			<Label Text="Dexterity" FontSize="Medium" />

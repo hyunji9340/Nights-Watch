@@ -10,7 +10,7 @@ namespace GroupProject_DD
 	{
 		public Monster()
 		{
-            Health = 15;
+            curHealth = 15;
 		}
 
         public Monster(Monster monster)
@@ -56,13 +56,13 @@ namespace GroupProject_DD
 		}
 
 		private int _Health;
-		public int Health
-		{
+		public int curHealth
+        {
 			get { return _Health; }
 			set
 			{
 				_Health = value;
-				OnPropertyChanged(nameof(Health));
+				OnPropertyChanged(nameof(curHealth));
 			}
 		}
 
@@ -125,23 +125,23 @@ namespace GroupProject_DD
 
         public void setMonsterLevel(int level)
 		{
-			Level = 1 * level;
-			Health = 15 * level;
-            Experience = 15 * level;
-			Strength = 1 * level;
-			Dexterity = 1 * level;
-			Agility = 1 * level;
-			Speed = 1 * level;
+			Level = level;
+            curHealth = 5 * level;
+            Experience = 5 * level;
+			Strength = level;
+			Dexterity = level;
+			Agility = level;
+			Speed = level;
 		}
 
 		public bool isDead()
 		{
-			return (Health <= 0);
+			return (curHealth <= 0);
 		}
 
 		public int takeDamage(int damage)
 		{
-			Health -= damage;
+            curHealth -= damage;
             return damage;
 		}
 

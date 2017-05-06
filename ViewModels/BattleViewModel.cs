@@ -136,21 +136,34 @@ namespace GroupProject_DD
                 Enque(BattleEngine.IncrementDungeonLevel());
                 BattleEngine.PlayerStatusReset();
                 BattleEngine.generateMonsterList(BattleEngine.dungeonLevel);
+                //sort queues based on speed
+                BattleEngine.sortLists();
                 Enque("");
                 Enque("");
             }
             if (BattleEngine.areAnyCharactersAlive())//characters still alive
             {
-                List<string> actionList = BattleEngine.Volley();
-                foreach (string _action in actionList)
+                List<string> actionList;
+                if (BattleEngine.CharacterIsFaster())//character first
                 {
-                    Enque(_action);
+                    EnqueActions(BattleEngine.Volley(true));
+                }
+                else//monster first
+                {
+                    EnqueActions(BattleEngine.Volley(false));
                 }
             }
             else
                 Enque("All characters are dead....");
-
             OnPropertyChanged("Actions");
+        }
+
+        public void EnqueActions(List<string> actions)
+        {
+            foreach (string _action in actions)
+            {
+                Enque(_action);
+            }
         }
 
 		public event PropertyChangedEventHandler PropertyChanged;

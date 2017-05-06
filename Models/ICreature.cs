@@ -16,6 +16,7 @@ namespace GroupProject_DD.Models
         int Experience { get; set; }
         int Agility { get; set; }
         int Level { get; set; }
+        int curHealth { get; set; }
         bool isDead();
     }
 }
