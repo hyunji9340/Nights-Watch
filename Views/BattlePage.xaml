@@ -50,11 +50,8 @@
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
                       SeparatorVisibility="None">
-                
                 <ListView.ItemTemplate>
-                    
                     <DataTemplate>
-
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Spacing="10">
 
@@ -100,11 +97,8 @@
                                              HorizontalOptions="CenterAndExpand"
                                              Scale="2"
                                              WidthRequest="35"/>
-
-
                             </StackLayout>
                         </ViewCell>
-
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

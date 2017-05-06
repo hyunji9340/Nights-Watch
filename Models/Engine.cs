@@ -9,21 +9,21 @@ namespace GroupProject_DD
 	public class Engine
 	{
 		/***********************resource declarations***************************/
-		public List<Character> characterList;
-		public List<Monster> monsterList;
-		public List<Character> characterDeadList;
+		public List<ICreature> characterList;
+		public List<ICreature> monsterList;
+		public List<ICreature> characterDeadList;
 		public List<Item> item_dictionary;
 		public List<Monster> monster_dictionary;
 		public int dungeonLevel;
 		Random rand;
 
-		public Engine(List<Character> charList, List<Item> itemDictionary, List<Monster> monsterDictionary)
+		public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary)
 		{
 			characterList = charList;
-			item_dictionary = itemDictionary;
+            item_dictionary = itemDictionary;
 			monster_dictionary = monsterDictionary;
-			monsterList = new List<Monster>();
-			characterDeadList = new List<Character>();
+			monsterList = new List<ICreature>();
+			characterDeadList = new List<ICreature>();
 			dungeonLevel = 0;
 			rand = new Random();
 
@@ -63,15 +63,16 @@ namespace GroupProject_DD
 			int num_monsters = rand.Next(1, 4) + dungeonLevel;
 			for (int i = 0; i < num_monsters; i++)
 			{
-				monsterList.Add(monster_dictionary[rand.Next(monster_dictionary.Count)]);
-				monsterList[i].setMonsterLevel(dungeonLevel);
-                if (rand.Next(99) % 1 == 0)
-                    monsterList[i].addItem(new Item(item_dictionary[rand.Next(item_dictionary.Count)]));
+                Monster monster = new Monster(monster_dictionary[rand.Next(monster_dictionary.Count)]);
+                monster.setMonsterLevel(dungeonLevel);
+                if (rand.Next(99) % 1 == 0)//percentage to spawn with an item
+                    monster.addItem(new Item(item_dictionary[rand.Next(item_dictionary.Count)]));
+                monsterList.Add(monster_dictionary[rand.Next(monster_dictionary.Count)]); 
             }
 			return "There are " + num_monsters.ToString() + " monsters in this dungeon.";
 		}
 
-		public List<Monster> currentMonsterList()
+		public List<ICreature> currentMonsterList()
 		{
 			return monsterList;
 		}
@@ -120,8 +121,8 @@ namespace GroupProject_DD
             int dmg = 0;
             float dodge_rating;
             bool characterGoesFirst = CharacterIsFaster();
-			Character hero = characterList[0];
-			Monster monster = monsterList[0];
+			Character hero = characterList[0] as Character;
+			Monster monster = monsterList[0] as Monster;
 			characterList.RemoveAt(0);
 			monsterList.RemoveAt(0);
             //Whoever has fastest speed gets first hit, benefit if kills opponent -> returns to queue with no damage taken
@@ -152,7 +153,7 @@ namespace GroupProject_DD
                         actions.Add(action);
                     }
                     //character pick up item off of monster dead body
-                    if (hero.addExperience(monster.xpValue))
+                    if (hero.addExperience(monster.Experience))
                     {
                         actions.Add(hero.Name + " Leveled up!!!!!!!");
                     }

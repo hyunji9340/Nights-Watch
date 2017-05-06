@@ -12,12 +12,12 @@ namespace DnD_Unit_Tests
         private List<Item> item_dictionary;
         private List<Monster> monster_dictionary;
         Engine BattleEngine;
-        public List<Character> CharacterList { get; private set; }
+        public List<ICreature> CharacterList { get; private set; }
 
         [TestInitialize]
         public void EngineStartup()
         {
-            CharacterList = new List<Character>()
+            CharacterList = new List<ICreature>()
             {
                 new Character("Greg the Chancellor"),
                 new Character("Sally the Destroyer"),
@@ -115,9 +115,10 @@ namespace DnD_Unit_Tests
         [TestMethod]
         public void CharacterStatsReset()
         {
-            BattleEngine.characterList[0].curHealth = 0;
+            Character hero = BattleEngine.characterList[0] as Character;
+            hero.curHealth = 0;
             BattleEngine.PlayerStatusReset();
-            Assert.IsTrue(BattleEngine.characterList[0].curHealth > 0);
+            Assert.IsTrue(hero.curHealth > 0);
         }
 
         [TestMethod]

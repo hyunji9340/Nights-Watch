@@ -6,14 +6,20 @@ using GroupProject_DD.Models;
 namespace GroupProject_DD
 {
 	[Table("Monsters")]
-	public class Monster : INotifyPropertyChanged
+	public class Monster : INotifyPropertyChanged, ICreature
 	{
 		public Monster()
 		{
             Health = 15;
 		}
 
-		private int _id;
+        public Monster(Monster monster)
+        {
+            Name = monster.Name;
+        }
+
+
+        private int _id;
 		[PrimaryKey, AutoIncrement]
 		public int Id
 		{
@@ -82,14 +88,14 @@ namespace GroupProject_DD
 			}
 		}
 
-		private int _xpValue;
-		public int xpValue
-		{
-			get { return _xpValue; }
+		private int _Experience;
+		public int Experience
+        {
+			get { return _Experience; }
 			set
 			{
-				_xpValue = value;
-				OnPropertyChanged(nameof(xpValue));
+				_Experience = value;
+				OnPropertyChanged(nameof(Experience));
 			}
 		}
 
@@ -121,7 +127,7 @@ namespace GroupProject_DD
 		{
 			Level = 1 * level;
 			Health = 15 * level;
-			xpValue = 15 * level;
+            Experience = 15 * level;
 			Strength = 1 * level;
 			Dexterity = 1 * level;
 			Agility = 1 * level;

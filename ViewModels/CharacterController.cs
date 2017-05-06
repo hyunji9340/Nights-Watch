@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using GroupProject_DD.Models;
 
 namespace GroupProject_DD
 {
@@ -11,13 +12,13 @@ namespace GroupProject_DD
 	{
 		private SQLiteConnection database;
 		private static object collisionLock = new object();
-		public ObservableCollection<Character> Characters { get; set; }
+		public ObservableCollection<ICreature> Characters { get; set; }
 
 		public CharacterController()
 		{
 			database = DependencyService.Get<ISQLiteDb>().DbConnection();
-			database.CreateTable<Character>();
-			this.Characters = new ObservableCollection<Character>(database.Table<Character>());
+			database.CreateTable<ICreature>();
+			this.Characters = new ObservableCollection<ICreature>(database.Table<Character>());
 			// If the table is empty, initialize the collection
 			if (!database.Table<Character>().Any())
 			{
@@ -36,7 +37,7 @@ namespace GroupProject_DD
 		}
 
 		// get all items from Character table
-		public IEnumerable<Character> GetAllItems()
+		public IEnumerable<ICreature> GetAllItems()
 		{
 			lock (collisionLock)
 			{

@@ -8,15 +8,14 @@ namespace GroupProject_DD.Models
 {
     public interface ICreature
     {
-        int Id();
-        string Name();
-        int Level();
-        int Health();
-        int Strength();
-        int Dexterity();
-        int xpValue();
-        int Speed();
-        void takeDamage(int damage);
+        int takeDamage(int damage);
         int Attack();
+        int Speed { get; set; }
+        string Name { get; set; }
+        int Dexterity { get; set; }
+        int Experience { get; set; }
+        int Agility { get; set; }
+        int Level { get; set; }
+        bool isDead();
     }
 }

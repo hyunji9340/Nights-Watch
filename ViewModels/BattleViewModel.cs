@@ -18,9 +18,9 @@ namespace GroupProject_DD
 
 		/*****************Actual Fields**********************/
 		List<Item> item_dictionary;
-		List<Character> CharacterList;
+		List<ICreature> CharacterList;
 		List<Monster> monster_dictionary;
-        List<Monster> activeMonsterList;
+        List<ICreature> activeMonsterList;
 		public ObservableCollection<String> actions;
         public ObservableCollection<Character> CharacterReadoutList;
         public string action;
@@ -65,7 +65,7 @@ namespace GroupProject_DD
 		public void devStartup()
 		{
 			// access to db and fetch data
-			IEnumerable < Character > allCharactersInDB= characterController.GetAllItems();
+			IEnumerable < ICreature > allCharactersInDB = characterController.GetAllItems();
 			// convert ienumerable to array
 			this.CharacterList = allCharactersInDB.ToList();
             CharacterReadoutList = new ObservableCollection<Character>();

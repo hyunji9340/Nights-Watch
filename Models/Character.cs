@@ -7,7 +7,7 @@ using GroupProject_DD.Models;
 namespace GroupProject_DD
 {
 	[Table("Characters")]
-	public class Character : INotifyPropertyChanged
+	public class Character : INotifyPropertyChanged, ICreature
 	{
 
         public Dictionary<string, Item> Inventory;
