@@ -17,7 +17,7 @@ namespace GroupProject_DD
 		public CharacterController()
 		{
 			database = DependencyService.Get<ISQLiteDb>().DbConnection();
-			database.CreateTable<ICreature>();
+			database.CreateTable<Character>();
 			this.Characters = new ObservableCollection<ICreature>(database.Table<Character>());
 			// If the table is empty, initialize the collection
 			if (!database.Table<Character>().Any())

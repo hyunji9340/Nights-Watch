@@ -6,6 +6,7 @@
         <Label Text="{Binding Monster.curHealth, StringFormat='Health: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Strength, StringFormat='Strength: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Dexterity, StringFormat='Dexterity: {0}'}" FontSize="Medium" />
+        <Label Text="{Binding Monster.Defense, StringFormat='Defense: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Agility, StringFormat='Agility: {0}'}" FontSize="Medium" />
 		<Label Text="{Binding Monster.Speed, StringFormat='Speed: {0}'}" FontSize="Medium" />
 		<Button Text="Update Item" 

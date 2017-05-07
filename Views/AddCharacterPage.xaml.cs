@@ -23,6 +23,7 @@ namespace GroupProject_DD
 			InitializeComponent();
 			this.characterController = characterController;
 			this.Character = character;
+            this.Character.curHealth = this.Character.Health;
 			this.Character.Name = character.Name;
 			BindingContext = this;
 		}

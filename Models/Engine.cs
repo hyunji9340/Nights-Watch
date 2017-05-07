@@ -205,21 +205,21 @@ namespace GroupProject_DD
             if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
             {
                 dmg = Defender.takeDamage(Attacker.Attack());
+                if (Defender.isDead())
+                {
+                    actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
+                    return true;
+                }
+                else
+                {
+                    actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                }
             }
             else// successfully dodged
             {
                 actions.Add(Defender.Name + " dodged attack from " + Attacker.Name);
             }
-            if (Defender.isDead())
-            {
-                actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
-                return true;
-            }
-            else
-            {
-                actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
-                return false;
-            }
+            return false;
         }
     }
 }

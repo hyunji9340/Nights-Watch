@@ -88,7 +88,18 @@ namespace GroupProject_DD
 			}
 		}
 
-		private int _Experience;
+        private int _Defense;
+        public int Defense
+        {
+            get { return _Defense; }
+            set
+            {
+                _Defense = value;
+                OnPropertyChanged(nameof(Defense));
+            }
+        }
+
+        private int _Experience;
 		public int Experience
         {
 			get { return _Experience; }
@@ -127,11 +138,12 @@ namespace GroupProject_DD
 		{
 			Level = level;
             curHealth = 5 * level;
-            Experience = 5 * level;
+            Experience = 10 * level;
 			Strength = level;
 			Dexterity = level;
 			Agility = level;
 			Speed = level;
+            Defense = level;
 		}
 
 		public bool isDead()
@@ -141,8 +153,9 @@ namespace GroupProject_DD
 
 		public int takeDamage(int damage)
 		{
-            curHealth -= damage;
-            return damage;
+            int dmg = (damage / Defense);
+            curHealth -= dmg;
+            return dmg;
 		}
 
         public void addItem(Item item)
@@ -165,7 +178,7 @@ namespace GroupProject_DD
 
         public int Attack()
 		{
-			return Strength + Level;
+			return ((2 * Level) / 5 + 2) * Strength;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

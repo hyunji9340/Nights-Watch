@@ -219,7 +219,7 @@ namespace GroupProject_DD
 
         public int Attack()
   		{
-			int attack = Strength;
+			int attack = ((2*Level)/5+2)*Strength;
   			return attack;
   		}
 
@@ -242,9 +242,10 @@ namespace GroupProject_DD
 
   		public int takeDamage(int damage)
 		{
-			curHealth -= damage;
+            int dmg = (damage / Defense) + 2;
+            curHealth -= dmg;
             HealthStatus = (float)curHealth / (float)Health;
-            return damage;
+            return dmg;
 		}
 
 		public bool addExperience(int gain)
