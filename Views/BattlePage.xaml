@@ -47,6 +47,7 @@
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
                 IsPullToRefreshEnabled="false"
+                ItemSelected="OnCharacterSelected"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
                       SeparatorVisibility="None">

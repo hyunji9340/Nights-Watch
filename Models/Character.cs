@@ -9,8 +9,16 @@ namespace GroupProject_DD
 	[Table("Characters")]
 	public class Character : INotifyPropertyChanged, ICreature
 	{
-
-        public Dictionary<string, Item> Inventory;
+        private Dictionary<string, Item> Inventory;
+        //public Dictionary<string, Item> Inventory
+        //{
+        //    get { return inventory; }
+        //    set
+        //    {
+        //        inventory = value;
+        //        OnPropertyChanged(nameof(Inventory));
+        //    }
+        //}
 
         private int _id;
 		[PrimaryKey, AutoIncrement]
@@ -201,6 +209,7 @@ namespace GroupProject_DD
             Speed = 1;
             monstersKilled = 0;
             HealthStatus = 1;
+
             Inventory = new Dictionary<string, Item>()
             {
                 {Bodypart.Head, new Item("Empty", "", 0, Bodypart.Head)},
@@ -209,6 +218,7 @@ namespace GroupProject_DD
                 {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Head)},
                 {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Head)}
             };
+            Item item = Inventory[Bodypart.AttkArm];
         }
 
         public void ResetStatus()

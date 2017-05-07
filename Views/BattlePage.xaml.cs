@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroupProject_DD.Views;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -11,7 +12,10 @@ namespace GroupProject_DD
 		private BattleViewModel BattleEngineView;
 		private int counter;
         Random rand;
-		public BattlePage()
+        private CharacterStatsPage characterStatsPage;
+        private CharacterController characterController;
+
+        public BattlePage()
 		{
 			InitializeComponent();
             DependencyService.Get<IAudioPlayerService>().Pause();
@@ -19,8 +23,8 @@ namespace GroupProject_DD
             BindingContext = BattleEngineView = new BattleViewModel();
 			counter = 0;
             rand = new Random();
-            
-		}
+            this.characterController = new CharacterController();
+        }
 
 		async void Button_Clicked(object sender, EventArgs e)
 		{
@@ -46,6 +50,22 @@ namespace GroupProject_DD
             DependencyService.Get<IAudioPlayerService>().Play(battleSound);
             BattleEngineView.UpdateAction(ref counter);
 		}
-	}
+
+        async void OnCharacterSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var character = args.SelectedItem as Character;
+
+            if (character == null)
+                return;
+
+            this.characterStatsPage = new CharacterStatsPage(new CharacterDetailViewModel(character));
+            characterStatsPage.setCharacterController(characterController);
+
+            await Navigation.PushAsync(this.characterStatsPage);
+
+            // Manually deselect item
+            CharacterListView.SelectedItem = null;
+        }
+    }
 }
 

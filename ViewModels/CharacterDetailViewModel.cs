@@ -13,6 +13,7 @@ namespace GroupProject_DD
 
 		public CharacterDetailViewModel()
 		{
+
 		}
 		public CharacterDetailViewModel(Character character = null) 
 		{

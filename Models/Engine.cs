@@ -170,6 +170,7 @@ namespace GroupProject_DD
             {
                 Monster _monster = monster as Monster;
                 Character _hero = hero as Character;
+                _hero.monstersKilled++;
                 if (_monster.hasItem())
                 {
                     Item droppedItem = _monster.discardItem();
