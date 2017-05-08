@@ -9,7 +9,7 @@ namespace GroupProject_DD
 	[Table("Characters")]
 	public class Character : INotifyPropertyChanged, ICreature
 	{
-        private Dictionary<string, Item> Inventory;
+        public Dictionary<string, Item> Inventory;
         //public Dictionary<string, Item> Inventory
         //{
         //    get { return inventory; }

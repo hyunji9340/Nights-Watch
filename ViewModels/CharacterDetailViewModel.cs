@@ -10,14 +10,15 @@ namespace GroupProject_DD
 	public class CharacterDetailViewModel
 	{
 		public Character Character { get; set; }
-
-		public CharacterDetailViewModel()
+        public Dictionary<string, Item> Inventory { get; set; }
+        public CharacterDetailViewModel()
 		{
 
 		}
 		public CharacterDetailViewModel(Character character = null) 
 		{
 			Character = character;
+            Inventory = Character.Inventory;
 		}
 	}
 }

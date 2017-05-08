@@ -14,19 +14,20 @@
         <Label Text="{Binding Character.Speed, StringFormat='Speed: {0}'}" FontSize="Medium" />
         <Label Text="{Binding Character.monstersKilled, StringFormat='Monsters Killed: {0}'}" FontSize="Medium" />
         <Label Text="Items:" FontSize="Medium" />
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ListView  ItemsSource="{Binding Inventory}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <Label Text="{Binding Value.name}"/>
-                                <Label Text="{Binding Value.description}"/>
+        <ListView ItemsSource="{Binding Path=Inventory}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding Key, StringFormat='{0}:'}" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Value.name, StringFormat='{0} - '}" />
+                                <Label Text="{Binding Value.description, StringFormat='{0}'}" />
                             </StackLayout>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </DataTemplate>
-        </ListView.ItemTemplate>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>
