@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -7,10 +7,12 @@ namespace GroupProject_DD
 {
 	public partial class GameMainPage : ContentPage
 	{
+		private Player currentPlayer;
 
-		public GameMainPage()
+		public GameMainPage(Player currentPlayer)
 		{
 			InitializeComponent();
+			this.currentPlayer = currentPlayer;
 		}
 
 		async void CharacterBtnClicked(object sender, EventArgs e)
@@ -25,7 +27,7 @@ namespace GroupProject_DD
 
 		async void StartGameBtnClicked(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new GameStartPage());
+			await Navigation.PushAsync(new GameStartPage(currentPlayer));
 		}
 	}
 }
