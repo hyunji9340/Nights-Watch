@@ -139,11 +139,11 @@ namespace GroupProject_DD
 			Level = level;
             curHealth = 5 * level;
             Experience = 10 * level;
-			Strength = level;
-			Dexterity = level;
+			Strength = 2*level;
+			Dexterity = 2*level;
 			Agility = level;
 			Speed = level;
-            Defense = level;
+            Defense = 4*level;
 		}
 
 		public bool isDead()

@@ -71,10 +71,18 @@
     <Compile Include="IAudioPlayerService.cs" />
     <Compile Include="Models\Bodypart.cs" />
     <Compile Include="Models\ICreature.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\ISQLiteDb.cs" />
+    <Compile Include="ViewModels\PlayerController.cs" />
     <Compile Include="Views\CharacterStatsPage.xaml.cs">
       <DependentUpon>CharacterStatsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerInfoPage.xaml.cs">
+      <DependentUpon>PlayerInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScorePage.xaml.cs">
+      <DependentUpon>ScorePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StudentsInfoPage.xaml.cs">
       <DependentUpon>StudentsInfoPage.xaml</DependentUpon>
@@ -150,6 +158,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\CharacterStatsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\PlayerInfoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ScorePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

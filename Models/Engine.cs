@@ -12,27 +12,43 @@ namespace GroupProject_DD
         public List<ICreature> characterList;
         public List<ICreature> monsterList;
         public List<ICreature> characterDeadList;
+        public List<ICreature> deadMonsterList;
         public List<Item> item_dictionary;
         public List<Monster> monster_dictionary;
         public int dungeonLevel;
+        public bool isGameOver;
         Random rand;
+        public Player currentPlayer;
+        private PlayerController playerController;
 
-        public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary)
+        public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary, Player currentPlayer)
         {
             characterList = charList;
             item_dictionary = itemDictionary;
             monster_dictionary = monsterDictionary;
+            deadMonsterList = new List<ICreature>();
             monsterList = new List<ICreature>();
             characterDeadList = new List<ICreature>();
             dungeonLevel = 0;
             rand = new Random();
-
+            this.currentPlayer = currentPlayer;
+            this.playerController = new PlayerController();
+            this.isGameOver = false;
         }
 
         public string IncrementDungeonLevel()
         {
-            dungeonLevel++;
-            return "********* Entering Dungeon Level = " + dungeonLevel + " *********";
+            if (dungeonLevel < 5)
+            {
+                dungeonLevel++;
+                return "********* Entering Dungeon Level = " + dungeonLevel + " *********";
+            }
+            else
+            {
+                // after dungeon level 5, the game will over
+                this.isGameOver = true;
+                return "";
+            }
         }
 
         public bool CharacterIsFaster()
@@ -168,6 +184,7 @@ namespace GroupProject_DD
 
             if (monster.isDead())
             {
+                deadMonsterList.Add(monster);
                 Monster _monster = monster as Monster;
                 Character _hero = hero as Character;
                 _hero.monstersKilled++;
@@ -192,6 +209,7 @@ namespace GroupProject_DD
             {
                 monsterList.Add(monster);
             }
+
             if (!hero.isDead())
             {
                 characterList.Add(hero);
@@ -221,6 +239,19 @@ namespace GroupProject_DD
                 actions.Add(Defender.Name + " dodged attack from " + Attacker.Name);
             }
             return false;
+        }
+
+        // method that calculates total earned point. This method is called when either all monster or all characters are dead
+        public void PointsEearned()
+        {
+            int totalPoints = 0;
+            for (int i = 0; i < deadMonsterList.Count; i++)
+            {
+                totalPoints += (deadMonsterList[i].Level * 10);
+            }
+
+            this.currentPlayer.TotalScore = totalPoints;
+            this.playerController.SavePlayer(currentPlayer);
         }
     }
 }

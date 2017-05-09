@@ -7,44 +7,45 @@ using Xamarin.Forms;
 
 namespace GroupProject_DD
 {
-	public partial class CharacterPage : ContentPage
-	{
-		private CharacterController characterController;
-		private CharacterDetailPage characterDetailPage;
+    public partial class CharacterPage : ContentPage
+    {
+        private CharacterController characterController;
+        private CharacterDetailPage characterDetailPage;
 
-		public CharacterPage()
-		{
-			InitializeComponent();
-			this.characterController = new CharacterController();
-		}
+        public CharacterPage()
+        {
+            InitializeComponent();
+            this.characterController = new CharacterController();
+        }
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			this.BindingContext = this.characterController;
-		}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            CharacterListView.ItemsSource = null;
+            CharacterListView.ItemsSource = characterController.GetAllItems();
+        }
 
-		// This method directs a detail page for a specific item
-		async void OnCharacterSelected(object sender, SelectedItemChangedEventArgs args)
-		{
-			var character = args.SelectedItem as Character;
+        // This method directs a detail page for a specific item
+        async void OnCharacterSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var character = args.SelectedItem as Character;
 
-			if (character == null)
-				return;
+            if (character == null)
+                return;
 
-			this.characterDetailPage = new CharacterDetailPage(new CharacterDetailViewModel(character));
-			characterDetailPage.setCharacterController(characterController);
+            this.characterDetailPage = new CharacterDetailPage(new CharacterDetailViewModel(character));
+            characterDetailPage.setCharacterController(characterController);
 
-			await Navigation.PushAsync(this.characterDetailPage);
+            await Navigation.PushAsync(this.characterDetailPage);
 
-			// Manually deselect item
-			CharacterListView.SelectedItem = null;
-		}
+            // Manually deselect item
+            CharacterListView.SelectedItem = null;
+        }
 
-		// directs to monster page
-		async void AddCharacterBtnClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new AddCharacterPage(characterController)); 
-		}
-	}
+        // directs to monster page
+        async void AddCharacterBtnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddCharacterPage(characterController));
+        }
+    }
 }

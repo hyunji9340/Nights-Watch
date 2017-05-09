@@ -28,9 +28,9 @@ namespace DnD_Unit_Tests
         public void monsterTakesDamageAndDies()
         {
             Monster monster = new Monster();
-            int health_placeholder = monster.Health;
+            int health_placeholder = monster.curHealth;
             monster.takeDamage(10);
-            Assert.AreNotSame(monster.Health, health_placeholder);
+            Assert.AreNotSame(monster.curHealth, health_placeholder);
         }
 
         [TestMethod]
