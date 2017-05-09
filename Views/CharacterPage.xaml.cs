@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SQLite;
 using System.Linq;
@@ -21,7 +21,8 @@ namespace GroupProject_DD
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			this.BindingContext = this.characterController;
+			CharacterListView.ItemsSource = null;
+			CharacterListView.ItemsSource = characterController.GetAllItems();
 		}
 
 		// This method directs a detail page for a specific item
