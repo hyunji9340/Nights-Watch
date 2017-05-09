@@ -14,7 +14,7 @@ namespace GroupProject_DD
 
 		async void playGameBtnClicked(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new GameMainPage());
+			await Navigation.PushAsync(new PlayerInfoPage());
 		}
 	}
 }
