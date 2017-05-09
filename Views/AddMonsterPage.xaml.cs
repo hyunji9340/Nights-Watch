@@ -30,7 +30,7 @@ namespace GroupProject_DD
 		async void SaveClicked(object sender, EventArgs e)
 		{
 			this.monsterController.SaveMonster(monster);
-			await Navigation.PopToRootAsync();
+			await Navigation.PopAsync();
 		}
 	}
 }
