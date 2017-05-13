@@ -29,5 +29,10 @@ namespace GroupProject_DD
         {
             await Navigation.PushAsync(new GameStartPage(currentPlayer));
         }
+
+        async void LeaderboardClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ScorePage());
+        }
     }
 }

@@ -4,9 +4,10 @@
       <Button Text="Create Monster" 
               VerticalOptions="Center" 
               HorizontalOptions="Center" 
-              FontSize="40" 
-              BackgroundColor="Lime" 
+              FontSize="30" 
+              BackgroundColor="Green" 
               Margin="20" 
+              TextColor="White"
               Clicked="AddMonsterBtnClicked"/>
 		<ListView x:Name="MonsterListView" 
                   ItemSelected="OnMonsterSelected" 
