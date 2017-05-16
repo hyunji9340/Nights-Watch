@@ -28,7 +28,6 @@ namespace GroupProject_DD
 			{
 				this._id = value;
 				OnPropertyChanged(nameof(Id));
-
 			}
 		}
 
