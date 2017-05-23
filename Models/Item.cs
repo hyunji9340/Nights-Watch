@@ -19,7 +19,7 @@ namespace GroupProject_DD
 		public int tier { get; set; }
 		public String type { get; set; }
 		public int slot { get; set; }
-
+        //Default constructor
         public Item()
         {
             name = "Empty";

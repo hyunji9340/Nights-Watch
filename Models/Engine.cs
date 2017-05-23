@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Plugin.Vibrate;
 using GroupProject_DD.Models;
+using System.Diagnostics;
 
 namespace GroupProject_DD
 {
@@ -38,7 +39,7 @@ namespace GroupProject_DD
 
         public int CheckCritical()
         {
-            int critChance = rand.Next(1, 3);
+            int critChance = rand.Next(1, 21);
             if (critChance == 1)
                 return -1;
             else if (critChance == 20)
@@ -284,32 +285,47 @@ namespace GroupProject_DD
                     if(Defender is Character && defenderCrit == -1)
                     {
                         //randomly picks a number between 0 and 5 to pick an item to break upon crit miss
-                        /*Character pc = Defender as Character;
+                        Character pc = Defender as Character;
                         int discardedIndex = rand.Next(0, 5);
-                        Item brokenItem = new Item();
-                        if(discardedIndex == 0)
+                        Debug.WriteLine("rand selected: {0}", discardedIndex);
+                        Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
+                        if(discardedIndex == 0 && pc.Inventory[Bodypart.Head].name != "Empty")
                         {
+                            Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.Head]);
+                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
+                            actions.Add("Their " + brokenItem.name + " broke!");
                         }
-                        if (discardedIndex == 1)
+                        if (discardedIndex == 1 && pc.Inventory[Bodypart.AttkArm].name != "Empty")
                         {
+                            Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.AttkArm]);
+                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
+                            actions.Add("Their " + brokenItem.name + " broke!");
                         }
-                        if (discardedIndex == 2)
+                        if (discardedIndex == 2 && pc.Inventory[Bodypart.DefArm].name != "Empty")
                         {
+                            Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.DefArm]);
+                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
+                            actions.Add("Their " + brokenItem.name + " broke!");
                         }
-                        if (discardedIndex == 3)
+                        if (discardedIndex == 3 && pc.Inventory[Bodypart.Torso].name != "Empty")
                         {
+                            Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.Torso]);
+                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
+                            actions.Add("Their " + brokenItem.name + " broke!");
                         }
-                        if (discardedIndex == 4)
+                        if (discardedIndex == 4 && pc.Inventory[Bodypart.Feet].name != "Empty")
                         {
+                            Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.Feet]);
+                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
+                            actions.Add("Their " + brokenItem.name + " broke!");
+                            pc.discardItem(brokenItem);
                         }
-                        */
-                        actions.Add(Defender.Name + " fumbled and scored a Critical Miss. Their " + "item" + " broke!");
-                        //pc.discardItem(brokenItem);
+
                     }
                 }
             }
