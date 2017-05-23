@@ -36,17 +36,6 @@ namespace GroupProject_DD
             this.isGameOver = false;
         }
 
-        public int CheckCritical()
-        {
-            int roll = rand.Next(1,21);
-            if (roll == 1)
-                return -1;
-            if (roll == 20)
-                return 1;
-            else
-                return 0;
-        }
-
         public string IncrementDungeonLevel()
         {
             if (dungeonLevel < 5)
@@ -231,31 +220,44 @@ namespace GroupProject_DD
         private bool Swing(ICreature Attacker, ICreature Defender, List<string> actions)
         {
             int dmg = 0;
+            bool charUsesFists = false;
             float dodgeRating = dodgePercentile(Attacker.Agility, Defender.Dexterity, Defender.Level);
             if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
             {
-                int attackerCrit = CheckCritical();
-                int defenderCrit = CheckCritical();
-                if (attackerCrit == 1)
+                //special case needed to evaluate unarmed characters
+                if (Attacker is Character)
                 {
-                    actions.Add(Attacker.Name + " scored a Critical Hit!");
-                    dmg = 2 * (Defender.takeDamage(Attacker.Attack()));
+                    Character hero = Attacker as Character;
+                    if (hero.Inventory[Bodypart.AttkArm].name == "Empty")
+                    {
+                        charUsesFists = true;
+                    }
                 }
-                else
+                if (charUsesFists) //implement fist damage
+                {
+                    dmg = Defender.takeDamage(0);
+                    if (Defender.isDead())
+                    {
+                        actions.Add(Attacker.Name + " killed " + Defender.Name + " with their bare hands... =O");
+                        return true;
+                    }
+                    else
+                    {
+                        actions.Add(Attacker.Name + " punched " + Defender.Name +  " with their fists for " + dmg + " damage.");
+                    }
+                }
+                else //normal operation
+                {
                     dmg = Defender.takeDamage(Attacker.Attack());
-                if (Defender.isDead())
-                {
-                    actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
-                    return true;
-                }
-                else
-                {
-                    actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
-                }
-                if(defenderCrit == -1)
-                {
-                    //delete a random item here 
-                    actions.Add(Defender.Name + " scored a Critical Miss!");
+                    if (Defender.isDead())
+                    {
+                        actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
+                        return true;
+                    }
+                    else
+                    {
+                        actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                    }
                 }
             }
             else// successfully dodged
