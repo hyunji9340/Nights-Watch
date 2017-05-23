@@ -20,6 +20,17 @@ namespace GroupProject_DD
 		public String type { get; set; }
 		public int slot { get; set; }
 
+        public Item()
+        {
+            name = "Empty";
+            description = "Empty";
+            tier = 0;
+            bodyassignment = null;
+            slot = 0;
+            Attributes = null;
+            rand = null;
+        }
+
 
 		//copy constructor
 		public Item(Item item)
