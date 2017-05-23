@@ -3,8 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Text;
-using System.Linq;
 using GroupProject_DD.Models;
+using Newtonsoft.Json.Linq;
+using System.Linq;
+using System.Net.Http;
+
+
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace GroupProject_DD
 {
@@ -81,7 +91,17 @@ namespace GroupProject_DD
             IEnumerable<Monster> allMonstersInDB = monsterController.GetAllMonsters();
             this.monster_dictionary = allMonstersInDB.ToList();
 
-            item_dictionary = new List<Item>()
+            item_dictionary = new List<Item>();
+
+            var formContent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("randomItemOption", "1"),
+                    new KeyValuePair<string, string>("superItemOption", "0"),
+
+                });
+            GetItemsAsync(formContent);
+
+            /*
             {
                 new Item("Sword", "Typical Sword", 2, Bodypart.AttkArm),
                 new Item("Leather Armor", "Torso Protection", 1, Bodypart.Torso),
@@ -92,7 +112,61 @@ namespace GroupProject_DD
                 new Item("Bronze Armor", "Rustic", 4, Bodypart.Torso),
                 new Item("Chainmail", "It's Bulletproof", 4, Bodypart.Torso),
                 new Item("Winged Boots", "It's so light", 7, Bodypart.Feet)
-            };
+            };*/
+
+        }
+
+        public async void GetItemsAsync(FormUrlEncodedContent code)
+        {
+
+            var client = new System.Net.Http.HttpClient();
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            var address = $"http://gamehackathon.azurewebsites.net/api/GetItemsList"; //?format=application/json";
+
+            var response = await client.PostAsync(address, code);
+
+            var itemsJson = response.Content.ReadAsStringAsync().Result;
+
+            
+            var parsed = JsonConvert.DeserializeObject<Item>(itemsJson);
+            
+            JObject JObj = JObject.Parse(itemsJson);
+            JArray arr = JArray.Parse(JObj.GetValue("data").ToString());
+            System.Diagnostics.Debug.WriteLine((JObj.GetValue("data")).ToString());
+
+            List<Item> jsonData = new List<Item>();
+            
+            
+            foreach (JObject obj in arr.Children<JObject>())
+            {
+                Item temp = JsonConvert.DeserializeObject<Item>(obj.ToString());
+
+                jsonData.Add(temp);
+               
+            }
+
+            //dataAccess.UpdateData(jsonData);
+
+            for (int i = 0; i < jsonData.Count(); i++)
+            {
+                Item tempItem = new Item(jsonData[i].Image, jsonData[i].Name, jsonData[i].Description, jsonData[i].Tier, jsonData[i].AttribMod, jsonData[i].BodyPart, jsonData[i].Usage  );
+                item_dictionary.Add(tempItem);
+                /*
+                item = new Data();
+                item.Image = newData[i].Image;
+                item.Name = newData[i].Name;
+                item.Description = newData[i].Description;
+                item.Tier = newData[i].Tier;
+                item.BodyPart = newData[i].BodyPart;
+                item.AttribMod = newData[i].AttribMod;
+                item.Usage = newData[i].Usage;
+                database.Insert(item);
+                */
+
+            }
+
+
+            return ;
 
         }
 

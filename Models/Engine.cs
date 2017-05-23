@@ -193,7 +193,7 @@ namespace GroupProject_DD
                     Item droppedItem = _monster.discardItem();
                     if (_hero.evaluateNewItem(droppedItem))
                     {
-                        action = hero.Name + " equipped " + droppedItem.name + ", was dropped by " + monster.Name;
+                        action = hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + monster.Name;
                         actions.Add(action);
                     }
                 }
@@ -228,7 +228,7 @@ namespace GroupProject_DD
                 if (Attacker is Character)
                 {
                     Character hero = Attacker as Character;
-                    if (hero.Inventory[Bodypart.AttkArm].name == "Empty")
+                    if (hero.Inventory[Bodypart.AttkArm].Name == "Empty")
                     {
                         charUsesFists = true;
                     }
