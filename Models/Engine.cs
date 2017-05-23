@@ -36,6 +36,17 @@ namespace GroupProject_DD
             this.isGameOver = false;
         }
 
+        public int CheckCritical()
+        {
+            int roll = rand.Next(1,21);
+            if (roll == 1)
+                return -1;
+            if (roll == 20)
+                return 1;
+            else
+                return 0;
+        }
+
         public string IncrementDungeonLevel()
         {
             if (dungeonLevel < 5)
@@ -223,7 +234,15 @@ namespace GroupProject_DD
             float dodgeRating = dodgePercentile(Attacker.Agility, Defender.Dexterity, Defender.Level);
             if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
             {
-                dmg = Defender.takeDamage(Attacker.Attack());
+                int attackerCrit = CheckCritical();
+                int defenderCrit = CheckCritical();
+                if (attackerCrit == 1)
+                {
+                    actions.Add(Attacker.Name + " scored a Critical Hit!");
+                    dmg = 2 * (Defender.takeDamage(Attacker.Attack()));
+                }
+                else
+                    dmg = Defender.takeDamage(Attacker.Attack());
                 if (Defender.isDead())
                 {
                     actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
@@ -232,6 +251,11 @@ namespace GroupProject_DD
                 else
                 {
                     actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                }
+                if(defenderCrit == -1)
+                {
+                    //delete a random item here 
+                    actions.Add(Defender.Name + " scored a Critical Miss!");
                 }
             }
             else// successfully dodged
