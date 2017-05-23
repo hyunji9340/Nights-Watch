@@ -184,4 +184,3 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-hdpi\watch.
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xhdpi\watch.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xxhdpi\watch.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.dll.mdb
-C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.Droid.dll.mdb

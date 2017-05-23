@@ -220,18 +220,44 @@ namespace GroupProject_DD
         private bool Swing(ICreature Attacker, ICreature Defender, List<string> actions)
         {
             int dmg = 0;
+            bool charUsesFists = false;
             float dodgeRating = dodgePercentile(Attacker.Agility, Defender.Dexterity, Defender.Level);
             if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
             {
-                dmg = Defender.takeDamage(Attacker.Attack());
-                if (Defender.isDead())
+                //special case needed to evaluate unarmed characters
+                if (Attacker is Character)
                 {
-                    actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
-                    return true;
+                    Character hero = Attacker as Character;
+                    if (hero.Inventory[Bodypart.AttkArm].name == "Empty")
+                    {
+                        charUsesFists = true;
+                    }
                 }
-                else
+                if (charUsesFists) //implement fist damage
                 {
-                    actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                    dmg = Defender.takeDamage(0);
+                    if (Defender.isDead())
+                    {
+                        actions.Add(Attacker.Name + " killed " + Defender.Name + " with their bare hands... =O");
+                        return true;
+                    }
+                    else
+                    {
+                        actions.Add(Attacker.Name + " punched " + Defender.Name +  " with their fists for " + dmg + " damage.");
+                    }
+                }
+                else //normal operation
+                {
+                    dmg = Defender.takeDamage(Attacker.Attack());
+                    if (Defender.isDead())
+                    {
+                        actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
+                        return true;
+                    }
+                    else
+                    {
+                        actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                    }
                 }
             }
             else// successfully dodged

@@ -152,7 +152,7 @@ namespace GroupProject_DD
 
 		public int takeDamage(int damage)
 		{
-            int dmg = (damage / Defense);
+            int dmg = (damage / Defense) + 2;
             curHealth -= dmg;
             return dmg;
 		}
