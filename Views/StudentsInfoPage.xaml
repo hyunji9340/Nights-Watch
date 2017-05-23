@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.StudentsInfoPage" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+		<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Personal Project"/>
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
+		<StackLayout Spacing="10" HorizontalOptions="Center" Margin="0, 100, 0, 0" BindingContext="{x:Static sys:DateTime.Now}" >
+			<Label Text="CPSC - 5910 SQ" FontSize="Medium" />
+			<Label Text="{Binding StringFormat='Date/Time - {0}'}" FontSize="Medium" />
+			<Label Text="Students - Hyunji Nam, Anthony Absher, Zachary Powers, Austin Ishii" FontSize="Medium" TextColor="Black" />
+			<Button Text="Let's start the game!" BorderWidth="1" BorderColor="Blue" FontSize="20" Margin="0, 20, 0, 0" Clicked="playGameBtnClicked"></Button>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
+

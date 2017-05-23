@@ -97,16 +97,21 @@ public class MonoPackageManager {
 
 class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
-		/* We need to ensure that "XamarinProject.Droid.dll" comes first in this list. */
-		"XamarinProject.Droid.dll",
+		/* We need to ensure that "GroupProject_DD.Droid.dll" comes first in this list. */
+		"GroupProject_DD.Droid.dll",
 		"FormsViewGroup.dll",
-		"Newtonsoft.Json.dll",
-		"Plugin.Connectivity.Abstractions.dll",
-		"Plugin.Connectivity.dll",
-		"Plugin.Settings.Abstractions.dll",
-		"Plugin.Settings.dll",
-		"System.Net.Http.Extensions.dll",
-		"System.Net.Http.Primitives.dll",
+		"Plugin.Vibrate.Abstractions.dll",
+		"Plugin.Vibrate.dll",
+		"SQLite-net.dll",
+		"SQLitePCLRaw.batteries_green.dll",
+		"SQLitePCLRaw.batteries_v2.dll",
+		"SQLitePCLRaw.core.dll",
+		"SQLitePCLRaw.lib.e_sqlite3.dll",
+		"SQLitePCLRaw.provider.e_sqlite3.dll",
+		"System.Reactive.Core.dll",
+		"System.Reactive.Interfaces.dll",
+		"System.Reactive.Linq.dll",
+		"System.Reactive.PlatformServices.dll",
 		"Xamarin.Android.Support.Animated.Vector.Drawable.dll",
 		"Xamarin.Android.Support.Design.dll",
 		"Xamarin.Android.Support.v4.dll",
@@ -119,8 +124,9 @@ class MonoPackageManager_Resources {
 		"Xamarin.Forms.Platform.Android.dll",
 		"Xamarin.Forms.Platform.dll",
 		"Xamarin.Forms.Xaml.dll",
+		"GroupProject_DD.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};
-	public static final String ApiPackageName = "Mono.Android.Platform.ApiLevel_23";
+	public static final String ApiPackageName = "Mono.Android.Platform.ApiLevel_25";
 }

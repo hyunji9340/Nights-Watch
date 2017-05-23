@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinProject.GameStartPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.GameStartPage" BackgroundColor="White">
 	<ContentPage.Content>
-		<Grid BackgroundColor="Black" Margin="0" Padding="0">
+		<Grid  Margin="0" Padding="0">
   			<Grid.RowDefinitions>
-				<RowDefinition Height="2*" />
-    			<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
+				<RowDefinition Height="4*" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="2*" />
   			</Grid.RowDefinitions>
   			<Grid.ColumnDefinitions>
     			<ColumnDefinition Width="*" />
     			<ColumnDefinition Width="*" />
   			</Grid.ColumnDefinitions>
-			<Image Source="http://nerdist.com/wp-content/uploads/2013/05/dungeons-and-dragons-banner.jpg" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />
-  			<Button Text="SCORE" Grid.Row="1" Grid.Column="0" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="scoreClicked"/>
-  			<Button Text="CHARACTERS" Grid.Row="1" Grid.Column="1" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="characterClicked"/>
-			<Button Text="INVENTORY" Grid.Row="2" Grid.Column="0" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="inventoryClicked"/>
-			<Button Text="MONSTERS" Grid.Row="2" Grid.Column="1" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="monsterClicked"/>
-			<Button Text="ITEMS" Grid.Row="3" Grid.Column="0" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="itemClicked"/>
-			<Button Text="BATTLE" Grid.Row="3" Grid.Column="1" TextColor="Aqua" BorderColor="Aqua" BorderWidth="1" Margin="20" Clicked="battleClicked"/>
-			<Image Source="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/NEW-TO-DnD_What-is-DnD_Subsection_Hero_140718.jpg?itok=5pBlzVTc" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />		
+  			<Button Text="AUTO" Grid.Row="0" Grid.Column="0" TextColor="White" BorderColor="Aqua" BorderWidth="1" Margin="20" BackgroundColor="Maroon"/>
+  			<Button Text="MANUAL" Grid.Row="0" Grid.Column="1" TextColor="White" BorderColor="Aqua" BorderWidth="1" Margin="20" BackgroundColor="Maroon"/>
+			<ListView x:Name="CharacterListView" ItemSelected="OnCharacterSelected" ItemsSource="{Binding Path=Characters}" Grid.Row="1" Grid.ColumnSpan="2">
+			<ListView.ItemTemplate>
+			<DataTemplate>
+				<ViewCell>
+					<StackLayout Orientation="Horizontal" Padding="5">
+						<StackLayout HorizontalOptions="CenterAndExpand">
+							<Label Text="{Binding Name}"  TextColor="Black"/>
+						</StackLayout>
+						<Label Text="Detail" HorizontalOptions="End" TextColor="Blue"/>
+					</StackLayout>
+				</ViewCell>
+			</DataTemplate>
+			</ListView.ItemTemplate>
+			</ListView>
+			<Button Text="START!" Grid.Row="2" Grid.Column="0" BackgroundColor="Maroon" TextColor="White" BorderRadius="5" Margin="20"  Grid.ColumnSpan="2" Clicked="GoBtnClicked"/>
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>
+

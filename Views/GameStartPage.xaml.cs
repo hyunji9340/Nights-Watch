@@ -3,49 +3,47 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace XamarinProject
+namespace GroupProject_DD
 {
-	public partial class GameStartPage : ContentPage
-	{
-		public GameStartPage()
-		{
-			InitializeComponent();
-		}
+    public partial class GameStartPage : ContentPage
+    {
+        private CharacterController characterController;
+        private CharacterDetailPage characterDetailPage;
+        private Player currentPlayer;
 
-		// character
-		async void characterClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new CharactersPage());
-		}
+        public GameStartPage(Player currentPlayer)
+        {
+            InitializeComponent();
+            this.characterController = new CharacterController();
+            this.currentPlayer = currentPlayer;
+        }
 
-		// monster
-		async void monsterClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new MonsterPage());
-		}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.BindingContext = this.characterController;
+        }
 
-		// item
-		async void itemClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new ItemsPage());
-		}
+        // This method directs a detail page for a specific item
+        async void OnCharacterSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var character = args.SelectedItem as Character;
 
-		// battle
-		async void battleClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new BattlePage());
-		}
+            if (character == null)
+                return;
 
-		// score
-		async void scoreClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new ScorePage());
-		}
+            this.characterDetailPage = new CharacterDetailPage(new CharacterDetailViewModel(character));
+            characterDetailPage.setCharacterController(characterController);
 
-		// inventory
-		async void inventoryClicked(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new InventoryPage());
-		}
-	}
+            await Navigation.PushAsync(this.characterDetailPage);
+
+            // Manually deselect item
+            CharacterListView.SelectedItem = null;
+        }
+
+        async void GoBtnClicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new BattlePage(currentPlayer));
+        }
+    }
 }

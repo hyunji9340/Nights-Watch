@@ -1,54 +1,51 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using SQLite;
+using System.Linq;
 
 using Xamarin.Forms;
 
-namespace XamarinProject
+namespace GroupProject_DD
 {
-	public partial class MonsterPage : ContentPage
-	{
-		private List<Monster> monsters;
+    public partial class MonsterPage : ContentPage
+    {
+        private MonsterController monsterController;
+        private MonsterDetailPage monsterDetailPage;
 
-		public MonsterPage()
-		{
-			InitializeComponent();
-			PopulateMonsters();
-			MonsterListView.ItemsSource = monsters;
-		}
+        public MonsterPage()
+        {
+            InitializeComponent();
+            this.monsterController = new MonsterController();
+        }
 
-		public void PopulateMonsters() 
-		{
-			monsters = new List<Monster>();
-			Monster monster1 = new Monster();
-			Monster monster2 = new Monster();
-			Monster monster3 = new Monster();
-			Monster monster4 = new Monster();
-			Monster monster5 = new Monster();
-			monster1.name = "monster1";
-			monster2.name = "mosnter2";
-			monster3.name = "monster3";
-			monster4.name = "monster4";
-			monster5.name = "monster5";
-			monsters.Add(monster1);
-			monsters.Add(monster2);
-			monsters.Add(monster3);
-			monsters.Add(monster4);
-			monsters.Add(monster5);
-		}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MonsterListView.ItemsSource = null;
+            MonsterListView.ItemsSource = monsterController.GetAllMonsters();
+        }
 
+        // This method directs a detail page for a specific item
+        async void OnMonsterSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var monster = args.SelectedItem as Monster;
 
-		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
-		{
-			var monster = args.SelectedItem as Monster;
+            if (monster == null)
+                return;
 
-			if (monster == null)
-				return;
+            this.monsterDetailPage = new MonsterDetailPage(new MonsterDetailViewModel(monster));
+            monsterDetailPage.setMonsterController(monsterController);
 
-			//await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(monster)));
+            await Navigation.PushAsync(this.monsterDetailPage);
 
-			// Manually deselect item
-			MonsterListView.SelectedItem = null;
-		}
+            // Manually deselect item
+            MonsterListView.SelectedItem = null;
+        }
 
-	}
+        // directs to monster page
+        async void AddMonsterBtnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddMonsterPage(monsterController));
+        }
+    }
 }

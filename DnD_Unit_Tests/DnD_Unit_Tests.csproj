@@ -50,14 +50,17 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Item_Test.cs" />
+    <Compile Include="Character_Test.cs" />
+    <Compile Include="Monster_Test.cs" />
+    <Compile Include="BattleEngine_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Droid\XamarinProject.Droid.csproj">
-      <Project>{aeb9920e-cee1-41f1-91ad-4907e61ebe9f}</Project>
-      <Name>XamarinProject.Droid</Name>
+    <ProjectReference Include="..\GroupProject_DD.csproj">
+      <Project>{92035e3c-59dc-4b25-b329-5be0264150c8}</Project>
+      <Name>GroupProject_DD</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

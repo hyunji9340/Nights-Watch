@@ -1,61 +1,31 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using Xamarin.Forms;
 
-using Xamarin.Forms;
-
-namespace XamarinProject
+namespace GroupProject_DD
 {
 	public partial class App : Application
 	{
-		public static bool UseMockDataStore = true;
-		public static string BackendUrl = "https://localhost:5000";
-
-		public static IDictionary<string, string> LoginParameters => null;
-
 		public App()
 		{
 			InitializeComponent();
-
-			if (UseMockDataStore)
-				DependencyService.Register<MockDataStore>();
-			else
-				DependencyService.Register<CloudDataStore>();
-
-			SetMainPage();
+            DependencyService.Get<IAudioPlayerService>().Play("prelude.mp3");
+            //MainPage = new GroupProject_DDPage();
+            MainPage = new NavigationPage(new StudentsInfoPage());
 		}
 
-		public static void SetMainPage()
+		protected override void OnStart()
 		{
-			if (!UseMockDataStore && !Settings.IsLoggedIn)
-			{
-				Current.MainPage = new NavigationPage(new LoginPage())
-				{
-					BarBackgroundColor = (Color)Current.Resources["Primary"],
-					BarTextColor = Color.White
-				};
-			}
-			else
-			{
-				GoToMainPage();
-			}
+			// Handle when your app starts
 		}
 
-		public static void GoToMainPage()
+		protected override void OnSleep()
 		{
-			Console.WriteLine("before calling new info class");
-			Current.MainPage = new TabbedPage
-			{
-				Children = {
-					new NavigationPage(new MyInfo()) // new ItemPage()
-					{
-						Title = "Browse" // Browse
-					},
-					new NavigationPage(new AboutPage())
-					{
-						Title = "About" // About
-					},
-				}
-			};
+            DependencyService.Get<IAudioPlayerService>().Pause();
+            // Handle when your app sleeps
+        }
+
+		protected override void OnResume()
+		{
+			// Handle when your app resumes
 		}
 	}
 }

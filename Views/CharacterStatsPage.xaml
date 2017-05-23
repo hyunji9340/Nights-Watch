@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GroupProject_DD.Views.CharacterStatsPage">
+    <StackLayout >
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Character.Name, StringFormat=' {0} '}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+            <Label Text="{Binding Character.Level, StringFormat='  Lv. {0}'}" FontSize="Medium"  HorizontalTextAlignment="Center"/>
+            <Label Text="     XP: " FontSize="Medium" />
+            <Label Text="{Binding Character.Experience, StringFormat=' {0}'}" FontSize="Medium" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="HEALTH: " FontSize="Medium"/>
+            <Label Text="{Binding Character.curHealth, StringFormat=' {0} '}" FontSize="Medium" />
+            <Label Text=" / " FontSize="Medium" />
+            <Label Text="{Binding Character.Health, StringFormat=' {0} '}" FontSize="Medium" />
+        </StackLayout>
+
+        <Label Text="Player Stats" FontSize="Large" FontAttributes="Bold" TextColor="Black" />
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Character.Strength, StringFormat='Strength: {0}'}" FontSize="Medium" />
+            <Label Text="{Binding Character.Dexterity, StringFormat='     Dexterity: {0}'}" FontSize="Medium"  />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Character.Defense, StringFormat='Defense: {0}'}" FontSize="Medium" />
+            <Label Text="{Binding Character.Speed, StringFormat='     Speed: {0}'}" FontSize="Medium"  />
+        </StackLayout>
+
+        <Label Text="{Binding Character.monstersKilled, StringFormat='Monsters Killed: {0}'}" FontSize="Medium" />
+        <Label Text="Current Inventory:" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+        <ListView ItemsSource="{Binding Path=Inventory}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding Key, StringFormat='{0}:'}" TextColor="Black"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Value.name, StringFormat='{0} - '}" />
+                                <Label Text="{Binding Value.description, StringFormat='{0}'}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

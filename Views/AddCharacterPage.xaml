@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.AddCharacterPage" Title="Add New Character">
+	<ContentPage.Content>
+        <ScrollView>
+		<StackLayout Spacing="10" Padding="10">
+			<Label Text="Name" FontSize="Medium" />
+			<Entry Text="{Binding Character.Name}" FontSize="Small" />
+			<Label Text="Level" FontSize="Medium" />
+			<Entry Text="{Binding Character.Level}" FontSize="Small" Margin="0" />
+			<Label Text="Health" FontSize="Medium" />
+			<Entry Text="{Binding Character.Health}" FontSize="Small" Margin="0" />
+			<Label Text="Strength" FontSize="Medium" />
+			<Entry Text="{Binding Character.Strength}" FontSize="Small" Margin="0" />
+			<Label Text="Dexterity" FontSize="Medium" />
+			<Entry Text="{Binding Character.Dexterity}" FontSize="Small" Margin="0" />
+			<Label Text="Defense" FontSize="Medium" />
+			<Entry Text="{Binding Character.Defense}" FontSize="Small" Margin="0" />
+			<Button Text="Save" FontSize="30" BackgroundColor="Green" TextColor="White" Clicked="SaveClicked"/>
+		</StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.MonsterDetailPage" Title="{Binding Title}">
+	<StackLayout Spacing="20" Padding="15">
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Monster.Name, StringFormat=' {0} '}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+            <Label Text="{Binding Monster.Level, StringFormat='  Lv. {0}'}" FontSize="Medium"  HorizontalTextAlignment="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="HEALTH: " FontSize="Medium"/>
+            <Label Text="{Binding Monster.curHealth, StringFormat=' {0} '}" FontSize="Medium" />
+        </StackLayout>
+
+        <Label Text="Monster Stats" FontSize="Large" FontAttributes="Bold" TextColor="Black" />
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Monster.Strength, StringFormat='Strength: {0}'}" FontSize="Medium" />
+            <Label Text="{Binding Monster.Dexterity, StringFormat='     Dexterity: {0}'}" FontSize="Medium"  />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Monster.Defense, StringFormat='Defense: {0}'}" FontSize="Medium" />
+            <Label Text="{Binding Monster.Speed, StringFormat='     Speed: {0}'}" FontSize="Medium"  />
+        </StackLayout>
+        <Button Text="Update Item" 
+                Clicked="UpdateBtnClicked" 
+                FontSize="25" 
+                BackgroundColor="Green" 
+                TextColor="White"/>
+		<Button Text="Delete Item" 
+                Clicked="DeleteBtnClicked" 
+                FontSize="25" 
+                BackgroundColor="Maroon" 
+                TextColor="White"/>
+	</StackLayout>
+</ContentPage>
+
