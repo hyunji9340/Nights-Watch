@@ -37,6 +37,17 @@ namespace GroupProject_DD
             this.isGameOver = false;
         }
 
+        public int CheckCritical()
+        {
+            int critChance = rand.Next(1, 3);
+            if (critChance == 1)
+                return -1;
+            else if (critChance == 20)
+                return 1;
+            else 
+                return 0;
+        }
+
         public string IncrementDungeonLevel()
         {
             if (dungeonLevel < 5)
@@ -225,6 +236,9 @@ namespace GroupProject_DD
             float dodgeRating = dodgePercentile(Attacker.Agility, Defender.Dexterity, Defender.Level);
             if (!dodged(dodgeRating, (float)(rand.Next(1, 1000) / 1000F)))// dodge failed, take hit
             {
+                //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
+                int attackerCrit = CheckCritical();
+                int defenderCrit = CheckCritical();
                 //special case needed to evaluate unarmed characters
                 if (Attacker is Character)
                 {
@@ -236,6 +250,8 @@ namespace GroupProject_DD
                 }
                 if (charUsesFists) //implement fist damage
                 {
+                    if (attackerCrit == 1)
+                        actions.Add(Attacker.Name + " scored a Critical Hit!");
                     dmg = Defender.takeDamage(0);
                     if (Defender.isDead())
                     {
@@ -249,7 +265,14 @@ namespace GroupProject_DD
                 }
                 else //normal operation
                 {
-                    dmg = Defender.takeDamage(Attacker.Attack());
+                    //double damage if crit
+                    if (attackerCrit == 1)
+                    {
+                        actions.Add(Attacker.Name + " scored a Critical Hit!");
+                        dmg = 2* (Defender.takeDamage(Attacker.Attack()));
+                    }
+                    else 
+                        dmg = Defender.takeDamage(Attacker.Attack());
                     if (Defender.isDead())
                     {
                         actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
@@ -258,6 +281,36 @@ namespace GroupProject_DD
                     else
                     {
                         actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
+                    }
+                    if(Defender is Character && defenderCrit == -1)
+                    {
+                        //randomly picks a number between 0 and 5 to pick an item to break upon crit miss
+                        /*Character pc = Defender as Character;
+                        int discardedIndex = rand.Next(0, 5);
+                        Item brokenItem = new Item();
+                        if(discardedIndex == 0)
+                        {
+                            brokenItem = new Item(pc.Inventory[Bodypart.Head]);
+                        }
+                        if (discardedIndex == 1)
+                        {
+                            brokenItem = new Item(pc.Inventory[Bodypart.AttkArm]);
+                        }
+                        if (discardedIndex == 2)
+                        {
+                            brokenItem = new Item(pc.Inventory[Bodypart.DefArm]);
+                        }
+                        if (discardedIndex == 3)
+                        {
+                            brokenItem = new Item(pc.Inventory[Bodypart.Torso]);
+                        }
+                        if (discardedIndex == 4)
+                        {
+                            brokenItem = new Item(pc.Inventory[Bodypart.Feet]);
+                        }
+                        */
+                        actions.Add(Defender.Name + " fumbled and scored a Critical Miss. Their " + "item" + " broke!");
+                        //pc.discardItem(brokenItem);
                     }
                 }
             }
