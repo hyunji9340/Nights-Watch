@@ -28,13 +28,14 @@ namespace GroupProject_DD
         bool steplock;
         public Player currentPlayer;
         public bool isBattleEnded;
-
+        private Settings settings;
         /*****************Controllers**********************/
         CharacterController characterController = new CharacterController();
         MonsterController monsterController = new MonsterController();
 
-        public BattleViewModel(Player currentPlayer)
+        public BattleViewModel(Player currentPlayer, Settings IncomingSettings)
         {
+            settings = IncomingSettings;
             this.currentPlayer = currentPlayer;
             this.isBattleEnded = false;
             /**********For Developer Mode (*Fixed Character and Item List*)**********/
@@ -44,7 +45,7 @@ namespace GroupProject_DD
             actions = new ObservableCollection<string>();
             steplock = false;
             this.currentPlayer = currentPlayer;
-            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, currentPlayer);
+            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, currentPlayer, settings);
             startGameLoop(true);
         }
 

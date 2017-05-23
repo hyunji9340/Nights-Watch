@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GroupProject_DD.Models;
+using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -10,12 +11,14 @@ namespace GroupProject_DD
         private CharacterController characterController;
         private CharacterDetailPage characterDetailPage;
         private Player currentPlayer;
+        private Settings settings;
 
-        public GameStartPage(Player currentPlayer)
+        public GameStartPage(Player currentPlayer, Settings IncomingSettings)
         {
             InitializeComponent();
             this.characterController = new CharacterController();
             this.currentPlayer = currentPlayer;
+            settings = IncomingSettings;
         }
 
         protected override void OnAppearing()
@@ -43,7 +46,7 @@ namespace GroupProject_DD
 
         async void GoBtnClicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new BattlePage(currentPlayer));
+            await Navigation.PushAsync(new BattlePage(currentPlayer, settings));
         }
     }
 }

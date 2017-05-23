@@ -46,7 +46,7 @@ namespace DnD_Unit_Tests
                 new Monster()
             };
 
-            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, new Player());
+            //BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, IncomingSettings);
         }
 
         [TestMethod]

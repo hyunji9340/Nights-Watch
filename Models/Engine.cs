@@ -20,9 +20,10 @@ namespace GroupProject_DD
         Random rand;
         public Player currentPlayer;
         private PlayerController playerController;
-
-        public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary, Player currentPlayer)
+        private Settings settings;
+        public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary, Player currentPlayer, Settings IncomingSettings)
         {
+            settings = IncomingSettings;
             characterList = charList;
             item_dictionary = itemDictionary;
             monster_dictionary = monsterDictionary;
