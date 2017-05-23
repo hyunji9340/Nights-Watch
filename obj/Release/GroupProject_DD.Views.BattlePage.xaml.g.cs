@@ -8,20 +8,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XamarinProject {
+namespace GroupProject_DD {
     using System;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     
     
-    public partial class CharactersPage : global::Xamarin.Forms.ContentPage {
+    public partial class BattlePage : global::Xamarin.Forms.ContentPage {
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.ListView ActionsListView;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.ListView CharacterListView;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
-            this.LoadFromXaml(typeof(CharactersPage));
+            this.LoadFromXaml(typeof(BattlePage));
+            ActionsListView = this.FindByName<global::Xamarin.Forms.ListView>("ActionsListView");
             CharacterListView = this.FindByName<global::Xamarin.Forms.ListView>("CharacterListView");
         }
     }

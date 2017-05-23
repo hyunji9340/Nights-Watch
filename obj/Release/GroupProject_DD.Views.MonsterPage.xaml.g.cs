@@ -8,21 +8,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XamarinProject {
+namespace GroupProject_DD {
     using System;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     
     
-    public partial class CharactersPage : global::Xamarin.Forms.ContentPage {
+    public partial class MonsterPage : global::Xamarin.Forms.ContentPage {
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.ListView CharacterListView;
+        private global::Xamarin.Forms.StackLayout layout;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.ListView MonsterListView;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
-            this.LoadFromXaml(typeof(CharactersPage));
-            CharacterListView = this.FindByName<global::Xamarin.Forms.ListView>("CharacterListView");
+            this.LoadFromXaml(typeof(MonsterPage));
+            layout = this.FindByName<global::Xamarin.Forms.StackLayout>("layout");
+            MonsterListView = this.FindByName<global::Xamarin.Forms.ListView>("MonsterListView");
         }
     }
 }
