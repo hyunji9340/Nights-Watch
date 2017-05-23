@@ -1,4 +1,5 @@
-﻿using GroupProject_DD.Views;
+﻿using GroupProject_DD.Models;
+using GroupProject_DD.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,14 +16,16 @@ namespace GroupProject_DD
         private CharacterStatsPage characterStatsPage;
         private CharacterController characterController;
         private Player currentPlayer;
+        private Settings settings;
 
-        public BattlePage(Player currentPlayer)
+        public BattlePage(Player currentPlayer, Settings IncomingSettings)
         {
             InitializeComponent();
+            settings = IncomingSettings;
             DependencyService.Get<IAudioPlayerService>().Pause();
             DependencyService.Get<IAudioPlayerService>().Play("prelude");
             this.currentPlayer = currentPlayer;
-            BindingContext = BattleEngineView = new BattleViewModel(currentPlayer);
+            BindingContext = BattleEngineView = new BattleViewModel(currentPlayer, settings);
             counter = 0;
             rand = new Random();
             this.characterController = new CharacterController();

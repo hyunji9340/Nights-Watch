@@ -32,7 +32,7 @@ namespace GroupProject_DD
 
         async void StartGameBtnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GameStartPage(currentPlayer));
+            await Navigation.PushAsync(new GameStartPage(currentPlayer, settings));
         }
 
         async void LeaderboardClicked(object sender, EventArgs e)
