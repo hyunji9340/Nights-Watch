@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GroupProject_DD.Views.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout Padding="4, 4, 4, 4">
+            <Label Text="Settings" Font="Large" HorizontalTextAlignment="Center"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Server Items: " Font="16" />
+                <Label Text="{Binding ServerItems}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding ServerItems}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Items Randomized: " Font="16" />
+                <Label Text="{Binding ItemsRandom}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding ItemsRandom}" IsEnabled="{Binding ServerItems}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Super Items: " Font="16" />
+                <Label Text="{Binding SuperItems}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding SuperItems}" IsEnabled="{Binding ServerItems}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Debug Settings: " Font="16" />
+                <Label Text="{Binding DebugSettings}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding DebugSettings}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Critical Every Attack: " Font="16" />
+                <Label Text="{Binding EveryCritical}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding EveryCritical}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Enable Items: " Font="16" />
+                <Label Text="{Binding ItemUsage}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding ItemUsage}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Enalbe Magic: " Font="16" />
+                <Label Text="{Binding MagicUsage}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding MagicUsage}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Enable Healing: " Font="16" />
+                <Label Text="{Binding Healing}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding Healing}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Enable Battle Events: " Font="16" />
+                <Label Text="{Binding BattleEvents}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding BattleEvents}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
