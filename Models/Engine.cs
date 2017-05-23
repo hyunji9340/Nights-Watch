@@ -251,12 +251,9 @@ namespace GroupProject_DD
                 }
                 if (charUsesFists) //implement fist damage
                 {
-                    if (attackerCrit == 1 && settings.EveryCritical == true) {
+                    if (attackerCrit == 1)
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
-                        dmg = 2* (Defender.takeDamage(0));
-                    }
-                    else 
-                        dmg = Defender.takeDamage(0);
+                    dmg = Defender.takeDamage(0);
                     if (Defender.isDead())
                     {
                         actions.Add(Attacker.Name + " killed " + Defender.Name + " with their bare hands... =O");
@@ -269,8 +266,8 @@ namespace GroupProject_DD
                 }
                 else //normal operation
                 {
-                    //double damage if crit and crits are turned on
-                    if (attackerCrit == 1 && settings.EveryCritical == true)
+                    //double damage if crit
+                    if (attackerCrit == 1)
                     {
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
                         dmg = 2* (Defender.takeDamage(Attacker.Attack()));
@@ -286,7 +283,7 @@ namespace GroupProject_DD
                     {
                         actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
                     }
-                    if (Defender is Character && defenderCrit == -1 && settings.EveryCritical == true)
+                    if(Defender is Character && defenderCrit == -1)
                     {
                         //randomly picks a number between 0 and 5 to pick an item to break upon crit miss
                         Character pc = Defender as Character;
