@@ -43,5 +43,26 @@ namespace GroupProject_DD.Models
                 return "FEET";
             }
         }
+        public static string Healing
+        {
+            get
+            {
+                return "HEALING";
+            }
+        }
+        public static string MagicAll
+        {
+            get
+            {
+                return "MAGICALL";
+            }
+        }
+        public static string MagicDirect
+        {
+            get
+            {
+                return "MAGICDIRECT";
+            }
+        }
     }
 }

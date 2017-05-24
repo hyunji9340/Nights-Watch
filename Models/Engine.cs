@@ -204,7 +204,15 @@ namespace GroupProject_DD
                 if (_monster.hasItem())
                 {
                     Item droppedItem = _monster.discardItem();
-                    if (_hero.evaluateNewItem(droppedItem))
+                    //if the item type is healing, heals player by damaging for -rating amount.
+                    if(droppedItem.bodyassignment == "HEALING" && settings.Healing == true)
+                    {
+                        int healedPoints = -1*droppedItem.tier;
+                        hero.takeDamage(healedPoints);
+                        actions.Add(hero.Name + " used " + droppedItem.name + " dropped by" + monster.Name);
+                        actions.Add(hero.Name + " healed by " + droppedItem.tier + " points");
+                    }
+                    else if (_hero.evaluateNewItem(droppedItem))
                     {
                         action = hero.Name + " equipped " + droppedItem.name + ", was dropped by " + monster.Name;
                         actions.Add(action);
