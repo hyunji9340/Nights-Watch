@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.PlayerInfoPage" BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout Spacing="25" x:Name="layout">
             <Label Text="ENTER YOUR NAME" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"></Label>
             <Entry Text="Name" x:Name="playerName" TextColor="Black" BackgroundColor="White"/>
-            <Button Text="Start Game!" Clicked="Handle_Clicked" BackgroundColor="Maroon" TextColor="White"></Button>
+            <Button Text="Start Game!" BackgroundColor="Maroon" TextColor="White" x:Name="SeverItemClicked"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage> 
