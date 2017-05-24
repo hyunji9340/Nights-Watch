@@ -33,6 +33,8 @@ namespace GroupProject_DD
 			}
 		}
 
+        public string Image { get; set; }
+
 		private string _Name;
 		[NotNull]
 		public string Name
@@ -172,9 +174,21 @@ namespace GroupProject_DD
             }
         }
 
+        public List<String> CharacterImages = new List<String>()
+        {
+            "https://s-media-cache-ak0.pinimg.com/736x/4c/be/8e/4cbe8e4e51f35238f46eb740aa9eabdf--dungeons-and-dragons-characters-fantasy-characters.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/f2/9a/37/f29a3770434259a1015abbdc8ccac6a4.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/a8/0a/33/a80a3360d8ad2d0bf6789689ee4fd111.jpg",
+            "http://img01.deviantart.net/342a/i/2014/148/f/9/dungeons_and_dragons_character_commission_by_leahmsmith-d7k2ywh.png",
+            "http://dungeonsmaster.com/wp-content/uploads/2010/09/53.jpg"
+        };
+
         //constructor
         public Character()
         {
+            Random rand = new Random();
+            
+            Image = CharacterImages[rand.Next(0,4)];
             Name = "";
             Level = 1;
             Health = 20;
@@ -200,6 +214,9 @@ namespace GroupProject_DD
 
         public Character(String name)
         {
+            Random rand = new Random();
+
+            Image = CharacterImages[rand.Next(0, 4)];
             Name = name;
             Level = 1;
             Health = 20;
