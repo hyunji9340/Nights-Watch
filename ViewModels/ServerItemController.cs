@@ -18,10 +18,10 @@ namespace GroupProject_DD
 		ServerItems serverItems;
 		List<Item> ServerItems;
 
-		public ServerItemController()
+		public ServerItemController(Settings incomingSettings)
 		{
-			Debug.WriteLine("server item controller called");
-			currentSetting = new Settings();
+			Debug.WriteLine("server item controller instantiated");
+			currentSetting = incomingSettings;
 		}
 
 		public void InitializeServerItems() 
@@ -60,8 +60,7 @@ namespace GroupProject_DD
 
 			var values = new Dictionary<string, string>
 			{
-				{ "randomItemOption", stringIsRandom },
-				{ "superItemOption", stringIsSuperItem }
+				{ "", "" },
 			};
 			Debug.WriteLine("values created ");
 

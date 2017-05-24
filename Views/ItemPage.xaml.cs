@@ -1,29 +1,28 @@
-﻿using System;
+﻿using GroupProject_DD.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Text;
-using GroupProject_DD.Models;
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using System.Net.Http;
 using System.Diagnostics;
-
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Xamarin.Forms;
 
-namespace GroupProject_DD
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace GroupProject_DD.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemPage : ContentPage
     {
         List<Item> serverItems;
         ServerItemController serverItemController;
-        public ItemPage()
+        private Settings settings;
+        public ItemPage(Settings IncomingSettings)
         {
             InitializeComponent();
+            settings = IncomingSettings;
             Debug.WriteLine("after initialize component ");
-            serverItemController = new ServerItemController();
+            serverItemController = new ServerItemController(IncomingSettings);
             Debug.WriteLine("after initialize component1 ");
 
             serverItemController.InitializeServerItems();
@@ -32,6 +31,5 @@ namespace GroupProject_DD
             this.serverItems = serverItemController.getServerItems();
             ItemListView.ItemsSource = serverItems;
         }
-
     }
 }
