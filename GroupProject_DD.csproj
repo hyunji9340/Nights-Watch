@@ -73,10 +73,12 @@
     <Compile Include="Models\Bodypart.cs" />
     <Compile Include="Models\ICreature.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\ServerItems.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\ISQLiteDb.cs" />
     <Compile Include="ViewModels\PlayerController.cs" />
+    <Compile Include="ViewModels\ServerItemController.cs" />
     <Compile Include="Views\CharacterStatsPage.xaml.cs">
       <DependentUpon>CharacterStatsPage.xaml</DependentUpon>
     </Compile>
