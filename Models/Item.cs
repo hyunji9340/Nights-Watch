@@ -1,7 +1,9 @@
 ﻿using GroupProject_DD.Models;
 using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
+
 
 namespace GroupProject_DD
 {
@@ -10,37 +12,69 @@ namespace GroupProject_DD
 	public class Item 
 	{
         //tier is ranged from 1 - 10 based on how dominate an item can be
-        Random rand;
-        public Dictionary<string, int> Attributes;
+         Random rand;
+        /*public Dictionary<string, int> Attributes;
         public string bodyassignment;
 		// fields 
 		public String name { get; set; }
 		public String description { get; set; }
 		public int tier { get; set; }
 		public String type { get; set; }
-		public int slot { get; set; }
+		public int slot { get; set; } */
+
+        [JsonProperty("Image")]
+        public string Image { get; set; }
+        [JsonProperty("Name")]
+        public string Name { get; set; }
+        [JsonProperty("Description")]
+        public string Description { get; set; }
+        [JsonProperty("Tier")]
+        public int Tier { get; set; }
+        [JsonProperty("BodyPart")]
+        public string BodyPart { get; set; }
+        [JsonProperty("AttribMod")]
+        public string AttribMod { get; set; }
+
+        [JsonProperty("Usage")]
+        public int Usage { get; set; }
 
 
-		//copy constructor
-		public Item(Item item)
+        //copy constructor
+        public Item(Item item)
 		{
-			name = item.name;
-			description = item.description;
-			tier = item.tier;
-            bodyassignment = item.bodyassignment;
-			slot = item.slot;
-            Attributes = new Dictionary<string, int>(item.Attributes);
+            this.Image = item.Image;
+            this.Name = item.Name;
+            this.Description = item.Description;
+            this.Tier = item.Tier;
+            this.BodyPart = item.BodyPart;
+            this.AttribMod = item.AttribMod;
+            this.Usage = item.Usage;
             rand = new Random();
-            
+
+        }
+
+        public Item()
+        {
+            this.Image = "";
+            this.Name = "Empty";
+            this.Description = "";
+            this.Tier = 0;
+            this.BodyPart = "None";
+            this.AttribMod = "";
+            this.Usage = 0;
+            rand = new Random();
+
         }
 
         public void setAttributes(int tier)
         {
+            /*
             int dexterity = 0;
             int health = 0;
             int strength = 0;
             int defense = 0;
             int agility = 0;
+            */
             /*comment template: Primary Attribute bonus, secondary attribute bonus
             primary bonus:
                 lowerbound = tier level
@@ -52,7 +86,7 @@ namespace GroupProject_DD
                 lowerbound = 0
                 upperbound = tier/2
             */
-            if (bodyassignment == Bodypart.Head)//Dexterity, Defense
+            /*if (bodyassignment == Bodypart.Head)//Dexterity, Defense
             {
                 dexterity = rand.Next(tier, tier*2);
                 health = rand.Next(0, tier / 2);
@@ -91,23 +125,24 @@ namespace GroupProject_DD
                 strength = rand.Next(0, tier / 2);
                 defense = rand.Next(0, tier / 2);
                 agility = rand.Next(tier, tier * 2);
-            }
-            Attributes.Add("str", strength);
+            }*/
+            /*Attributes.Add("str", strength);
             Attributes.Add("dex", dexterity);
             Attributes.Add("def", defense);
             Attributes.Add("HP", health);
-            Attributes.Add("agl", agility);
+            Attributes.Add("agl", agility);*/
         }
 
-        public Item(String name, String description, int Tier, string body)
+        public Item(String image, String name, String description, int Tier, string body, string attribute, int usage)
 		{
-			this.name = name;
-			this.description = description;
-			this.tier = Tier;
-			this.bodyassignment = body;
-            Attributes = new Dictionary<string, int>();
+            this.Image = image;
+			this.Name = name;
+			this.Description = description;
+			this.Tier = Tier;
+			this.BodyPart = body;
+            this.AttribMod = attribute;
+            this.Usage = usage;
             rand = new Random();
-            setAttributes(tier);
         }
 	}
 }

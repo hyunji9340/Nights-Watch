@@ -4,12 +4,15 @@
 		<ToolbarItem Text="Personal Project"/>
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<StackLayout Spacing="10" HorizontalOptions="Center" Margin="0, 100, 0, 0" BindingContext="{x:Static sys:DateTime.Now}" >
+        <ScrollView>
+		<StackLayout Spacing="10" HorizontalOptions="Center" Margin="0, 10, 0, 0" BindingContext="{x:Static sys:DateTime.Now}" >
+            <Image Source="team.jpg" HeightRequest="250"/>
 			<Label Text="CPSC - 5910 SQ" FontSize="Medium" />
 			<Label Text="{Binding StringFormat='Date/Time - {0}'}" FontSize="Medium" />
 			<Label Text="Students - Hyunji Nam, Anthony Absher, Zachary Powers, Austin Ishii" FontSize="Medium" TextColor="Black" />
-			<Button Text="Let's start the game!" BorderWidth="1" BorderColor="Blue" FontSize="20" Margin="0, 20, 0, 0" Clicked="playGameBtnClicked"></Button>
+			<Button Text="Let's start the game!" BorderWidth="1" BorderColor="Blue" FontSize="20" Margin="0, 5, 0, 0" Clicked="playGameBtnClicked"></Button>
 		</StackLayout>
-	</ContentPage.Content>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
 

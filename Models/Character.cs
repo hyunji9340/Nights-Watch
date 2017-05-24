@@ -33,6 +33,8 @@ namespace GroupProject_DD
 			}
 		}
 
+        public string Image { get; set; }
+
 		private string _Name;
 		[NotNull]
 		public string Name
@@ -172,9 +174,21 @@ namespace GroupProject_DD
             }
         }
 
+        public List<String> CharacterImages = new List<String>()
+        {
+            "https://s-media-cache-ak0.pinimg.com/736x/4c/be/8e/4cbe8e4e51f35238f46eb740aa9eabdf--dungeons-and-dragons-characters-fantasy-characters.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/f2/9a/37/f29a3770434259a1015abbdc8ccac6a4.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/a8/0a/33/a80a3360d8ad2d0bf6789689ee4fd111.jpg",
+            "http://img01.deviantart.net/342a/i/2014/148/f/9/dungeons_and_dragons_character_commission_by_leahmsmith-d7k2ywh.png",
+            "http://dungeonsmaster.com/wp-content/uploads/2010/09/53.jpg"
+        };
+
         //constructor
         public Character()
         {
+            Random rand = new Random(5);
+            
+            Image = CharacterImages[rand.Next(0,4)];
             Name = "";
             Level = 1;
             Health = 20;
@@ -188,16 +202,19 @@ namespace GroupProject_DD
             HealthStatus = 1;
             Inventory = new Dictionary<string, Item>()
             {
-                {Bodypart.Head, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.AttkArm, new Item("Empty", "", 0, Bodypart.AttkArm)},
-                {Bodypart.DefArm, new Item("Empty", "", 0, Bodypart.DefArm)},
-                {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Torso)},
-                {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Feet)}
+                {Bodypart.Head, new Item() },
+                {Bodypart.AttkArm, new Item()},
+                {Bodypart.DefArm, new Item()},
+                {Bodypart.Torso, new Item()},
+                {Bodypart.Feet, new Item()} 
             };
         }
 
         public Character(String name)
         {
+            Random rand = new Random(5);
+
+            Image = CharacterImages[rand.Next(0, 4)];
             Name = name;
             Level = 1;
             Health = 20;
@@ -212,11 +229,11 @@ namespace GroupProject_DD
 
             Inventory = new Dictionary<string, Item>()
             {
-                {Bodypart.Head, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.AttkArm, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.DefArm, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.Torso, new Item("Empty", "", 0, Bodypart.Head)},
-                {Bodypart.Feet, new Item("Empty", "", 0, Bodypart.Head)}
+                {Bodypart.Head, new Item()},
+                {Bodypart.AttkArm, new Item()},
+                {Bodypart.DefArm, new Item()},
+                {Bodypart.Torso, new Item()},
+                {Bodypart.Feet, new Item()}
             };
             Item item = Inventory[Bodypart.AttkArm];
         }
@@ -274,10 +291,10 @@ namespace GroupProject_DD
         {
             /*locate item slot in inventory*/
             Item temp_Item;
-            Inventory.TryGetValue(item.bodyassignment, out temp_Item);
+            Inventory.TryGetValue(item.BodyPart, out temp_Item);
 
             /*slot is empty, fill with new item found*/
-            if (temp_Item.name == "Empty")
+            if (temp_Item.Name == "Empty")
             {
                 discardItem(temp_Item);
                 equipItem(item);
@@ -286,7 +303,7 @@ namespace GroupProject_DD
             else/*slot is already filled, evaluate better item (new or old)*/
             {
                 /*new item is better, discard old item, else ignore new item*/
-                if (temp_Item.tier <= item.tier)
+                if (temp_Item.Tier <= item.Tier)
                 {
                     discardItem(temp_Item);
                     equipItem(item);
@@ -299,14 +316,14 @@ namespace GroupProject_DD
 
         public void equipItem(Item item)
         {
-            Inventory.Add(item.bodyassignment, item);
+            Inventory.Add(item.BodyPart, item);
             addAttributes(item);
         }
 
         public void discardItem(Item item)
         {
             removeAttributes(item);
-            Inventory.Remove(item.bodyassignment);
+            Inventory.Remove(item.BodyPart);
             /*
             Could be scenario where max health is now lower than current health
             eavlutate whether to reset current health value; 
@@ -319,60 +336,59 @@ namespace GroupProject_DD
                 curHealth = Health;
         }
 
+        
         public void removeAttributes(Item item)
         {
-            foreach (KeyValuePair<string, int> attribute in item.Attributes)
-            {
-                if (attribute.Key == "str")
+           
+                if (item.AttribMod == "STRENGTH")
                 {
-                    Strength -= attribute.Value;
+                    Strength -= item.Tier;
                 }
-                else if (attribute.Key == "dex")
+                else if (item.AttribMod == "DEXTERITY")
                 {
-                    Dexterity -= attribute.Value;
+                    Dexterity -= item.Tier;
                 }
-                else if (attribute.Key == "def")
+                else if (item.AttribMod == "DEFENSE")
                 {
-                    Defense -= attribute.Value;
+                    Defense -= item.Tier;
                 }
-                else if (attribute.Key == "HP")
+                else if (item.AttribMod == "HP")
                 {
-                    Health -= attribute.Value;
+                    Health -= item.Tier;
                 }
-                else if (attribute.Key == "agl")
+                else if (item.AttribMod == "agl")
                 {
-                    Agility -= attribute.Value;
+                    Agility -= item.Tier;
                 }
-            }
+            
         }
 
         public void addAttributes(Item item)
         {
-            foreach (KeyValuePair<string, int> attribute in item.Attributes)
+
+            if (item.AttribMod == "STRENGTH")
             {
-                if (attribute.Key == "str")
-                {
-                    Strength += attribute.Value;
-                }
-                else if (attribute.Key == "dex")
-                {
-                    Dexterity += attribute.Value;
-                }
-                else if (attribute.Key == "def")
-                {
-                    Defense += attribute.Value;
-                }
-                else if (attribute.Key == "HP")
-                {
-                    Health += attribute.Value;
-                }
-                else if (attribute.Key == "agl")
-                {
-                    Agility += attribute.Value;
-                }
+                Strength += item.Tier;
+            }
+            else if (item.AttribMod == "DEXTERITY")
+            {
+                Dexterity += item.Tier;
+            }
+            else if (item.AttribMod == "DEFENSE")
+            {
+                Defense += item.Tier;
+            }
+            else if (item.AttribMod == "HP")
+            {
+                Health += item.Tier;
+            }
+            else if (item.AttribMod == "agl")
+            {
+                Agility += item.Tier;
             }
 
         }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string propertyName)
