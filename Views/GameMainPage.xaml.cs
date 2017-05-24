@@ -1,4 +1,4 @@
-﻿using GroupProject_DD.Models;
+using GroupProject_DD.Models;
 using GroupProject_DD.Views;
 using System;
 using System.Collections.Generic;
@@ -11,12 +11,14 @@ namespace GroupProject_DD
     {
         private Player currentPlayer;
         private Settings settings;
+		public ServerItemController serverItemController; // added
 
 
-        public GameMainPage(Player currentPlayer)
+		public GameMainPage(Player currentPlayer, ServerItemController serverItemController) // serverItemController added
         {
             InitializeComponent();
             this.currentPlayer = currentPlayer;
+			this.serverItemController = serverItemController;
             settings = new Settings();
         }
 
@@ -32,7 +34,7 @@ namespace GroupProject_DD
 
         async void StartGameBtnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GameStartPage(currentPlayer, settings));
+			await Navigation.PushAsync(new GameStartPage(currentPlayer, serverItemController));
         }
 
         async void LeaderboardClicked(object sender, EventArgs e)
@@ -46,7 +48,7 @@ namespace GroupProject_DD
         }
         async void ServerItemClicked(object sender, EventArgs e)
 		{
-			await Navigation.PushAsync(new ItemPage(settings));
+			await Navigation.PushAsync(new ItemPage(serverItemController)); // serverItemController added, setting deleted
 		}
     }
 }
