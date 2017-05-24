@@ -248,6 +248,11 @@ namespace GroupProject_DD
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
                 int defenderCrit = CheckCritical();
+                if(settings.EveryCritical == true)
+                {
+                    attackerCrit = 1;
+                    defenderCrit = -1;
+                }
                 //special case needed to evaluate unarmed characters
                 if (Attacker is Character)
                 {
