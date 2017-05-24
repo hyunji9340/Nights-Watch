@@ -167,8 +167,7 @@ namespace GroupProject_DD
             {
                 if(crit == 1)
                 {
-                    int dmg = 2*(Defender.takeDamage(Attacker.Attack()));
-
+                    int dmg = Defender.takeDamage(2*Attacker.Attack());
                     actions.Add(Defender.Name + " took " + dmg + " damage");
                 }
                 else
@@ -307,11 +306,9 @@ namespace GroupProject_DD
             {
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
-                int defenderCrit = CheckCritical();
                 if(settings.EveryCritical == true)
                 {
                     attackerCrit = 1;
-                    defenderCrit = -1;
                 }
                 //special case needed to evaluate unarmed characters
                 if (Attacker is Character)
@@ -326,7 +323,7 @@ namespace GroupProject_DD
                 {
                     if (attackerCrit == 1) {
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
-                        dmg = 2*(Defender.takeDamage(0));
+                        dmg = (Defender.takeDamage(2*0));
                     }
                     else
                         dmg = (Defender.takeDamage(0));
@@ -343,7 +340,7 @@ namespace GroupProject_DD
                 else //normal operation
                 {
                     //double damage if crit
-                    if (Attacker is Character && defenderCrit == -1)
+                    if (Attacker is Character && attackerCrit == -1)
                     {
                         //randomly picks a number between 0 and 5 to pick an item to break upon crit miss
                         Character pc = Attacker as Character;
@@ -399,7 +396,7 @@ namespace GroupProject_DD
                     else if (attackerCrit == 1)
                     {
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
-                        dmg = 2* (Defender.takeDamage(Attacker.Attack()));
+                        dmg = Defender.takeDamage(2*Attacker.Attack());
                     }
                     else 
                         dmg = Defender.takeDamage(Attacker.Attack());
@@ -411,59 +408,6 @@ namespace GroupProject_DD
                     else
                     {
                         actions.Add(Defender.Name + " took " + dmg + " damage from " + Attacker.Name);
-                    }
-                    if(Defender is Character && defenderCrit == -1)
-                    {
-                        //randomly picks a number between 0 and 5 to pick an item to break upon crit miss
-                        Character pc = Defender as Character;
-                        int discardedIndex = rand.Next(0, 5);
-                        Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
-                        if(discardedIndex == 0 && pc.Inventory[Bodypart.Head].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.Head]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 1 && pc.Inventory[Bodypart.AttkArm].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.AttkArm]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 2 && pc.Inventory[Bodypart.DefArm].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.DefArm]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 3 && pc.Inventory[Bodypart.Torso].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.Torso]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 4 && pc.Inventory[Bodypart.Feet].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.Feet]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                            pc.discardItem(brokenItem);
-                        }
-                        if (discardedIndex == 5 && pc.Inventory[Bodypart.MagicDirect].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.MagicDirect]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                            pc.discardItem(brokenItem);
-                        }
-                        if (discardedIndex == 6 && pc.Inventory[Bodypart.MagicAll].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.MagicAll]);
-                            actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                            pc.discardItem(brokenItem);
-                        }
-
                     }
                 }
             }
