@@ -2,12 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.MonsterDetailPage" Title="{Binding Title}">
 	<StackLayout Spacing="20" Padding="15">
         <StackLayout Orientation="Horizontal">
-            <Label Text="{Binding Monster.Name, StringFormat=' {0} '}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
-            <Label Text="{Binding Monster.Level, StringFormat='  Lv. {0}'}" FontSize="Medium"  HorizontalTextAlignment="Center"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="HEALTH: " FontSize="Medium"/>
-            <Label Text="{Binding Monster.curHealth, StringFormat=' {0} '}" FontSize="Medium" />
+            <Image Source="{Binding Monster.Image}" HeightRequest="150" WidthRequest="150"/>
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Monster.Name, StringFormat=' {0} '}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="{Binding Monster.Level, StringFormat=' Lv. {0}'}" FontSize="Medium"  HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="HEALTH: " FontSize="Medium"/>
+                    <Label Text="{Binding Monster.Health, StringFormat=' {0} '}" FontSize="Medium" />
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
 
         <Label Text="Monster Stats" FontSize="Large" FontAttributes="Bold" TextColor="Black" />
