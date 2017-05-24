@@ -22,7 +22,7 @@ namespace GroupProject_DD
         public ItemPage()
         {
             InitializeComponent();
-            Debug.WriteLine("after initialize component ");
+            /*Debug.WriteLine("after initialize component ");
             serverItemController = new ServerItemController();
             Debug.WriteLine("after initialize component1 ");
 
@@ -30,7 +30,7 @@ namespace GroupProject_DD
             Debug.WriteLine("after initialize component2 ");
 
             this.serverItems = serverItemController.getServerItems();
-            ItemListView.ItemsSource = serverItems;
+            ItemListView.ItemsSource = serverItems;*/
         }
 
     }

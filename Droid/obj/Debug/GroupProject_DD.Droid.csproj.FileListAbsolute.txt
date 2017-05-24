@@ -204,4 +204,3 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\Xamarin.F
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\Xamarin.Forms.Platform.Android.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\Xamarin.Forms.Xaml.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.dll.mdb
-C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.Droid.dll.mdb

@@ -81,6 +81,7 @@ namespace GroupProject_DD
 
         public void devStartup()
         {
+            /*
             // access to db and fetch data
             IEnumerable<ICreature> allCharactersInDB = characterController.GetAllItems();
             // convert ienumerable to array
@@ -102,20 +103,21 @@ namespace GroupProject_DD
 
                 });
             GetItemsAsync(formContent);
-
-            /*
+            */
+            item_dictionary = new List<Item> 
             {
-                new Item("Sword", "Typical Sword", 2, Bodypart.AttkArm),
-                new Item("Leather Armor", "Torso Protection", 1, Bodypart.Torso),
-                new Item("Stupid Helmet", "It's dumb", 1, Bodypart.Head),
-                new Item("Mythril Sheild", "Heavy", 5, Bodypart.DefArm),
-                new Item("Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm),
-                new Item("Silver Helmet", "Elegant Helmet", 4, Bodypart.Head),
-                new Item("Bronze Armor", "Rustic", 4, Bodypart.Torso),
-                new Item("Chainmail", "It's Bulletproof", 4, Bodypart.Torso),
-                new Item("Winged Boots", "It's so light", 7, Bodypart.Feet)
-            };*/
-
+                new Item("temp", "Sword", "Typical Sword", 2, Bodypart.AttkArm, "STRENGTH", 20),
+                new Item("temp","Leather Armor", "Torso Protection", 1, Bodypart.Torso, "DEFENSE", 150),
+                new Item("temp", "Stupid Helmet", "It's dumb", 1, Bodypart.Head, "DEFENSE", 150),
+                new Item("temp", "Mythril Sheild", "Heavy", 5, Bodypart.DefArm, "DEFENSE", 200),
+                new Item("temp", "Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm, "STRENGTH", 25),
+                new Item("temp", "Silver Helmet", "Elegant Helmet", 4, Bodypart.Head, "DEFENSE", 200),
+                new Item("temp", "Bronze Armor", "Rustic", 4, Bodypart.Torso, "DEFENSE", 100),
+                new Item("temp", "Chainmail", "It's Bulletproof", 4, Bodypart.Torso, "DEFENSE", 100),
+                new Item("temp", "Winged Boots", "It's so light", 7, Bodypart.Feet, "SPEED", 200),
+                new Item("temp", "Book of Devs", "Dev item", 10, Bodypart.MagicAll, "STRENGTH", 10)
+            };
+            
         }
 
         public async void GetItemsAsync(FormUrlEncodedContent code)
