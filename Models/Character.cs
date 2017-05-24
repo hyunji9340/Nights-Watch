@@ -186,7 +186,7 @@ namespace GroupProject_DD
         //constructor
         public Character()
         {
-            Random rand = new Random(5);
+            Random rand = new Random();
             
             Image = CharacterImages[rand.Next(0,4)];
             Name = "";
@@ -212,7 +212,7 @@ namespace GroupProject_DD
 
         public Character(String name)
         {
-            Random rand = new Random(5);
+            Random rand = new Random();
 
             Image = CharacterImages[rand.Next(0, 4)];
             Name = name;
