@@ -15,16 +15,17 @@ namespace GroupProject_DD
 	public class ServerItemController
 	{
 		Settings currentSetting;
-		ServerItems serverItems;
-		List<Item> ServerItems;
+		public ServerItems serverItems;
+		ObservableCollection<Item> ServerItems;
 
-		public ServerItemController(Settings incomingSettings)
+		public ServerItemController(Settings incomingSettings, ObservableCollection<Item> displayItems)
 		{
-			Debug.WriteLine("server item controller instantiated");
+            displayItems = ServerItems;
+            Debug.WriteLine("server item controller instantiated");
 			currentSetting = incomingSettings;
 		}
 
-		public void InitializeServerItems() 
+        async public void InitializeServerItems() 
 		{
 			Debug.WriteLine("initializer server item called");
 			bool isRandom = currentSetting.ItemsRandom;
@@ -34,14 +35,14 @@ namespace GroupProject_DD
 			if (!isRandom) { intVersionIsRandom = 0; }
 			if (!isSuperItem) { intVersionIsSuperItem = 0; }
 			GetItemsAsync(intVersionIsRandom, intVersionIsSuperItem);
-			ServerItems = serverItems.data;
+			
 		}
 
-		public List<Item> getServerItems() 
+		public ObservableCollection<Item> getServerItems() 
 		{
 			if (ServerItems == null || ServerItems.Count == 0)
 			{
-				return new List<Item>();
+				return new ObservableCollection<Item>();
 			}
 			return ServerItems;
 		}
@@ -73,8 +74,7 @@ namespace GroupProject_DD
 			//ItemAPI apiItems = JsonConvert.DeserializeObject<ItemAPI>(itemJson);
 			this.serverItems = JsonConvert.DeserializeObject<ServerItems>(itemsJson);
 			Debug.WriteLine("after conversion deserialization");
-
-			return;
-		}
+            ServerItems = serverItems.data;
+        }
 	}
 }

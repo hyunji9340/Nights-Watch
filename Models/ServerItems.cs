@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace GroupProject_DD
 {
@@ -9,10 +10,15 @@ namespace GroupProject_DD
 
 		public string msg { get; set; }
 		public int errorCode { get; set; }
-		public List<Item> data { get; set; }
+
+
+		public ObservableCollection<Item> data { get; set; }
 
 		public ServerItems()
 		{
+
 		}
+
+
 	}
 }
