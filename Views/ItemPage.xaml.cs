@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
@@ -15,23 +15,23 @@ using Xamarin.Forms;
 
 namespace GroupProject_DD
 {
-	public partial class ItemPage : ContentPage
-	{
-		List<Item> serverItems;
-		ServerItemController serverItemController;
-		public ItemPage()
-		{
-			InitializeComponent();
-			Debug.WriteLine("after initialize component ");
-			serverItemController = new ServerItemController();
-			Debug.WriteLine("after initialize component1 ");
+    public partial class ItemPage : ContentPage
+    {
+        List<Item> serverItems;
+        ServerItemController serverItemController;
+        public ItemPage()
+        {
+            InitializeComponent();
+            Debug.WriteLine("after initialize component ");
+            serverItemController = new ServerItemController();
+            Debug.WriteLine("after initialize component1 ");
 
-			serverItemController.InitializeServerItems();
-			Debug.WriteLine("after initialize component2 ");
+            serverItemController.InitializeServerItems();
+            Debug.WriteLine("after initialize component2 ");
 
-			this.serverItems = serverItemController.getServerItems();
-			ItemListView.ItemsSource = serverItems;
-		}
+            this.serverItems = serverItemController.getServerItems();
+            ItemListView.ItemsSource = serverItems;
+        }
 
-	}
+    }
 }
