@@ -31,6 +31,7 @@ namespace GroupProject_DD
         List<ICreature> CharacterList;
         List<Monster> monster_dictionary;
         List<ICreature> activeMonsterList;
+        Settings currentSettings;
         public ObservableCollection<String> actions;
         public ObservableCollection<Character> CharacterReadoutList;
         public string action;
@@ -43,10 +44,11 @@ namespace GroupProject_DD
         CharacterController characterController = new CharacterController();
         MonsterController monsterController = new MonsterController();
 
-        public BattleViewModel(Player currentPlayer)
+        public BattleViewModel(Player currentPlayer, Settings incomingSettings)
         {
             this.currentPlayer = currentPlayer;
             this.isBattleEnded = false;
+            this.currentSettings = incomingSettings;
             /**********For Developer Mode (*Fixed Character and Item List*)**********/
             devStartup();
             /**********************************************************************/
@@ -54,7 +56,7 @@ namespace GroupProject_DD
             actions = new ObservableCollection<string>();
             steplock = false;
             this.currentPlayer = currentPlayer;
-            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, currentPlayer);
+            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, currentPlayer, incomingSettings);
             startGameLoop(true);
         }
 
