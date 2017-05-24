@@ -44,5 +44,9 @@ namespace GroupProject_DD
         {
             await Navigation.PushAsync(new SettingsPage(settings));
         }
+        async void ServerItemClicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new ItemPage());
+		}
     }
 }
