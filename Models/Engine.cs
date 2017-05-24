@@ -204,9 +204,17 @@ namespace GroupProject_DD
                 if (_monster.hasItem())
                 {
                     Item droppedItem = _monster.discardItem();
-                    if (_hero.evaluateNewItem(droppedItem))
+                    //if the item type is healing, heals player by damaging for -rating amount.
+                    if(droppedItem.BodyPart == "HEALING" && settings.Healing == true)
                     {
-                        action = hero.Name + " equipped " + droppedItem.name + ", was dropped by " + monster.Name;
+                        int healedPoints = -1*droppedItem.Tier;
+                        hero.takeDamage(healedPoints);
+                        actions.Add(hero.Name + " used " + droppedItem.Name + " dropped by" + monster.Name);
+                        actions.Add(hero.Name + " healed by " + droppedItem.Tier + " points");
+                    }
+                    else if (_hero.evaluateNewItem(droppedItem))
+                    {
+                        action = hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + monster.Name;
                         actions.Add(action);
                     }
                 }
@@ -240,20 +248,28 @@ namespace GroupProject_DD
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
                 int defenderCrit = CheckCritical();
+                if(settings.EveryCritical == true)
+                {
+                    attackerCrit = 1;
+                    defenderCrit = -1;
+                }
                 //special case needed to evaluate unarmed characters
                 if (Attacker is Character)
                 {
                     Character hero = Attacker as Character;
-                    if (hero.Inventory[Bodypart.AttkArm].name == "Empty")
+                    if (hero.Inventory[Bodypart.AttkArm].Name == "Empty")
                     {
                         charUsesFists = true;
                     }
                 }
                 if (charUsesFists) //implement fist damage
                 {
-                    if (attackerCrit == 1)
+                    if (attackerCrit == 1) {
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
-                    dmg = Defender.takeDamage(0);
+                        dmg = 2*(Defender.takeDamage(0));
+                    }
+                    else
+                        dmg = (Defender.takeDamage(0));
                     if (Defender.isDead())
                     {
                         actions.Add(Attacker.Name + " killed " + Defender.Name + " with their bare hands... =O");
@@ -290,40 +306,40 @@ namespace GroupProject_DD
                         int discardedIndex = rand.Next(0, 5);
                         Debug.WriteLine("rand selected: {0}", discardedIndex);
                         Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
-                        if(discardedIndex == 0 && pc.Inventory[Bodypart.Head].name != "Empty")
+                        if(discardedIndex == 0 && pc.Inventory[Bodypart.Head].Name != "Empty")
                         {
                             Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.Head]);
                             actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.name + " broke!");
+                            actions.Add("Their " + brokenItem.Name + " broke!");
                         }
-                        if (discardedIndex == 1 && pc.Inventory[Bodypart.AttkArm].name != "Empty")
+                        if (discardedIndex == 1 && pc.Inventory[Bodypart.AttkArm].Name != "Empty")
                         {
                             Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.AttkArm]);
                             actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.name + " broke!");
+                            actions.Add("Their " + brokenItem.Name + " broke!");
                         }
-                        if (discardedIndex == 2 && pc.Inventory[Bodypart.DefArm].name != "Empty")
+                        if (discardedIndex == 2 && pc.Inventory[Bodypart.DefArm].Name != "Empty")
                         {
                             Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.DefArm]);
                             actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.name + " broke!");
+                            actions.Add("Their " + brokenItem.Name + " broke!");
                         }
-                        if (discardedIndex == 3 && pc.Inventory[Bodypart.Torso].name != "Empty")
+                        if (discardedIndex == 3 && pc.Inventory[Bodypart.Torso].Name != "Empty")
                         {
                             Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.Torso]);
                             actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.name + " broke!");
+                            actions.Add("Their " + brokenItem.Name + " broke!");
                         }
-                        if (discardedIndex == 4 && pc.Inventory[Bodypart.Feet].name != "Empty")
+                        if (discardedIndex == 4 && pc.Inventory[Bodypart.Feet].Name != "Empty")
                         {
                             Debug.WriteLine("if block entered");
                             brokenItem = new Item(pc.Inventory[Bodypart.Feet]);
                             actions.Add(Defender.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.name + " broke!");
+                            actions.Add("Their " + brokenItem.Name + " broke!");
                             pc.discardItem(brokenItem);
                         }
 
