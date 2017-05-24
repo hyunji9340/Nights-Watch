@@ -248,6 +248,11 @@ namespace GroupProject_DD
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
                 int defenderCrit = CheckCritical();
+                if(settings.EveryCritical == true)
+                {
+                    attackerCrit = 1;
+                    defenderCrit = -1;
+                }
                 //special case needed to evaluate unarmed characters
                 if (Attacker is Character)
                 {
@@ -259,9 +264,12 @@ namespace GroupProject_DD
                 }
                 if (charUsesFists) //implement fist damage
                 {
-                    if (attackerCrit == 1)
+                    if (attackerCrit == 1) {
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
-                    dmg = Defender.takeDamage(0);
+                        dmg = 2*(Defender.takeDamage(0));
+                    }
+                    else
+                        dmg = (Defender.takeDamage(0));
                     if (Defender.isDead())
                     {
                         actions.Add(Attacker.Name + " killed " + Defender.Name + " with their bare hands... =O");
