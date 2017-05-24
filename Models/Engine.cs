@@ -259,9 +259,12 @@ namespace GroupProject_DD
                 }
                 if (charUsesFists) //implement fist damage
                 {
-                    if (attackerCrit == 1)
+                    if (attackerCrit == 1) {
                         actions.Add(Attacker.Name + " scored a Critical Hit!");
-                    dmg = Defender.takeDamage(0);
+                        dmg = 2*(Defender.takeDamage(0));
+                    }
+                    else
+                        dmg = (Defender.takeDamage(0));
                     if (Defender.isDead())
                     {
                         actions.Add(Attacker.Name + " killed " + Defender.Name + " with their bare hands... =O");
