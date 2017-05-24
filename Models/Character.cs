@@ -192,7 +192,9 @@ namespace GroupProject_DD
                 {Bodypart.AttkArm, new Item()},
                 {Bodypart.DefArm, new Item()},
                 {Bodypart.Torso, new Item()},
-                {Bodypart.Feet, new Item()} 
+                {Bodypart.Feet, new Item()},
+                {Bodypart.MagicDirect, new Item()},
+                {Bodypart.MagicAll, new Item() }
             };
         }
 
@@ -216,7 +218,9 @@ namespace GroupProject_DD
                 {Bodypart.AttkArm, new Item()},
                 {Bodypart.DefArm, new Item()},
                 {Bodypart.Torso, new Item()},
-                {Bodypart.Feet, new Item()}
+                {Bodypart.Feet, new Item()},
+                {Bodypart.MagicDirect, new Item()},
+                {Bodypart.MagicAll, new Item() }
             };
             Item item = Inventory[Bodypart.AttkArm];
         }
@@ -255,6 +259,7 @@ namespace GroupProject_DD
             int dmg = (damage / Defense) + 2;
             curHealth -= dmg;
             HealthStatus = (float)curHealth / (float)Health;
+            verifyHealth();
             return dmg;
 		}
 
