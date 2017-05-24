@@ -188,6 +188,3 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\GroupProject_DD.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\GroupProject_DD.Droid.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.dll.mdb
-C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.csprojResolveAssemblyReference.cache
-C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.dll
-C:\Users\antho\Documents\GitHub\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.pdb
