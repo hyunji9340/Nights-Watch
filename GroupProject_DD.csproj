@@ -69,6 +69,7 @@
       <DependentUpon>GroupProject_DDPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="IAudioPlayerService.cs" />
+    <Compile Include="Models\BattleEffects.cs" />
     <Compile Include="Models\Bodypart.cs" />
     <Compile Include="Models\ICreature.cs" />
     <Compile Include="Models\Player.cs" />
