@@ -16,6 +16,7 @@ namespace GroupProject_DD
         public List<ICreature> deadMonsterList;
         public List<Item> item_dictionary;
         public List<Monster> monster_dictionary;
+        private List<BattleEffects> battleEvent_dictionary;
         public int dungeonLevel;
         public bool isGameOver;
         Random rand;
@@ -28,6 +29,7 @@ namespace GroupProject_DD
             characterList = charList;
             item_dictionary = itemDictionary;
             monster_dictionary = monsterDictionary;
+            battleEvent_dictionary = new List<BattleEffects>();
             deadMonsterList = new List<ICreature>();
             monsterList = new List<ICreature>();
             characterDeadList = new List<ICreature>();
@@ -429,6 +431,11 @@ namespace GroupProject_DD
 
             this.currentPlayer.TotalScore = totalPoints;
             this.playerController.SavePlayer(currentPlayer);
+        }
+
+        public void populateBattleEvents()
+        {
+
         }
     }
 }

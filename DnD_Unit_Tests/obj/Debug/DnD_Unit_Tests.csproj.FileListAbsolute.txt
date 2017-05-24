@@ -30,3 +30,4 @@ C:\Users\antho\Documents\GitHub\Nights-Watch\DnD_Unit_Tests\bin\Debug\Xamarin.Fo
 C:\Users\antho\Documents\GitHub\Nights-Watch\DnD_Unit_Tests\obj\Debug\DnD_Unit_Tests.csprojResolveAssemblyReference.cache
 C:\Users\antho\Documents\GitHub\Nights-Watch\DnD_Unit_Tests\obj\Debug\DnD_Unit_Tests.dll
 C:\Users\antho\Documents\GitHub\Nights-Watch\DnD_Unit_Tests\obj\Debug\DnD_Unit_Tests.pdb
+C:\Users\Zach\Source\Repos\Nights-Watch\DnD_Unit_Tests\obj\Debug\DnD_Unit_Tests.csprojResolveAssemblyReference.cache

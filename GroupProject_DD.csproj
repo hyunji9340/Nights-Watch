@@ -30,6 +30,10 @@
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="GroupProject_DDPage.xaml" />
+    <Page Include="Views\ItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <EmbeddedResource Include="Views\StudentsInfoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -81,6 +85,9 @@
     <Compile Include="ViewModels\ServerItemController.cs" />
     <Compile Include="Views\CharacterStatsPage.xaml.cs">
       <DependentUpon>CharacterStatsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemPage.xaml.cs">
+      <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlayerInfoPage.xaml.cs">
       <DependentUpon>PlayerInfoPage.xaml</DependentUpon>

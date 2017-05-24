@@ -55,7 +55,8 @@ namespace GroupProject_DD.Models
 
                 return this.Description;
 
-            }else if(this.Target == "CHARACTERALL")
+            }
+            else if(this.Target == "CHARACTERALL")
             {
                 foreach (var character in CharList)
                 {

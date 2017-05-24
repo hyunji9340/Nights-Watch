@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.ItemPage" Title="Server Item List">
+		<ListView x:Name="ItemListView">
+		<ListView.ItemTemplate>
+			<DataTemplate>
+				<ViewCell>
+					<StackLayout Orientation="Horizontal">
+						<Image Source="{Binding Image}"/>
+						<StackLayout HorizontalOptions="CenterAndExpand">
+							<Label Text="{Binding Name}"/>
+						</StackLayout>
+						<Label Text="{Binding Description}"/>
+					</StackLayout>
+				</ViewCell>
+			</DataTemplate>
+		</ListView.ItemTemplate>
+	</ListView>
+</ContentPage>
