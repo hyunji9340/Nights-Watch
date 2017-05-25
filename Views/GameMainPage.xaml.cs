@@ -1,12 +1,14 @@
-using GroupProject_DD.Models;
+﻿using GroupProject_DD.Models;
 using GroupProject_DD.Views;
 using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace GroupProject_DD
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GameMainPage : ContentPage
     {
         private Player currentPlayer;
