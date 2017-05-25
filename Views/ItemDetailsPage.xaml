@@ -1,5 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GroupProject_DD.Views.ItemDetailsPage">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.ItemDetailPage">
+	<StackLayout Spacing="20" Padding="15">
+        <StackLayout Orientation="Horizontal">
+            <Image  Source="{Binding Image}" HeightRequest="150" WidthRequest="150"/>
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Name, StringFormat=' {0} '}" FontSize="Large" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="{Binding Description, StringFormat=' {0}'}" FontSize="Medium"  HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Body Part: " FontSize="Medium"/>
+                    <Label Text="{Binding BodyPart, StringFormat=' {0} '}" FontSize="Medium" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding Usage, StringFormat='Usage: {0}'}" FontSize="Medium" />
+            <Label Text="{Binding AttribMod, StringFormat=' Attribute: {0}'}" FontSize="Medium"  />
+        </StackLayout>
+       
+        	</StackLayout>
 </ContentPage>
