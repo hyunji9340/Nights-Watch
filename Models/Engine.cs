@@ -535,6 +535,7 @@ namespace GroupProject_DD
                         //THIS IS THE PART WHERE I SUPPOSE TO CALL FUNCTIONS THAT ARE RELATED TO STEP 6
                         if (Attacker is Character && isEquipped && settings.ItemUsage)
 						{
+                            Debug.WriteLine("Item Wear and Tear");
 							Character pc = Attacker as Character;
 							CheckItemUsage(pc, actions);
 							DecreaseItemUsage(pc);
@@ -614,7 +615,6 @@ namespace GroupProject_DD
 		public bool CheckItemUsageHelper(Character currentCharacter, Item item, List<string> actions)
 		{
 
-
 			if (item.Name != "Empty" && item.Usage <= 0 && item.Name.Length > 0)
 			{
 				currentCharacter.discardItem(item);
@@ -661,6 +661,7 @@ namespace GroupProject_DD
 			if (item.Name != "Empty" && item.Name.Length > 0)
 			{
 				item.Usage--;
+                Debug.WriteLine("Item Usage: {0}", 0);
 				//actions.Add(currentCharacter.Name + "'s Item " + item.Name + " is still good to use!");
 			}
 		}
