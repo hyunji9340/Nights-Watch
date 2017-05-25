@@ -92,25 +92,26 @@ namespace GroupProject_DD
             IEnumerable<Monster> allMonstersInDB = monsterController.GetAllMonsters();
             this.monster_dictionary = allMonstersInDB.ToList();
 
-			// THIS IS WHERE ITEM DICTIONARY GETS INSTANTIATED (THIS ITEM DICTIONARY WILL BE USED IN ENGINE.CS)
-			// IF ITEM_DICTIONARY IS SET TO STATIC ITMES, IT SEEMS LIKE NO EXCEPTION IS THROWN IN BATTLE
-			// BUT IF ITEM_DICTIONARY IS SET TO SERVERITME, THEN AN EXCEPTION IS THROWN IN BATTLE IRREGULARLY
-			//List<Item> serverItems = serverItemController.getServerItems();
+            // THIS IS WHERE ITEM DICTIONARY GETS INSTANTIATED (THIS ITEM DICTIONARY WILL BE USED IN ENGINE.CS)
+            // IF ITEM_DICTIONARY IS SET TO STATIC ITMES, IT SEEMS LIKE NO EXCEPTION IS THROWN IN BATTLE
+            // BUT IF ITEM_DICTIONARY IS SET TO SERVERITME, THEN AN EXCEPTION IS THROWN IN BATTLE IRREGULARLY
+            //List<Item> serverItems = serverItemController.getServerItems();
 
-			//if (serverItems.Count == 0)
-			//{
-				item_dictionary = new List<Item>
-				{
-					new Item("temp", "Sword", "Typical Sword", 2, Bodypart.AttkArm, "STRENGTH", 20),
-					new Item("temp","Leather Armor", "Torso Protection", 1, Bodypart.Torso, "DEFENSE", 150),
-					new Item("temp", "Stupid Helmet", "It's dumb", 1, Bodypart.Head, "DEFENSE", 150),
-					new Item("temp", "Mythril Sheild", "Heavy", 5, Bodypart.DefArm, "DEFENSE", 200),
-					new Item("temp", "Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm, "STRENGTH", 25),
-					new Item("temp", "Silver Helmet", "Elegant Helmet", 4, Bodypart.Head, "DEFENSE", 200),
-					new Item("temp", "Bronze Armor", "Rustic", 4, Bodypart.Torso, "DEFENSE", 100),
-					new Item("temp", "Chainmail", "It's Bulletproof", 4, Bodypart.Torso, "DEFENSE", 100),
-					new Item("temp", "Winged Boots", "It's so light", 7, Bodypart.Feet, "SPEED", 200),
-					new Item("temp", "Book of Devs", "Dev item", 10, Bodypart.MagicAll, "STRENGTH", 10)
+            //if (serverItems.Count == 0)
+            //{
+            item_dictionary = new List<Item>
+                {
+                    new Item("temp", "Sword", "Typical Sword", 2, Bodypart.AttkArm, "STRENGTH", 20),
+                    new Item("temp","Leather Armor", "Torso Protection", 1, Bodypart.Torso, "DEFENSE", 150),
+                    new Item("temp", "Stupid Helmet", "It's dumb", 1, Bodypart.Head, "DEFENSE", 150),
+                    new Item("temp", "Mythril Sheild", "Heavy", 5, Bodypart.DefArm, "DEFENSE", 200),
+                    new Item("temp", "Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm, "STRENGTH", 25),
+                    new Item("temp", "Silver Helmet", "Elegant Helmet", 4, Bodypart.Head, "DEFENSE", 200),
+                    new Item("temp", "Bronze Armor", "Rustic", 4, Bodypart.Torso, "DEFENSE", 100),
+                    new Item("temp", "Chainmail", "It's Bulletproof", 4, Bodypart.Torso, "DEFENSE", 100),
+                    new Item("temp", "Winged Boots", "It's so light", 7, Bodypart.Feet, "SPEED", 200),
+                    new Item("temp", "Book of Devs", "Dev item", 10, Bodypart.MagicAll, "STRENGTH", 10),
+                    new Item("temp", "Potion", "Normal Potion", 10, Bodypart.Healing, "HEALING", 1)
 				};
 			//}
 			//else 

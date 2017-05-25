@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Plugin.Vibrate;
@@ -159,31 +159,81 @@ namespace GroupProject_DD
             return chance <= dodge;
         }
 
-        public void CastAll(ICreature Attacker, List<String> actions)
+        public void CastAll(ICreature Attacker, ICreature Defender, List<String> actions)
         {
             int crit = CheckCritical();
+            bool defenderDead = false;
             if(settings.EveryCritical == true)
             {
                 crit = 1;
             }
             actions.Add(Attacker.Name + " cast a Critical Hit!");
-            foreach (ICreature Defender in monsterList)
+            if (crit == 1)
+            {
+                int dmg = Defender.takeDamage(2 * Attacker.Attack());
+                actions.Add(Defender.Name + " took " + dmg + " damage");
+            }
+            else
+            {
+                int dmg = (Defender.takeDamage(Attacker.Attack()));
+                actions.Add(Defender.Name + " took " + dmg + " damage");
+            }
+            foreach (ICreature otherMonster in monsterList)
             {
                 if(crit == 1)
                 {
-                    int dmg = Defender.takeDamage(2*Attacker.Attack());
-                    actions.Add(Defender.Name + " took " + dmg + " damage");
+                    int dmg = otherMonster.takeDamage(2*Attacker.Attack());
+                    actions.Add(otherMonster.Name + " took " + dmg + " damage");
                 }
                 else
                 {
-                    int dmg = (Defender.takeDamage(Attacker.Attack()));
-                    actions.Add(Defender.Name + " took " + dmg + " damage");
+                    int dmg = (otherMonster.takeDamage(Attacker.Attack()));
+                    actions.Add(otherMonster.Name + " took " + dmg + " damage");
                 }
             }
-            for(int i = 0; i < monsterList.Count; i++)
+            if (Defender.isDead())
+            {
+                defenderDead = true;
+                deadMonsterList.Add(Defender);
+                Monster _monster = Defender as Monster;
+                Character _hero = Attacker as Character;
+                _hero.monstersKilled++;
+                if (_monster.hasItem())
+                {
+                    Item droppedItem = _monster.discardItem();
+                    //if the item type is healing, heals player by damaging for -rating amount.
+                    if (droppedItem.BodyPart == "HEALING")
+                    {
+                        int healedPoints = -1 * droppedItem.Tier;
+                        Attacker.takeDamage(healedPoints);
+                        actions.Add(Attacker.Name + " used " + droppedItem.Name + " dropped by" + Defender.Name);
+                        actions.Add(Attacker.Name + " healed by " + droppedItem.Tier + " points");
+                    }
+                    else if (_hero.evaluateNewItem(droppedItem))
+                    {
+                        Debug.WriteLine("IN HERO_EVALUATENEWITEM(DROPPEDITEM) droppedItem0: " + droppedItem.Name + " usage: " + droppedItem.Usage);
+                        actions.Add(Attacker.Name + " killed " + Defender.Name);
+                        string action = Attacker.Name + " equipped " + droppedItem.Name + ", was dropped by " + Defender.Name;
+                        actions.Add(action);
+                        isEquipped = true;
+                    }
+                }
+                //character pick up item off of monster dead body
+                if (_hero.addExperience(Defender.Experience))
+                {
+                    actions.Add(_hero.Name + " Leveled up!!!!!!!");
+                }
+            }
+
+            for (int i = 0; i < monsterList.Count; i++)
             {
                 ICreature tempMonster = monsterList[0] as Monster;
                 monsterList.RemoveAt(0);
+                if (defenderDead == false)
+                {
+                    monsterList.Add(Defender);
+                    defenderDead = true;
+                }
                 if (tempMonster.isDead())
                 {
                     deadMonsterList.Add(tempMonster);
@@ -194,7 +244,7 @@ namespace GroupProject_DD
                     {
                         Item droppedItem = _monster.discardItem();
                         //if the item type is healing, heals player by damaging for -rating amount.
-                        if (droppedItem.BodyPart == "HEALING" && settings.Healing == true)
+                        if (droppedItem.BodyPart == "HEALING")
                         {
                             int healedPoints = -1 * droppedItem.Tier;
                             Attacker.takeDamage(healedPoints);
@@ -204,6 +254,7 @@ namespace GroupProject_DD
                         else if (_hero.evaluateNewItem(droppedItem))
                         {
 							Debug.WriteLine("IN HERO_EVALUATENEWITEM(DROPPEDITEM) droppedItem0: " + droppedItem.Name + " usage: " + droppedItem.Usage);
+                            actions.Add(Attacker.Name + " killed " + _monster.Name);
                             string action = Attacker.Name + " equipped " + droppedItem.Name + ", was dropped by " + tempMonster.Name;
                             actions.Add(action);
 							isEquipped = true;
@@ -231,10 +282,24 @@ namespace GroupProject_DD
             ICreature monster = monsterList[0] as Monster;
             characterList.RemoveAt(0);
             monsterList.RemoveAt(0);
-            bool DidDefenderDie;
+            bool DidDefenderDie = false;
+            Debug.WriteLine("Hero Speed: {0}", hero.Speed);
+            Debug.WriteLine("Monster Speed: {0}", monster.Speed);
+            Debug.WriteLine("Char initiative: {0}", characterAttackingFirst);
             if (characterAttackingFirst)
             {
-                DidDefenderDie = Swing(hero, monster, actions);
+                Character mage = hero as Character;
+                Debug.WriteLine("Tome: {0}", mage.Inventory[Bodypart.MagicAll].Name);
+                if (mage.Inventory[Bodypart.MagicAll].Name != "Empty")
+                {
+                    CastAll(hero, monster, actions);
+                    if (monsterList.Count != 0)
+                        monster = monsterList[0] as Monster;
+                    else
+                        DidDefenderDie = true;
+                }                    
+                else
+                    DidDefenderDie = Swing(hero, monster, actions);
                 //Attack back if not dead
                 if (!DidDefenderDie)
                 {
@@ -264,21 +329,27 @@ namespace GroupProject_DD
             {
                 deadMonsterList.Add(monster);
                 Monster _monster = monster as Monster;
+                Debug.WriteLine("Monster name: {0}", _monster.Name);
+                Debug.WriteLine("Monster item: {0}", _monster.hasItem());
                 Character _hero = hero as Character;
                 _hero.monstersKilled++;
                 if (_monster.hasItem())
                 {
                     Item droppedItem = _monster.discardItem();
+                    Debug.WriteLine("dropped item: {0}", droppedItem.Name);
+                    Debug.WriteLine("dropped type: {0}", droppedItem.BodyPart);
                     //if the item type is healing, heals player by damaging for -rating amount.
-                    if(droppedItem.BodyPart == "HEALING" && settings.Healing == true)
+                    if(droppedItem.BodyPart == "HEALING")
                     {
                         actions.Add(hero.Name + " used " + droppedItem.Name + " dropped by" + monster.Name);
                         int healedPoints = -1*droppedItem.Tier;
                         hero.takeDamage(healedPoints);
                         actions.Add(hero.Name + " healed by " + droppedItem.Tier + " points");
                     }
-                    else if (_hero.evaluateNewItem(droppedItem))
+                    else
                     {
+                        bool test = _hero.evaluateNewItem(droppedItem);
+                        Debug.WriteLine("test equip: {0}", test);
                         action = hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + monster.Name;
                         actions.Add(action);
 						isEquipped = true;
@@ -313,6 +384,7 @@ namespace GroupProject_DD
             {
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
+                Debug.WriteLine("critical check: {0}", attackerCrit);
                 if(settings.EveryCritical == true)
                 {
                     attackerCrit = 1;
@@ -349,10 +421,13 @@ namespace GroupProject_DD
 					//double damage if crit
 					if (Attacker is Character && attackerCrit == -1)
 					{
+                        
 						//randomly picks a number between 0 and 5 to pick an item to break upon crit miss
 						Character pc = Attacker as Character;
+                        Debug.WriteLine("critical miss entered");
 						int discardedIndex = rand.Next(0, 5);
-						Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
+                        Debug.WriteLine("Critical miss: {0}", discardedIndex);
+                        Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
 						if (discardedIndex == 0 && pc.Inventory[Bodypart.Head].Name != "Empty")
 						{
 							brokenItem = new Item(pc.Inventory[Bodypart.Head]);
