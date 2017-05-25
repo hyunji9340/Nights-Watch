@@ -35,8 +35,8 @@
                         <StackLayout Orientation="Vertical">
                             <Label Text="{Binding Key, StringFormat='{0}:'}" TextColor="Black"/>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Value.name, StringFormat='{0} - '}" />
-                                <Label Text="{Binding Value.description, StringFormat='{0}'}" />
+                                <Label Text="{Binding Value.Name, StringFormat='{0} - '}" />
+                                <Label Text="{Binding Value.Description, StringFormat='{0}'}" />
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

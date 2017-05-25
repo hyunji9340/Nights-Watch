@@ -46,9 +46,15 @@ namespace GroupProject_DD
         {
             await Navigation.PushAsync(new SettingsPage(serverItemController.currentSetting));
         }
+
         async void ServerItemClicked(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new ItemPage(serverItemController)); // serverItemController added, setting deleted
 		}
+
+        protected async override void OnAppearing()
+        {
+            await serverItemController.GetItemsAsync();
+        }
     }
 }
