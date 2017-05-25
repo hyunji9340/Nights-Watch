@@ -40,6 +40,8 @@ namespace GroupProject_DD
             this.currentPlayer = currentPlayer;
             this.playerController = new PlayerController();
             this.isGameOver = false;
+            settings.MagicUsage = false;
+            settings.Healing = false;
         }
 
         public int CheckCritical()
@@ -167,9 +169,10 @@ namespace GroupProject_DD
             {
                 crit = 1;
             }
-            actions.Add(Attacker.Name + " cast a Critical Hit!");
+            actions.Add(Attacker.Name + " attacked all the monsters!");
             if (crit == 1)
             {
+                actions.Add(Attacker.Name + " cast a critical hit!");
                 int dmg = Defender.takeDamage(2 * Attacker.Attack());
                 actions.Add(Defender.Name + " took " + dmg + " damage");
             }
