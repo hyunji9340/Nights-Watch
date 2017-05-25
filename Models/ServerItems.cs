@@ -12,7 +12,8 @@ namespace GroupProject_DD
 		public int errorCode { get; set; }
 
 
-		public ObservableCollection<Item> data { get; set; }
+		//public ObservableCollection<Item> data { get; set; }
+		public List<Item> data { get; set; }
 
 		public ServerItems()
 		{

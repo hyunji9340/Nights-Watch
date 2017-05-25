@@ -23,6 +23,8 @@ namespace GroupProject_DD
         public Player currentPlayer;
         private PlayerController playerController;
         private Settings settings;
+		bool isEquipped = false;
+
         public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary, Player currentPlayer, Settings IncomingSettings)
         {
             settings = IncomingSettings;
@@ -157,31 +159,81 @@ namespace GroupProject_DD
             return chance <= dodge;
         }
 
-        public void CastAll(ICreature Attacker, List<String> actions)
+        public void CastAll(ICreature Attacker, ICreature Defender, List<String> actions)
         {
             int crit = CheckCritical();
+            bool defenderDead = false;
             if(settings.EveryCritical == true)
             {
                 crit = 1;
             }
             actions.Add(Attacker.Name + " cast a Critical Hit!");
-            foreach (ICreature Defender in monsterList)
+            if (crit == 1)
+            {
+                int dmg = Defender.takeDamage(2 * Attacker.Attack());
+                actions.Add(Defender.Name + " took " + dmg + " damage");
+            }
+            else
+            {
+                int dmg = (Defender.takeDamage(Attacker.Attack()));
+                actions.Add(Defender.Name + " took " + dmg + " damage");
+            }
+            foreach (ICreature otherMonster in monsterList)
             {
                 if(crit == 1)
                 {
-                    int dmg = Defender.takeDamage(2*Attacker.Attack());
-                    actions.Add(Defender.Name + " took " + dmg + " damage");
+                    int dmg = otherMonster.takeDamage(2*Attacker.Attack());
+                    actions.Add(otherMonster.Name + " took " + dmg + " damage");
                 }
                 else
                 {
-                    int dmg = (Defender.takeDamage(Attacker.Attack()));
-                    actions.Add(Defender.Name + " took " + dmg + " damage");
+                    int dmg = (otherMonster.takeDamage(Attacker.Attack()));
+                    actions.Add(otherMonster.Name + " took " + dmg + " damage");
                 }
             }
-            for(int i = 0; i < monsterList.Count; i++)
+            if (Defender.isDead())
+            {
+                defenderDead = true;
+                deadMonsterList.Add(Defender);
+                Monster _monster = Defender as Monster;
+                Character _hero = Attacker as Character;
+                _hero.monstersKilled++;
+                if (_monster.hasItem())
+                {
+                    Item droppedItem = _monster.discardItem();
+                    //if the item type is healing, heals player by damaging for -rating amount.
+                    if (droppedItem.BodyPart == "HEALING")
+                    {
+                        int healedPoints = -1 * droppedItem.Tier;
+                        Attacker.takeDamage(healedPoints);
+                        actions.Add(Attacker.Name + " used " + droppedItem.Name + " dropped by" + Defender.Name);
+                        actions.Add(Attacker.Name + " healed by " + droppedItem.Tier + " points");
+                    }
+                    else if (_hero.evaluateNewItem(droppedItem))
+                    {
+                        Debug.WriteLine("IN HERO_EVALUATENEWITEM(DROPPEDITEM) droppedItem0: " + droppedItem.Name + " usage: " + droppedItem.Usage);
+                        actions.Add(Attacker.Name + " killed " + Defender.Name);
+                        string action = Attacker.Name + " equipped " + droppedItem.Name + ", was dropped by " + Defender.Name;
+                        actions.Add(action);
+                        isEquipped = true;
+                    }
+                }
+                //character pick up item off of monster dead body
+                if (_hero.addExperience(Defender.Experience))
+                {
+                    actions.Add(_hero.Name + " Leveled up!!!!!!!");
+                }
+            }
+
+            for (int i = 0; i < monsterList.Count; i++)
             {
                 ICreature tempMonster = monsterList[0] as Monster;
                 monsterList.RemoveAt(0);
+                if (defenderDead == false)
+                {
+                    monsterList.Add(Defender);
+                    defenderDead = true;
+                }
                 if (tempMonster.isDead())
                 {
                     deadMonsterList.Add(tempMonster);
@@ -192,7 +244,7 @@ namespace GroupProject_DD
                     {
                         Item droppedItem = _monster.discardItem();
                         //if the item type is healing, heals player by damaging for -rating amount.
-                        if (droppedItem.BodyPart == "HEALING" && settings.Healing == true)
+                        if (droppedItem.BodyPart == "HEALING")
                         {
                             int healedPoints = -1 * droppedItem.Tier;
                             Attacker.takeDamage(healedPoints);
@@ -201,8 +253,11 @@ namespace GroupProject_DD
                         }
                         else if (_hero.evaluateNewItem(droppedItem))
                         {
+							Debug.WriteLine("IN HERO_EVALUATENEWITEM(DROPPEDITEM) droppedItem0: " + droppedItem.Name + " usage: " + droppedItem.Usage);
+                            actions.Add(Attacker.Name + " killed " + _monster.Name);
                             string action = Attacker.Name + " equipped " + droppedItem.Name + ", was dropped by " + tempMonster.Name;
                             actions.Add(action);
+							isEquipped = true;
                         }
                     }
                     //character pick up item off of monster dead body
@@ -227,10 +282,24 @@ namespace GroupProject_DD
             ICreature monster = monsterList[0] as Monster;
             characterList.RemoveAt(0);
             monsterList.RemoveAt(0);
-            bool DidDefenderDie;
+            bool DidDefenderDie = false;
+            Debug.WriteLine("Hero Speed: {0}", hero.Speed);
+            Debug.WriteLine("Monster Speed: {0}", monster.Speed);
+            Debug.WriteLine("Char initiative: {0}", characterAttackingFirst);
             if (characterAttackingFirst)
             {
-                DidDefenderDie = Swing(hero, monster, actions);
+                Character mage = hero as Character;
+                Debug.WriteLine("Tome: {0}", mage.Inventory[Bodypart.MagicAll].Name);
+                if (mage.Inventory[Bodypart.MagicAll].Name != "Empty")
+                {
+                    CastAll(hero, monster, actions);
+                    if (monsterList.Count != 0)
+                        monster = monsterList[0] as Monster;
+                    else
+                        DidDefenderDie = true;
+                }                    
+                else
+                    DidDefenderDie = Swing(hero, monster, actions);
                 //Attack back if not dead
                 if (!DidDefenderDie)
                 {
@@ -260,23 +329,30 @@ namespace GroupProject_DD
             {
                 deadMonsterList.Add(monster);
                 Monster _monster = monster as Monster;
+                Debug.WriteLine("Monster name: {0}", _monster.Name);
+                Debug.WriteLine("Monster item: {0}", _monster.hasItem());
                 Character _hero = hero as Character;
                 _hero.monstersKilled++;
                 if (_monster.hasItem())
                 {
                     Item droppedItem = _monster.discardItem();
+                    Debug.WriteLine("dropped item: {0}", droppedItem.Name);
+                    Debug.WriteLine("dropped type: {0}", droppedItem.BodyPart);
                     //if the item type is healing, heals player by damaging for -rating amount.
-                    if(droppedItem.BodyPart == "HEALING" && settings.Healing == true)
+                    if(droppedItem.BodyPart == "HEALING")
                     {
                         actions.Add(hero.Name + " used " + droppedItem.Name + " dropped by" + monster.Name);
                         int healedPoints = -1*droppedItem.Tier;
                         hero.takeDamage(healedPoints);
                         actions.Add(hero.Name + " healed by " + droppedItem.Tier + " points");
                     }
-                    else if (_hero.evaluateNewItem(droppedItem))
+                    else
                     {
+                        bool test = _hero.evaluateNewItem(droppedItem);
+                        Debug.WriteLine("test equip: {0}", test);
                         action = hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + monster.Name;
                         actions.Add(action);
+						isEquipped = true;
                     }
                 }
                 //character pick up item off of monster dead body
@@ -308,6 +384,7 @@ namespace GroupProject_DD
             {
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
+                Debug.WriteLine("critical check: {0}", attackerCrit);
                 if(settings.EveryCritical == true)
                 {
                     attackerCrit = 1;
@@ -340,69 +417,82 @@ namespace GroupProject_DD
                     }
                 }
                 else //normal operation
-                {
-                    //double damage if crit
-                    if (Attacker is Character && attackerCrit == -1)
-                    {
-                        //randomly picks a number between 0 and 5 to pick an item to break upon crit miss
-                        Character pc = Attacker as Character;
-                        int discardedIndex = rand.Next(0, 5);
+				{
+					//double damage if crit
+					if (Attacker is Character && attackerCrit == -1)
+					{
+                        
+						//randomly picks a number between 0 and 5 to pick an item to break upon crit miss
+						Character pc = Attacker as Character;
+                        Debug.WriteLine("critical miss entered");
+						int discardedIndex = rand.Next(0, 5);
+                        Debug.WriteLine("Critical miss: {0}", discardedIndex);
                         Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
-                        if (discardedIndex == 0 && pc.Inventory[Bodypart.Head].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.Head]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 1 && pc.Inventory[Bodypart.AttkArm].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.AttkArm]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 2 && pc.Inventory[Bodypart.DefArm].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.DefArm]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 3 && pc.Inventory[Bodypart.Torso].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.Torso]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                        }
-                        if (discardedIndex == 4 && pc.Inventory[Bodypart.Feet].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.Feet]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                            pc.discardItem(brokenItem);
-                        }
-                        if (discardedIndex == 5 && pc.Inventory[Bodypart.MagicDirect].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.MagicDirect]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                            pc.discardItem(brokenItem);
-                        }
-                        if (discardedIndex == 6 && pc.Inventory[Bodypart.MagicAll].Name != "Empty")
-                        {
-                            brokenItem = new Item(pc.Inventory[Bodypart.MagicAll]);
-                            actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
-                            actions.Add("Their " + brokenItem.Name + " broke!");
-                            pc.discardItem(brokenItem);
-                        }
+						if (discardedIndex == 0 && pc.Inventory[Bodypart.Head].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.Head]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+						}
+						if (discardedIndex == 1 && pc.Inventory[Bodypart.AttkArm].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.AttkArm]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+						}
+						if (discardedIndex == 2 && pc.Inventory[Bodypart.DefArm].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.DefArm]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+						}
+						if (discardedIndex == 3 && pc.Inventory[Bodypart.Torso].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.Torso]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+						}
+						if (discardedIndex == 4 && pc.Inventory[Bodypart.Feet].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.Feet]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+							pc.discardItem(brokenItem);
+						}
+						if (discardedIndex == 5 && pc.Inventory[Bodypart.MagicDirect].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.MagicDirect]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+							pc.discardItem(brokenItem);
+						}
+						if (discardedIndex == 6 && pc.Inventory[Bodypart.MagicAll].Name != "Empty")
+						{
+							brokenItem = new Item(pc.Inventory[Bodypart.MagicAll]);
+							actions.Add(Attacker.Name + " fumbled and scored a Critical Miss.");
+							actions.Add("Their " + brokenItem.Name + " broke!");
+							pc.discardItem(brokenItem);
+						}
+					}
+					else if (attackerCrit == 1)
+					{
+						actions.Add(Attacker.Name + " scored a Critical Hit!");
+						dmg = Defender.takeDamage(2 * Attacker.Attack());
+					}
+					else
+					{
+						// THIS IS THE PART WHERE I SUPPOSE TO CALL FUNCTIONS THAT ARE RELATED TO STEP 6
+						/*if (Attacker is Character && isEquipped)
+						{
+							Character pc = Attacker as Character;
+							CheckItemUsage(pc, actions);
+							DecreaseItemUsage(pc);
+						}*/
+	
+						dmg = Defender.takeDamage(Attacker.Attack());
+					}
 
-                    }
-                    else if (attackerCrit == 1)
-                    {
-                        actions.Add(Attacker.Name + " scored a Critical Hit!");
-                        dmg = Defender.takeDamage(2*Attacker.Attack());
-                    }
-                    else 
-                        dmg = Defender.takeDamage(Attacker.Attack());
-                    if (Defender.isDead())
+					if (Defender.isDead())
                     {
                         actions.Add(Attacker.Name + " killed " + Defender.Name + " with " + dmg + " damage");
                         return true;
@@ -432,6 +522,96 @@ namespace GroupProject_DD
             this.currentPlayer.TotalScore = totalPoints;
             this.playerController.SavePlayer(currentPlayer);
         }
+
+		// implmented for hackathon -> FUNCTION RELATED TO STEP 6
+		public bool CheckItemUsage(Character currentCharacter, List<string> actions)
+		{
+
+			if (currentCharacter.Inventory[Bodypart.Head] != null)
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.Head], actions);
+			}
+			if (currentCharacter.Inventory[Bodypart.AttkArm] != null)
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.AttkArm], actions);
+			}
+			if (currentCharacter.Inventory[Bodypart.DefArm] != null)
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.DefArm], actions);
+			}
+			if (currentCharacter.Inventory[Bodypart.Torso] != null)
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.Torso], actions);
+			}
+			if (currentCharacter.Inventory[Bodypart.Feet] != null)
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.Feet], actions);
+			}
+			if (currentCharacter.Inventory[Bodypart.MagicAll] != null)
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.MagicAll], actions);
+			}
+			if (currentCharacter.Inventory[Bodypart.MagicDirect] != null) 
+			{
+				return CheckItemUsageHelper(currentCharacter, currentCharacter.Inventory[Bodypart.MagicDirect], actions);
+			}
+			return true;
+		}
+
+		// FUNCTION RELATED TO STEP 6
+		public bool CheckItemUsageHelper(Character currentCharacter, Item item, List<string> actions)
+		{
+
+
+			if (item.Name != "Empty" && item.Usage <= 0 && item.Name.Length > 0)
+			{
+				currentCharacter.discardItem(item);
+				currentCharacter.equipItem(item);
+				actions.Add(currentCharacter.Name + "'s Item " + item.Name + " is broken. Used too many times!");
+				return true;
+			}
+			else if (item.Name != "Empty" && item.Usage > 0 && item.Name.Length > 0)
+			{
+				actions.Add(currentCharacter.Name + "'s Item " + item.Name + " is still good to use!");
+				return false;
+			}
+			return false;
+		}
+
+		// FUNCTION RELATED TO STEP 6
+		public void DecreaseItemUsage(Character currentCharacter)
+		{
+			if (currentCharacter.Inventory[Bodypart.Head] != null)
+			{
+				DecreaseItemUsageHelper(currentCharacter.Inventory[Bodypart.Head]);
+			}
+			if (currentCharacter.Inventory[Bodypart.AttkArm] != null)
+			{
+				DecreaseItemUsageHelper(currentCharacter.Inventory[Bodypart.AttkArm]);
+			}
+			if (currentCharacter.Inventory[Bodypart.DefArm] != null)
+			{
+				DecreaseItemUsageHelper(currentCharacter.Inventory[Bodypart.DefArm]);
+			}
+			if (currentCharacter.Inventory[Bodypart.Torso] != null)
+			{
+				DecreaseItemUsageHelper(currentCharacter.Inventory[Bodypart.Torso]);
+			}
+			if (currentCharacter.Inventory[Bodypart.Feet] != null)
+			{
+				DecreaseItemUsageHelper(currentCharacter.Inventory[Bodypart.Feet]);
+			}
+		}
+
+		// FUNCTION RELATED TO STEP 6
+		public void DecreaseItemUsageHelper(Item item)
+		{
+			if (item.Name != "Empty" && item.Name.Length > 0)
+			{
+				item.Usage--;
+				//actions.Add(currentCharacter.Name + "'s Item " + item.Name + " is still good to use!");
+			}
+		}
 
         public void populateBattleEvents()
         {

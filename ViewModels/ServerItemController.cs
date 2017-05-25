@@ -9,72 +9,67 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Net.Http;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace GroupProject_DD
 {
 	public class ServerItemController
 	{
-		Settings currentSetting;
+		public Settings currentSetting;
 		public ServerItems serverItems;
-		ObservableCollection<Item> ServerItems;
+		List<Item> ServerItems;
 
-		public ServerItemController(Settings incomingSettings, ObservableCollection<Item> displayItems)
+		// default constructor
+		public ServerItemController() 
+		{
+			this.currentSetting = new Settings();
+			this.serverItems = new ServerItems();
+			this.ServerItems = new List<Item>();
+		}
+
+
+		public ServerItemController(Settings incomingSettings, List<Item> displayItems)
 		{
             displayItems = ServerItems;
             Debug.WriteLine("server item controller instantiated");
 			currentSetting = incomingSettings;
 		}
 
-        async public void InitializeServerItems() 
+		public List<Item> getServerItems() 
 		{
-			Debug.WriteLine("initializer server item called");
+			if (ServerItems == null || ServerItems.Count == 0)
+			{
+				return new List<Item>();
+			}
+			return ServerItems;
+		}
+
+
+		public async Task<string> GetItemsAsync() 
+		{
 			bool isRandom = currentSetting.ItemsRandom;
 			bool isSuperItem = currentSetting.SuperItems;
 			int intVersionIsRandom = 1;
 			int intVersionIsSuperItem = 1;
 			if (!isRandom) { intVersionIsRandom = 0; }
 			if (!isSuperItem) { intVersionIsSuperItem = 0; }
-			GetItemsAsync(intVersionIsRandom, intVersionIsSuperItem);
-			
-		}
 
-		public ObservableCollection<Item> getServerItems() 
-		{
-			if (ServerItems == null || ServerItems.Count == 0)
-			{
-				return new ObservableCollection<Item>();
-			}
-			return ServerItems;
-		}
-
-
-		public async void GetItemsAsync(int isRandom, int isSuperItem)
-		{
-			Debug.WriteLine("Get Item Asyn called");
 			var client = new System.Net.Http.HttpClient();
-			Debug.WriteLine("IsRandom: " + isRandom);
-			Debug.WriteLine("is super Item: " + isSuperItem);
-			string stringIsRandom = Convert.ToString(isRandom);
-			string stringIsSuperItem = Convert.ToString(isSuperItem);
-			Debug.WriteLine("IsRandom: " + isRandom);
-			Debug.WriteLine("is super Item: " + isSuperItem);
+			string stringIsRandom = Convert.ToString(intVersionIsRandom);
+			string stringIsSuperItem = Convert.ToString(intVersionIsSuperItem);
 
 			var values = new Dictionary<string, string>
 			{
-				{ "", "" },
+				{ "randomItemOption", stringIsRandom },
+				{ "superItemOption", stringIsSuperItem }
 			};
-			Debug.WriteLine("values created ");
 
 			var content = new FormUrlEncodedContent(values);
-			Debug.WriteLine("converted to url form");
 			var response = await client.PostAsync("http://gamehackathon.azurewebsites.net/api/GetItemsList", content);
-			Debug.WriteLine("after response");
 			var itemsJson = response.Content.ReadAsStringAsync().Result;
-			Debug.WriteLine("after itemJson convert");
-			//ItemAPI apiItems = JsonConvert.DeserializeObject<ItemAPI>(itemJson);
 			this.serverItems = JsonConvert.DeserializeObject<ServerItems>(itemsJson);
-			Debug.WriteLine("after conversion deserialization");
             ServerItems = serverItems.data;
+			return itemsJson;
         }
 	}
 }
