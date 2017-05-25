@@ -119,7 +119,7 @@ namespace GroupProject_DD.Models
             DebugSettings = false;
             EveryCriticalHit = false;
             EveryCriticalMiss = false;
-            ItemUsage = true;
+            ItemUsage = false;
             MagicUsage = false;
             Healing = false;
             BattleEvents = false;
