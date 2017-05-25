@@ -40,8 +40,6 @@ namespace GroupProject_DD
             this.currentPlayer = currentPlayer;
             this.playerController = new PlayerController();
             this.isGameOver = false;
-            settings.MagicUsage = false;
-            settings.Healing = false;
         }
 
         public int CheckCritical()
@@ -169,7 +167,7 @@ namespace GroupProject_DD
             {
                 crit = 1;
             }
-            actions.Add(Attacker.Name + " attacked all the monsters!");
+            actions.Add(Attacker.Name + " used magic and attacked all the monsters!");
             if (crit == 1)
             {
                 actions.Add(Attacker.Name + " cast a critical hit!");
@@ -207,12 +205,26 @@ namespace GroupProject_DD
                     //if the item type is healing, heals player by damaging for -rating amount.
                     if (droppedItem.BodyPart == "HEALING")
                     {
-                        int healedPoints = -1 * droppedItem.Tier;
-                        Attacker.takeDamage(healedPoints);
-                        actions.Add(Attacker.Name + " used " + droppedItem.Name + " dropped by" + Defender.Name);
-                        actions.Add(Attacker.Name + " healed by " + droppedItem.Tier + " points");
+                        if (settings.Healing == true)
+                        {
+                            int healedPoints = -1 * droppedItem.Tier;
+                            Attacker.takeDamage(healedPoints);
+                            actions.Add(Attacker.Name + " used " + droppedItem.Name + " dropped by" + Defender.Name);
+                            actions.Add(Attacker.Name + " healed by " + droppedItem.Tier + " points");
+                        }
                     }
-                    else if (_hero.evaluateNewItem(droppedItem))
+                    else if (droppedItem.BodyPart == "MAGICALL" || droppedItem.BodyPart == "MAGICDIRECT")
+                    {
+                        if (settings.MagicUsage == true)
+                        {
+                            bool test = _hero.evaluateNewItem(droppedItem);
+                            Debug.WriteLine("test equip: {0}", test);
+                            string action = _hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + _monster.Name;
+                            actions.Add(action);
+                            isEquipped = true;
+                        }
+                    }
+                    else if(_hero.evaluateNewItem(droppedItem) == true)
                     {
                         Debug.WriteLine("IN HERO_EVALUATENEWITEM(DROPPEDITEM) droppedItem0: " + droppedItem.Name + " usage: " + droppedItem.Usage);
                         actions.Add(Attacker.Name + " killed " + Defender.Name);
