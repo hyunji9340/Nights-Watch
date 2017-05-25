@@ -163,7 +163,7 @@ namespace GroupProject_DD
         {
             int crit = CheckCritical();
             bool defenderDead = false;
-            if(settings.EveryCritical == true)
+            if(settings.EveryCriticalHit == true)
             {
                 crit = 1;
             }
@@ -243,25 +243,42 @@ namespace GroupProject_DD
                     if (_monster.hasItem())
                     {
                         Item droppedItem = _monster.discardItem();
+                        Debug.WriteLine("dropped item: {0}", droppedItem.Name);
+                        Debug.WriteLine("dropped type: {0}", droppedItem.BodyPart);
                         //if the item type is healing, heals player by damaging for -rating amount.
                         if (droppedItem.BodyPart == "HEALING")
                         {
-                            int healedPoints = -1 * droppedItem.Tier;
-                            Attacker.takeDamage(healedPoints);
-                            actions.Add(Attacker.Name + " used " + droppedItem.Name + " dropped by" + tempMonster.Name);
-                            actions.Add(Attacker.Name + " healed by " + droppedItem.Tier + " points");
+                            if(settings.Healing == true)
+                            {
+                                actions.Add(_hero.Name + " used " + droppedItem.Name + " dropped by" + _monster.Name);
+                                int healedPoints = -1 * droppedItem.Tier;
+                                _hero.takeDamage(healedPoints);
+                                actions.Add(_hero.Name + " healed by " + droppedItem.Tier + " points");
+                            }
+                            
                         }
-                        else if (_hero.evaluateNewItem(droppedItem))
+                        else if (droppedItem.BodyPart == "MAGICALL" || droppedItem.BodyPart == "MAGICDIRECT")
                         {
-							Debug.WriteLine("IN HERO_EVALUATENEWITEM(DROPPEDITEM) droppedItem0: " + droppedItem.Name + " usage: " + droppedItem.Usage);
-                            actions.Add(Attacker.Name + " killed " + _monster.Name);
-                            string action = Attacker.Name + " equipped " + droppedItem.Name + ", was dropped by " + tempMonster.Name;
+                            if (settings.MagicUsage == true)
+                            {
+                                bool test = _hero.evaluateNewItem(droppedItem);
+                                Debug.WriteLine("test equip: {0}", test);
+                                string action = _hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + _monster.Name;
+                                actions.Add(action);
+                                isEquipped = true;
+                            }
+                        }
+                        else
+                        {
+                            bool test = _hero.evaluateNewItem(droppedItem);
+                            Debug.WriteLine("test equip: {0}", test);
+                            string action = _monster.Name + " equipped " + droppedItem.Name + ", was dropped by " + _monster.Name;
                             actions.Add(action);
-							isEquipped = true;
+                            isEquipped = true;
                         }
                     }
                     //character pick up item off of monster dead body
-                    if (_hero.addExperience(tempMonster.Experience))
+                    if (_hero.addExperience(_monster.Experience))
                     {
                         actions.Add(_hero.Name + " Leveled up!!!!!!!");
                     }
@@ -290,7 +307,7 @@ namespace GroupProject_DD
             {
                 Character mage = hero as Character;
                 Debug.WriteLine("Tome: {0}", mage.Inventory[Bodypart.MagicAll].Name);
-                if (mage.Inventory[Bodypart.MagicAll].Name != "Empty")
+                if (mage.Inventory[Bodypart.MagicAll].Name != "Empty" && settings.MagicUsage == true)
                 {
                     CastAll(hero, monster, actions);
                     if (monsterList.Count != 0)
@@ -341,10 +358,25 @@ namespace GroupProject_DD
                     //if the item type is healing, heals player by damaging for -rating amount.
                     if(droppedItem.BodyPart == "HEALING")
                     {
-                        actions.Add(hero.Name + " used " + droppedItem.Name + " dropped by" + monster.Name);
-                        int healedPoints = -1*droppedItem.Tier;
-                        hero.takeDamage(healedPoints);
-                        actions.Add(hero.Name + " healed by " + droppedItem.Tier + " points");
+                        if (settings.Healing == true)
+                        {
+                            actions.Add(hero.Name + " used " + droppedItem.Name + " dropped by" + monster.Name);
+                            int healedPoints = -1 * droppedItem.Tier;
+                            hero.takeDamage(healedPoints);
+                            actions.Add(hero.Name + " healed by " + droppedItem.Tier + " points");
+                        }
+                        
+                    }
+                    else if(droppedItem.BodyPart == "MAGICALL" || droppedItem.BodyPart == "MAGICDIRECT")
+                    {
+                        if(settings.MagicUsage == true)
+                        {
+                            bool test = _hero.evaluateNewItem(droppedItem);
+                            Debug.WriteLine("test equip: {0}", test);
+                            action = hero.Name + " equipped " + droppedItem.Name + ", was dropped by " + monster.Name;
+                            actions.Add(action);
+                            isEquipped = true;
+                        }
                     }
                     else
                     {
@@ -385,9 +417,13 @@ namespace GroupProject_DD
                 //calls CheckCritical to check for critical hit (1), critical miss (-1), or neither (0)
                 int attackerCrit = CheckCritical();
                 Debug.WriteLine("critical check: {0}", attackerCrit);
-                if(settings.EveryCritical == true)
+                if(settings.EveryCriticalHit == true)
                 {
                     attackerCrit = 1;
+                }
+                else if(settings.EveryCriticalMiss == true)
+                {
+                    attackerCrit = -1;
                 }
                 //special case needed to evaluate unarmed characters
                 if (Attacker is Character)

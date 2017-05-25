@@ -50,14 +50,24 @@ namespace GroupProject_DD.Models
                 OnPropertyChanged(nameof(DebugSettings));
             }
         }
-        private bool everyCritical;
-        public bool EveryCritical
+        private bool everyCriticalHit;
+        public bool EveryCriticalHit
         {
-            get { return everyCritical; }
+            get { return everyCriticalHit; }
             set
             {
-                everyCritical = value;
-                OnPropertyChanged(nameof(EveryCritical));
+                everyCriticalHit = value;
+                OnPropertyChanged(nameof(EveryCriticalHit));
+            }
+        }
+        private bool everyCriticalMiss;
+        public bool EveryCriticalMiss
+        {
+            get { return everyCriticalMiss; }
+            set
+            {
+                everyCriticalMiss = value;
+                OnPropertyChanged(nameof(EveryCriticalMiss));
             }
         }
         private bool itemUsage;
@@ -107,7 +117,8 @@ namespace GroupProject_DD.Models
             ItemsRandom = false;
             SuperItems = false;
             DebugSettings = false;
-            EveryCritical = false;
+            EveryCriticalHit = false;
+            EveryCriticalMiss = false;
             ItemUsage = true;
             MagicUsage = false;
             Healing = false;
