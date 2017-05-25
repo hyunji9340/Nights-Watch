@@ -80,6 +80,7 @@ namespace GroupProject_DD
         public void devStartup()
         {
 
+            bool useServer = false;
 			// access to db and fetch data
             IEnumerable<ICreature> allCharactersInDB = characterController.GetAllItems();
             // convert ienumerable to array
@@ -95,10 +96,10 @@ namespace GroupProject_DD
             // THIS IS WHERE ITEM DICTIONARY GETS INSTANTIATED (THIS ITEM DICTIONARY WILL BE USED IN ENGINE.CS)
             // IF ITEM_DICTIONARY IS SET TO STATIC ITMES, IT SEEMS LIKE NO EXCEPTION IS THROWN IN BATTLE
             // BUT IF ITEM_DICTIONARY IS SET TO SERVERITME, THEN AN EXCEPTION IS THROWN IN BATTLE IRREGULARLY
-            //List<Item> serverItems = serverItemController.getServerItems();
+            List<Item> serverItems = serverItemController.getServerItems();
 
-            //if (serverItems.Count == 0)
-            //{
+            if (serverItems.Count == 0 || useServer == false)
+            {
             item_dictionary = new List<Item>
                 {
                     new Item("temp", "Sword", "Typical Sword", 2, Bodypart.AttkArm, "STRENGTH", 20),
@@ -113,11 +114,11 @@ namespace GroupProject_DD
                     new Item("temp", "Book of Devs", "Dev item", 10, Bodypart.MagicAll, "STRENGTH", 10),
                     new Item("temp", "Potion", "Normal Potion", 10, Bodypart.Healing, "HEALING", 1)
 				};
-			//}
-			//else 
-			//{
-				//item_dictionary = serverItems;
-			//}     
+			}
+			else
+            {
+                item_dictionary = serverItems;
+			}     
         }
 
         public void Enque(string log)
