@@ -532,15 +532,15 @@ namespace GroupProject_DD
 					}
 					else
 					{
-						// THIS IS THE PART WHERE I SUPPOSE TO CALL FUNCTIONS THAT ARE RELATED TO STEP 6
-						/*if (Attacker is Character && isEquipped)
+                        //THIS IS THE PART WHERE I SUPPOSE TO CALL FUNCTIONS THAT ARE RELATED TO STEP 6
+                        if (Attacker is Character && isEquipped && settings.ItemUsage)
 						{
 							Character pc = Attacker as Character;
 							CheckItemUsage(pc, actions);
 							DecreaseItemUsage(pc);
-						}*/
-	
-						dmg = Defender.takeDamage(Attacker.Attack());
+						}
+
+                        dmg = Defender.takeDamage(Attacker.Attack());
 					}
 
 					if (Defender.isDead())
@@ -558,6 +558,7 @@ namespace GroupProject_DD
             {
                 actions.Add(Defender.Name + " dodged attack from " + Attacker.Name);
             }
+
             return false;
         }
 
