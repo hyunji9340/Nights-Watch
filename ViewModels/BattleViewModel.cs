@@ -48,7 +48,7 @@ namespace GroupProject_DD
             this.isBattleEnded = false;
 			this.serverItemController = serverItemController;
             /**********For Developer Mode (*Fixed Character and Item List*)**********/
-            devStartup();
+            devStartup(serverItemController);
             /**********************************************************************/
             action = "Game starting...";
             actions = new ObservableCollection<string>();
@@ -77,7 +77,7 @@ namespace GroupProject_DD
         }
 
 
-        public void devStartup()
+        public void devStartup(ServerItemController serverItems)
         {
 
 			// access to db and fetch data
@@ -97,9 +97,9 @@ namespace GroupProject_DD
             // BUT IF ITEM_DICTIONARY IS SET TO SERVERITME, THEN AN EXCEPTION IS THROWN IN BATTLE IRREGULARLY
             //List<Item> serverItems = serverItemController.getServerItems();
 
-            //if (serverItems.Count == 0)
-            //{
-            item_dictionary = new List<Item>
+            if (!serverItems.currentSetting.ServerItems)
+            {
+                item_dictionary = new List<Item>
                 {
                     new Item("temp", "Sword", "Typical Sword", 2, Bodypart.AttkArm, "STRENGTH", 20),
                     new Item("temp","Leather Armor", "Torso Protection", 1, Bodypart.Torso, "DEFENSE", 150),
@@ -113,11 +113,11 @@ namespace GroupProject_DD
                     new Item("temp", "Book of Devs", "Dev item", 10, Bodypart.MagicAll, "STRENGTH", 10),
                     new Item("temp", "Potion", "Normal Potion", 10, Bodypart.Healing, "HEALING", 1)
 				};
-			//}
-			//else 
-			//{
-				//item_dictionary = serverItems;
-			//}     
+            }
+            else
+            {
+                item_dictionary = serverItems.serverItems.data;
+            }
         }
 
         public void Enque(string log)
