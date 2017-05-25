@@ -24,5 +24,17 @@ namespace GroupProject_DD.Views
 			serverItems = serverItemController.getServerItems();
 			ItemListView.ItemsSource = serverItems;
         }
+
+		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+		{
+			var Item = args.SelectedItem as Item;
+			if (Item == null)
+				return;
+
+			await Navigation.PushAsync(new ItemDetailPage(Item));
+
+			// Manually deselect item
+			ItemListView.SelectedItem = null;
+		}
     }
 }
