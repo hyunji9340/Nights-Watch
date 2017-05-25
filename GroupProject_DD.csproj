@@ -82,6 +82,9 @@
     <Compile Include="Views\CharacterStatsPage.xaml.cs">
       <DependentUpon>CharacterStatsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ItemDetailsPage.xaml.cs">
+      <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ItemPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ItemDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
