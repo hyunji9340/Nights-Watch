@@ -12,7 +12,6 @@ namespace GroupProject_DD
     public partial class GameMainPage : ContentPage
     {
         private Player currentPlayer;
-        private Settings settings;
 		public ServerItemController serverItemController; // added
 
 
@@ -21,7 +20,6 @@ namespace GroupProject_DD
             InitializeComponent();
             this.currentPlayer = currentPlayer;
 			this.serverItemController = serverItemController;
-            settings = new Settings();
         }
 
         async void CharacterBtnClicked(object sender, EventArgs e)
@@ -46,7 +44,7 @@ namespace GroupProject_DD
 
         async void SettingsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage(settings));
+            await Navigation.PushAsync(new SettingsPage(serverItemController.currentSetting));
         }
         async void ServerItemClicked(object sender, EventArgs e)
 		{
