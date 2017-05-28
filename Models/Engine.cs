@@ -596,21 +596,6 @@ namespace GroupProject_DD
             this.playerController.SavePlayer(currentPlayer);
         }
 
-		// returns true is item still can be used
-		public bool CheckItemUsage() 
-		{
-			Debug.WriteLine("Check Item Usage called");
-			if (currentlyEquippedItem != null) 
-			{
-				Debug.WriteLine("currently EquippedItem is not null");
-				if (currentlyEquippedItem.Usage > 0)
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-
         public void populateBattleEvents()
         {
         }
