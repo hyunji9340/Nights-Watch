@@ -613,7 +613,6 @@ namespace GroupProject_DD
 
         public void populateBattleEvents()
         {
-
         }
     }
 }
