@@ -4,20 +4,22 @@ using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace GroupProject_DD
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GameMainPage : ContentPage
     {
         private Player currentPlayer;
-        private Settings settings;
+		public ServerItemController serverItemController; // added
 
 
-        public GameMainPage(Player currentPlayer)
+		public GameMainPage(Player currentPlayer, ServerItemController serverItemController) // serverItemController added
         {
             InitializeComponent();
             this.currentPlayer = currentPlayer;
-            settings = new Settings();
+			this.serverItemController = serverItemController;
         }
 
         async void CharacterBtnClicked(object sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace GroupProject_DD
 
         async void StartGameBtnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GameStartPage(currentPlayer, settings));
+			await Navigation.PushAsync(new GameStartPage(currentPlayer, serverItemController));
         }
 
         async void LeaderboardClicked(object sender, EventArgs e)
@@ -42,7 +44,17 @@ namespace GroupProject_DD
 
         async void SettingsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage(settings));
+            await Navigation.PushAsync(new SettingsPage(serverItemController.currentSetting));
+        }
+
+        async void ServerItemClicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new ItemPage(serverItemController)); // serverItemController added, setting deleted
+		}
+
+        protected async override void OnAppearing()
+        {
+            await serverItemController.GetItemsAsync();
         }
     }
 }

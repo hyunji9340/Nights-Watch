@@ -19,5 +19,8 @@ namespace GroupProject_DD.Views
             InitializeComponent();
             BindingContext = localSettings = settings;
         }
+
+
+
     }
 }

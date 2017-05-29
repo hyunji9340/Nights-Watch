@@ -3,6 +3,7 @@ using SQLite;
 using System.ComponentModel;
 using System.Collections.Generic;
 using GroupProject_DD.Models;
+using System.Diagnostics;
 
 namespace GroupProject_DD
 {
@@ -32,6 +33,8 @@ namespace GroupProject_DD
 
 			}
 		}
+
+        public string Image { get; set; }
 
 		private string _Name;
 		[NotNull]
@@ -70,7 +73,9 @@ namespace GroupProject_DD
 		private int _curHealth;
 		public int curHealth
 		{
-			get { return _curHealth; }
+			get {
+                Debug.WriteLine("Current health: {0}", _curHealth);
+                return _curHealth; }
 			set
 			{
 				_curHealth = value;
@@ -154,6 +159,7 @@ namespace GroupProject_DD
             }
             get
             {
+                Debug.WriteLine("Health Status: {0}", healthstatus);
                 return healthstatus;
             }
         }
@@ -172,9 +178,21 @@ namespace GroupProject_DD
             }
         }
 
+        public List<String> CharacterImages = new List<String>()
+        {
+            "https://s-media-cache-ak0.pinimg.com/736x/4c/be/8e/4cbe8e4e51f35238f46eb740aa9eabdf--dungeons-and-dragons-characters-fantasy-characters.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/f2/9a/37/f29a3770434259a1015abbdc8ccac6a4.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/a8/0a/33/a80a3360d8ad2d0bf6789689ee4fd111.jpg",
+            "http://img01.deviantart.net/342a/i/2014/148/f/9/dungeons_and_dragons_character_commission_by_leahmsmith-d7k2ywh.png",
+            "http://dungeonsmaster.com/wp-content/uploads/2010/09/53.jpg"
+        };
+
         //constructor
         public Character()
         {
+            Random rand = new Random();
+            
+            Image = CharacterImages[rand.Next(0,4)];
             Name = "";
             Level = 1;
             Health = 20;
@@ -183,7 +201,7 @@ namespace GroupProject_DD
             Strength = 1;
             Dexterity = 1;
             Defense = 1;
-            Speed = 1;
+            Speed = 3;
             monstersKilled = 0;
             HealthStatus = 1;
             Inventory = new Dictionary<string, Item>()
@@ -192,12 +210,17 @@ namespace GroupProject_DD
                 {Bodypart.AttkArm, new Item()},
                 {Bodypart.DefArm, new Item()},
                 {Bodypart.Torso, new Item()},
-                {Bodypart.Feet, new Item()} 
+                {Bodypart.Feet, new Item()},
+                {Bodypart.MagicAll, new Item()},
+                {Bodypart.MagicDirect, new Item()}
             };
         }
 
         public Character(String name)
         {
+            Random rand = new Random();
+
+            Image = CharacterImages[rand.Next(0, 4)];
             Name = name;
             Level = 1;
             Health = 20;
@@ -206,7 +229,7 @@ namespace GroupProject_DD
             Strength = 1;
             Dexterity = 1;
             Defense = 1;
-            Speed = 1;
+            Speed = 3;
             monstersKilled = 0;
             HealthStatus = 1;
 
@@ -216,7 +239,9 @@ namespace GroupProject_DD
                 {Bodypart.AttkArm, new Item()},
                 {Bodypart.DefArm, new Item()},
                 {Bodypart.Torso, new Item()},
-                {Bodypart.Feet, new Item()}
+                {Bodypart.Feet, new Item()},
+                {Bodypart.MagicAll, new Item()},
+                {Bodypart.MagicDirect, new Item()}
             };
             Item item = Inventory[Bodypart.AttkArm];
         }
@@ -273,12 +298,14 @@ namespace GroupProject_DD
         public bool evaluateNewItem(Item item)
         {
             /*locate item slot in inventory*/
-            Item temp_Item;
-            Inventory.TryGetValue(item.BodyPart, out temp_Item);
+            Item temp_Item = Inventory[item.BodyPart];
 
             /*slot is empty, fill with new item found*/
             if (temp_Item.Name == "Empty")
             {
+                Debug.WriteLine("tempItem {0}", temp_Item.BodyPart);
+                temp_Item.BodyPart = item.BodyPart;
+                Debug.WriteLine("tempItem new {0}", temp_Item.BodyPart);
                 discardItem(temp_Item);
                 equipItem(item);
                 return true;
@@ -299,6 +326,8 @@ namespace GroupProject_DD
 
         public void equipItem(Item item)
         {
+            Debug.WriteLine("Equipped: {0}", item.Name);
+            Debug.WriteLine("Equipped: {0}", item.BodyPart);
             Inventory.Add(item.BodyPart, item);
             addAttributes(item);
         }

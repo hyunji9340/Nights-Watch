@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
@@ -7,12 +7,9 @@ using GroupProject_DD.Models;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Net.Http;
-
-
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -31,7 +28,6 @@ namespace GroupProject_DD
         List<ICreature> CharacterList;
         List<Monster> monster_dictionary;
         List<ICreature> activeMonsterList;
-        Settings currentSettings;
         public ObservableCollection<String> actions;
         public ObservableCollection<Character> CharacterReadoutList;
         public string action;
@@ -40,23 +36,25 @@ namespace GroupProject_DD
         public Player currentPlayer;
         public bool isBattleEnded;
 
+
         /*****************Controllers**********************/
         CharacterController characterController = new CharacterController();
         MonsterController monsterController = new MonsterController();
+		public ServerItemController serverItemController;
 
-        public BattleViewModel(Player currentPlayer, Settings incomingSettings)
+		public BattleViewModel(Player currentPlayer, ServerItemController serverItemController)
         {
             this.currentPlayer = currentPlayer;
             this.isBattleEnded = false;
-            this.currentSettings = incomingSettings;
+			this.serverItemController = serverItemController;
             /**********For Developer Mode (*Fixed Character and Item List*)**********/
-            devStartup();
+            devStartup(serverItemController);
             /**********************************************************************/
             action = "Game starting...";
             actions = new ObservableCollection<string>();
             steplock = false;
             this.currentPlayer = currentPlayer;
-            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, currentPlayer, incomingSettings);
+			BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, currentPlayer, serverItemController.currentSetting);
             startGameLoop(true);
         }
 
@@ -79,97 +77,47 @@ namespace GroupProject_DD
         }
 
 
-        public void devStartup()
+        public void devStartup(ServerItemController serverItems)
         {
-            // access to db and fetch data
+
+			// access to db and fetch data
             IEnumerable<ICreature> allCharactersInDB = characterController.GetAllItems();
             // convert ienumerable to array
             this.CharacterList = allCharactersInDB.ToList();
             CharacterReadoutList = new ObservableCollection<Character>();
             foreach (Character hero in CharacterList)
             {
-                CharacterReadoutList.Add(hero);
+                CharacterReadoutList.Add(hero); // add empty items to characters
             }
             IEnumerable<Monster> allMonstersInDB = monsterController.GetAllMonsters();
             this.monster_dictionary = allMonstersInDB.ToList();
 
-            item_dictionary = new List<Item>();
+            // THIS IS WHERE ITEM DICTIONARY GETS INSTANTIATED (THIS ITEM DICTIONARY WILL BE USED IN ENGINE.CS)
+            // IF ITEM_DICTIONARY IS SET TO STATIC ITMES, IT SEEMS LIKE NO EXCEPTION IS THROWN IN BATTLE
+            // BUT IF ITEM_DICTIONARY IS SET TO SERVERITME, THEN AN EXCEPTION IS THROWN IN BATTLE IRREGULARLY
+            //List<Item> serverItems = serverItemController.getServerItems();
 
-            var formContent = new FormUrlEncodedContent(new[]
+            if (!serverItems.currentSetting.ServerItems)
+            {
+                item_dictionary = new List<Item>
                 {
-                    new KeyValuePair<string, string>("randomItemOption", "1"),
-                    new KeyValuePair<string, string>("superItemOption", "0"),
-
-                });
-            GetItemsAsync(formContent);
-
-            /*
-            {
-                new Item("Sword", "Typical Sword", 2, Bodypart.AttkArm),
-                new Item("Leather Armor", "Torso Protection", 1, Bodypart.Torso),
-                new Item("Stupid Helmet", "It's dumb", 1, Bodypart.Head),
-                new Item("Mythril Sheild", "Heavy", 5, Bodypart.DefArm),
-                new Item("Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm),
-                new Item("Silver Helmet", "Elegant Helmet", 4, Bodypart.Head),
-                new Item("Bronze Armor", "Rustic", 4, Bodypart.Torso),
-                new Item("Chainmail", "It's Bulletproof", 4, Bodypart.Torso),
-                new Item("Winged Boots", "It's so light", 7, Bodypart.Feet)
-            };*/
-
-        }
-
-        public async void GetItemsAsync(FormUrlEncodedContent code)
-        {
-
-            var client = new System.Net.Http.HttpClient();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            var address = $"http://gamehackathon.azurewebsites.net/api/GetItemsList"; //?format=application/json";
-
-            var response = await client.PostAsync(address, code);
-
-            var itemsJson = response.Content.ReadAsStringAsync().Result;
-
-            
-            var parsed = JsonConvert.DeserializeObject<Item>(itemsJson);
-            
-            JObject JObj = JObject.Parse(itemsJson);
-            JArray arr = JArray.Parse(JObj.GetValue("data").ToString());
-            System.Diagnostics.Debug.WriteLine((JObj.GetValue("data")).ToString());
-
-            List<Item> jsonData = new List<Item>();
-            
-            
-            foreach (JObject obj in arr.Children<JObject>())
-            {
-                Item temp = JsonConvert.DeserializeObject<Item>(obj.ToString());
-
-                jsonData.Add(temp);
-               
+                    new Item("temp", "Sword", "Typical Sword", 2, Bodypart.AttkArm, "STRENGTH", 20),
+                    new Item("temp","Leather Armor", "Torso Protection", 1, Bodypart.Torso, "DEFENSE", 150),
+                    new Item("temp", "Stupid Helmet", "It's dumb", 1, Bodypart.Head, "DEFENSE", 150),
+                    new Item("temp", "Mythril Sheild", "Heavy", 5, Bodypart.DefArm, "DEFENSE", 200),
+                    new Item("temp", "Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm, "STRENGTH", 25),
+                    new Item("temp", "Silver Helmet", "Elegant Helmet", 4, Bodypart.Head, "DEFENSE", 200),
+                    new Item("temp", "Bronze Armor", "Rustic", 4, Bodypart.Torso, "DEFENSE", 100),
+                    new Item("temp", "Chainmail", "It's Bulletproof", 4, Bodypart.Torso, "DEFENSE", 100),
+                    new Item("temp", "Winged Boots", "It's so light", 7, Bodypart.Feet, "SPEED", 200),
+                    new Item("temp", "Book of Devs", "Dev item", 10, Bodypart.MagicAll, "STRENGTH", 10),
+                    new Item("temp", "Potion", "Normal Potion", 10, Bodypart.Healing, "HEALING", 1)
+				};
             }
-
-            //dataAccess.UpdateData(jsonData);
-
-            for (int i = 0; i < jsonData.Count(); i++)
+            else
             {
-                Item tempItem = new Item(jsonData[i].Image, jsonData[i].Name, jsonData[i].Description, jsonData[i].Tier, jsonData[i].AttribMod, jsonData[i].BodyPart, jsonData[i].Usage  );
-                item_dictionary.Add(tempItem);
-                /*
-                item = new Data();
-                item.Image = newData[i].Image;
-                item.Name = newData[i].Name;
-                item.Description = newData[i].Description;
-                item.Tier = newData[i].Tier;
-                item.BodyPart = newData[i].BodyPart;
-                item.AttribMod = newData[i].AttribMod;
-                item.Usage = newData[i].Usage;
-                database.Insert(item);
-                */
-
+                item_dictionary = serverItems.serverItems.data;
             }
-
-
-            return ;
-
         }
 
         public void Enque(string log)
@@ -249,7 +197,6 @@ namespace GroupProject_DD
                 BattleEngine.PointsEearned();
                 this.isBattleEnded = true;
             }
-
             OnPropertyChanged("Actions");
         }
 

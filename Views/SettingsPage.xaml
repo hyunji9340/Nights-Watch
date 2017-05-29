@@ -27,8 +27,13 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Critical Every Attack: " Font="16" />
-                <Label Text="{Binding EveryCritical}" Font="16" HorizontalTextAlignment="Center"/>
-                <Switch IsToggled="{Binding EveryCritical}" IsEnabled="{Binding DebugSettings}" HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding EveryCriticalHit}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding EveryCriticalHit}" IsEnabled="{Binding DebugSettings}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Critical Miss Every Attack: " Font="16" />
+                <Label Text="{Binding EveryCriticalMiss}" Font="16" HorizontalTextAlignment="Center"/>
+                <Switch IsToggled="{Binding EveryCriticalMiss}" IsEnabled="{Binding DebugSettings}" HorizontalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Enable Items: " Font="16" />

@@ -23,10 +23,14 @@ namespace GroupProject_DD {
         private global::Xamarin.Forms.Entry playerName;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private global::Xamarin.Forms.Button SeverItemClicked;
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             this.LoadFromXaml(typeof(PlayerInfoPage));
             layout = this.FindByName<global::Xamarin.Forms.StackLayout>("layout");
             playerName = this.FindByName<global::Xamarin.Forms.Entry>("playerName");
+            SeverItemClicked = this.FindByName<global::Xamarin.Forms.Button>("SeverItemClicked");
         }
     }
 }

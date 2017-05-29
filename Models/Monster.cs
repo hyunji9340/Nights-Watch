@@ -2,16 +2,30 @@
 using SQLite;
 using System.ComponentModel;
 using GroupProject_DD.Models;
+using System.Collections.Generic;
 
 namespace GroupProject_DD
 {
 	[Table("Monsters")]
 	public class Monster : INotifyPropertyChanged, ICreature
 	{
-		public Monster()
+        public List<String> MonsterImages = new List<String>()
+        {
+            "https://img.wonderhowto.com/img/64/06/63581561216775/0/become-game-thrones-white-walker-halloween.w1456.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/b8/f4/68/b8f468548840f7f9fa3f81df253ef2a0.jpg",
+            "https://s-media-cache-ak0.pinimg.com/736x/d6/e0/15/d6e015b57fed8899b388f44784992f56.jpg",
+            "https://generalmills.promo.eprize.com/monsters/public/images/boo_placeholder.png",
+            "https://vignette2.wikia.nocookie.net/muppet/images/0/08/CookieMonsterWaving.jpg/revision/latest?cb=20120128192952"
+        };
+        public Monster()
 		{
+            Random rand = new Random();
+
             curHealth = 15;
+            Image = MonsterImages[rand.Next(0, 4)];
 		}
+
+        public string Image { get; set; }
 
         public Monster(Monster monster)
         {
@@ -177,7 +191,8 @@ namespace GroupProject_DD
 
         public int Attack()
 		{
-			return ((2 * Level) / 5 + 2) * Strength;
+			//return ((2 * Level) / 5 + 2) * Strength;
+			return ((2 * Level) / 5 + 2);
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
