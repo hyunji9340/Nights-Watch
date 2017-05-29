@@ -1,5 +1,6 @@
 using GroupProject_DD.Models;
 using GroupProject_DD.Views;
+using GroupProject_DD.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,19 +19,24 @@ namespace GroupProject_DD
         private Player currentPlayer;
         private Settings settings;
 		public ServerItemController serverItemController;
+        public BattleEffectController battleEffects;
 
-		public BattlePage(Player currentPlayer, ServerItemController serverItemController)
+        public BattlePage(Player currentPlayer, ServerItemController serverItemController, BattleEffectController battleEffects)
         {
             InitializeComponent();
-			//settings = IncomingSettings;
-			this.serverItemController = serverItemController;
+            //settings = IncomingSettings;
+            this.serverItemController = serverItemController;
             DependencyService.Get<IAudioPlayerService>().Pause();
             DependencyService.Get<IAudioPlayerService>().Play("prelude");
             this.currentPlayer = currentPlayer;
-			BindingContext = BattleEngineView = new BattleViewModel(currentPlayer, serverItemController);
+            BindingContext = BattleEngineView = new BattleViewModel(currentPlayer, serverItemController);
             counter = 0;
             rand = new Random();
             this.characterController = new CharacterController();
+            this.battleEffects = battleEffects;
+
+            var randomEvent = battleEffects.Effects[rand.Next(0, battleEffects.Effects.Count)].UseEffect(BattleEngineView.CharacterList, BattleEngineView.monster_dictionary);
+            DisplayAlert("Battle Event!", randomEvent, "OK");
         }
 
         async void Button_Clicked(object sender, EventArgs e)

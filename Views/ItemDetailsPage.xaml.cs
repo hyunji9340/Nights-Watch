@@ -11,7 +11,7 @@ namespace GroupProject_DD
 
 		public ItemDetailPage(Item item)
 		{
-			InitializeComponent();
+			//InitializeComponent();
 			this.Item = item;
 			Debug.WriteLine("In detail page: " + Item.Name);
 			Debug.WriteLine("In detial page: image url: " + Item.Image);

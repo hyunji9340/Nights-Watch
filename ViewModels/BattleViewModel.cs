@@ -25,8 +25,8 @@ namespace GroupProject_DD
 
         /*****************Actual Fields**********************/
         List<Item> item_dictionary;
-        List<ICreature> CharacterList;
-        List<Monster> monster_dictionary;
+        public List<ICreature> CharacterList;
+        public List<Monster> monster_dictionary;
         List<ICreature> activeMonsterList;
         public ObservableCollection<String> actions;
         public ObservableCollection<Character> CharacterReadoutList;
