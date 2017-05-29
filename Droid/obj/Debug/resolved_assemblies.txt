@@ -57,4 +57,12 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Dy
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.Serialization.dll
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.ServiceModel.Internals.dll
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Text.RegularExpressions.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\Newtonsoft.Json.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Xml.XDocument.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Xml.Linq.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.Serialization.Primitives.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Text.Encoding.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Text.Encoding.Extensions.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\Microsoft.CSharp.dll
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\Mono.CSharp.dll
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\android\assets\System.Runtime.InteropServices.dll
