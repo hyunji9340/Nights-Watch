@@ -19,7 +19,7 @@ namespace GroupProject_DD
         private Settings settings;
 		public ServerItemController serverItemController;
 
-		public BattlePage(Player currentPlayer, ServerItemController serverItemController)
+		public BattlePage(Player currentPlayer, ServerItemController serverItemController, bool auto)
         {
             InitializeComponent();
 			//settings = IncomingSettings;
@@ -27,10 +27,20 @@ namespace GroupProject_DD
             DependencyService.Get<IAudioPlayerService>().Pause();
             DependencyService.Get<IAudioPlayerService>().Play("prelude");
             this.currentPlayer = currentPlayer;
-			BindingContext = BattleEngineView = new BattleViewModel(currentPlayer, serverItemController);
+			BindingContext = BattleEngineView = new BattleViewModel(currentPlayer, serverItemController, auto);
             counter = 0;
             rand = new Random();
             this.characterController = new CharacterController();
+            if (auto)
+                runTilEnd();
+        }
+
+        private void runTilEnd()
+        {
+            while (!BattleEngineView.isBattleEnded)
+            {
+                BattleEngineView.UpdateAction(ref counter);
+            }
         }
 
         async void Button_Clicked(object sender, EventArgs e)

@@ -195,12 +195,12 @@ namespace GroupProject_DD
             Image = CharacterImages[rand.Next(0,4)];
             Name = "";
             Level = 1;
-            Health = 20;
+            Health = 50;
             curHealth = Health;
             Experience = 0;
-            Strength = 1;
-            Dexterity = 1;
-            Defense = 1;
+            Strength = 2;
+            Dexterity = 2;
+            Defense = 2;
             Speed = 3;
             monstersKilled = 0;
             HealthStatus = 1;

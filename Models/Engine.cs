@@ -56,7 +56,7 @@ namespace GroupProject_DD
 
         public string IncrementDungeonLevel()
         {
-            if (dungeonLevel < 3)
+            if (dungeonLevel < 12)
             {
                 dungeonLevel++;
                 return "********* Entering Dungeon Level = " + dungeonLevel + " *********";
@@ -65,7 +65,7 @@ namespace GroupProject_DD
             {
                 // after dungeon level 5, the game will over
                 this.isGameOver = true;
-                return "";
+                return "********* The Heros cleared out the dungeon, GAME OVER!!! *********";
             }
         }
 
@@ -105,14 +105,18 @@ namespace GroupProject_DD
             return creature;
         }
 
-        public string generateMonsterList(int dungeonLevel)
+        public string generateMonsterList(int DungeonLevel)
         {
-
-            int num_monsters = rand.Next(1, 4) + dungeonLevel;
+            this.dungeonLevel = DungeonLevel;
+            int num_monsters = rand.Next(1, 4) + DungeonLevel;
             for (int i = 0; i < num_monsters; i++)
             {
+
                 Monster monster = new Monster(monster_dictionary[rand.Next(monster_dictionary.Count)]);
-                monster.setMonsterLevel(dungeonLevel + rand.Next(1, 3));
+                if (DungeonLevel > 2)
+                    monster.setMonsterLevel(DungeonLevel + rand.Next(DungeonLevel, DungeonLevel* DungeonLevel));
+                else
+                    monster.setMonsterLevel(DungeonLevel + rand.Next(1, 3));
                 if (rand.Next(99) % 1 == 0)//percentage to spawn with an item
                     monster.addItem(new Item(item_dictionary[rand.Next(item_dictionary.Count)]));
                 monsterList.Add(monster);
