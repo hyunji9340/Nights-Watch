@@ -20,6 +20,7 @@
             <Button Text="Scores" Grid.Row="2" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" Grid.ColumnSpan="1" Clicked="LeaderboardClicked"/>
             <Button Text="Settings" Grid.Row="2" Grid.Column="1" TextColor="White" BackgroundColor="Maroon" Grid.ColumnSpan="1" Clicked="SettingsClicked"/>
             <Button Text="Server Items" Grid.Row="3" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" Clicked="ServerItemClicked"/>
+            <Button Text="Battle Effects" Grid.Row="3" Grid.Column="1" TextColor="White" BackgroundColor="Maroon" Clicked="BattleEffectClicked"/>
 			<Button Text="START THE GAME!" Grid.Row="4" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Margin="20" Grid.ColumnSpan="2" Clicked="StartGameBtnClicked"/>
 			<Image Source="http://dnd.wizards.com/sites/default/files/media/styles/second_hubpage_banner/public/images/head-banner/NEW-TO-DnD_What-is-DnD_Subsection_Hero_140718.jpg?itok=5pBlzVTc" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />		
 		</Grid>

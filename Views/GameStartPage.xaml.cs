@@ -1,7 +1,8 @@
 ﻿using GroupProject_DD.Models;
+using GroupProject_DD.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+
 using Xamarin.Forms;
 
 namespace GroupProject_DD
@@ -14,13 +15,14 @@ namespace GroupProject_DD
 		private ServerItemController serverItemController;
         private Settings settings;
 
-        public GameStartPage(Player currentPlayer, ServerItemController serverItemController) // setting deleted
+		public GameStartPage(Player currentPlayer, ServerItemController serverItemController) // setting deleted
         {
             InitializeComponent();
             this.characterController = new CharacterController();
             this.currentPlayer = currentPlayer;
 			this.serverItemController = serverItemController;
             //settings = IncomingSettings;
+            this.battleEffects = battleEffectCntrl;
             BindingContext = this;
         }
 
@@ -49,12 +51,12 @@ namespace GroupProject_DD
 
         async void GoBtnClicked(object sender, System.EventArgs e)
         {
-			await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController, false)); // setting deleted, added serverItemController
+			await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController, battleEffects, false)); // setting deleted, added serverItemController
         }
 
         async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController, true)); // setting deleted, added serverItemController
+            await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController, battleEffects, true)); // setting deleted, added serverItemController
         }
     }
 }
