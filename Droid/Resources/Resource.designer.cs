@@ -3888,9 +3888,6 @@ namespace GroupProject_DD.Droid
 			// aapt resource value: 0x7f0a0003
 			public const int Theme_MediaRouter_LightControlPanel = 2131361795;
 			
-			// aapt resource value: 0x7f0a0175
-			public const int Theme_Splash = 2131362165;
-			
 			// aapt resource value: 0x7f0a010e
 			public const int ThemeOverlay_AppCompat = 2131362062;
 			

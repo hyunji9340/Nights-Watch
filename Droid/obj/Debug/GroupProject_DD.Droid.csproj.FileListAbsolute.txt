@@ -157,10 +157,10 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable\team.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-hdpi\team.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xhdpi\team.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xxhdpi\team.jpg
-C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable\loadingscreen.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-hdpi\loadingscreen.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xhdpi\loadingscreen.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable-xxhdpi\loadingscreen.jpg
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable\loadingscreen.jpg
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\R.cs.flag
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\uploadflags.txt
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.Droid.dll.mdb
