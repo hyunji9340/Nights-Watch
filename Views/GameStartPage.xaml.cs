@@ -14,8 +14,9 @@ namespace GroupProject_DD
         private Player currentPlayer;
 		private ServerItemController serverItemController;
         private Settings settings;
+        private BattleEffectController battleEffects;
 
-		public GameStartPage(Player currentPlayer, ServerItemController serverItemController) // setting deleted
+        public GameStartPage(Player currentPlayer, ServerItemController serverItemController) // setting deleted
         {
             InitializeComponent();
             this.characterController = new CharacterController();
