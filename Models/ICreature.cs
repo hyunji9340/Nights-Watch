@@ -9,7 +9,7 @@ namespace GroupProject_DD.Models
     public interface ICreature
     {
         int takeDamage(int damage);
-        int Attack();
+        int generateAttackDmg();
         int Speed { get; set; }
         string Name { get; set; }
         int Dexterity { get; set; }

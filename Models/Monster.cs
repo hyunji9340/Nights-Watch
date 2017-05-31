@@ -23,6 +23,7 @@ namespace GroupProject_DD
 
             curHealth = 15;
             Image = MonsterImages[rand.Next(0, 4)];
+            setMonsterLevel(1);
 		}
 
         public string Image { get; set; }
@@ -189,7 +190,7 @@ namespace GroupProject_DD
                 return true;
         }
 
-        public int Attack()
+        public int generateAttackDmg()
 		{
 			//return ((2 * Level) / 5 + 2) * Strength;
 			return ((2 * Level) / 5 + 2);

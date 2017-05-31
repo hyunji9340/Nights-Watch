@@ -12,7 +12,7 @@ namespace DnD_Unit_Tests
         public void isMonsterDead()
         {
             Monster monster = new Monster();
-            monster.takeDamage(25);
+            monster.takeDamage(2500);
             Assert.IsTrue(monster.isDead());
         }
 
@@ -44,7 +44,7 @@ namespace DnD_Unit_Tests
         public void MonsterAddsItem()
         {
             Monster monster = new Monster();
-            Item item = new Item("Sword", "Hand", 1, Bodypart.AttkArm);
+            Item item = new Item("", "Helmet", "It's story", 7, Bodypart.Head, "STRENGTH", 20);
             monster.addItem(item);
             Assert.IsTrue(monster.hasItem());
         }
@@ -59,7 +59,7 @@ namespace DnD_Unit_Tests
         public void MonsterDropItem()
         {
             Monster monster = new Monster();
-            Item item = new Item("Sword", "Hand", 1, Bodypart.AttkArm);
+            Item item = new Item("", "Helmet", "It's story", 7, Bodypart.Head, "STRENGTH", 20);
             monster.addItem(item);
             Assert.AreSame(item, monster.discardItem());
         }
@@ -68,7 +68,7 @@ namespace DnD_Unit_Tests
         public void MonsterAttackAlgorithm()
         {
             Monster monster = new Monster();
-            Assert.IsTrue(monster.Level + monster.Strength == monster.Attack());
+            Assert.IsTrue(((2 * monster.Level) / 5 + 2) == monster.generateAttackDmg());
         }
     }
 }

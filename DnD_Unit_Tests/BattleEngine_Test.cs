@@ -27,32 +27,22 @@ namespace DnD_Unit_Tests
 
             item_dictionary = new List<Item>()
             {
-                new Item("Sword", "Typical Sword", 2, Bodypart.AttkArm),
-                new Item("Leather Armor", "Torso Protection", 1, Bodypart.Torso),
-                new Item("Stupid Helmet", "It's dumb", 1, Bodypart.Head),
-                new Item("Mythril Sheild", "Heavy", 5, Bodypart.DefArm),
-                new Item("Silver Sword", "Elegant Sword", 4, Bodypart.AttkArm),
-                new Item("Silver Helmet", "Elegant Helmet", 4, Bodypart.Head),
-                new Item("Bronze Armor", "Rustic", 4, Bodypart.Torso),
-                new Item("Chainmail", "It's Bulletproof", 4, Bodypart.Torso),
-                new Item("Winged Boots", "It's so light", 7, Bodypart.Feet)
+                new Item("", "Helmet", "It's story", 7, Bodypart.Head, "STRENGTH", 20),
+                new Item("", "Sword", "It's sharp", 7, Bodypart.AttkArm, "STRENGTH", 20)
             };
             monster_dictionary = new List<Monster>()
             {
                 new Monster(),
-                new Monster(),
-                new Monster(),
-                new Monster(),
                 new Monster()
             };
 
-            //BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary, IncomingSettings);
+            BattleEngine = new Engine(CharacterList, item_dictionary, monster_dictionary);
         }
 
         [TestMethod]
         public void MonsterGeneration()
         {
-            BattleEngine.generateMonsterList(BattleEngine.dungeonLevel);
+            BattleEngine.generateMonsterList(1);
             Assert.IsTrue(BattleEngine.currentMonsterList().Count > 0);
         }
 

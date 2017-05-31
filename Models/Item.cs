@@ -59,7 +59,20 @@ namespace GroupProject_DD
             this.Name = "Empty";
             this.Description = "";
             this.Tier = 0;
-            this.BodyPart = "None";
+            this.BodyPart = "HEAD";
+            this.AttribMod = "";
+            this.Usage = 0;
+            rand = new Random();
+
+        }
+
+        public Item(string bodypart)
+        {
+            this.Image = "";
+            this.Name = "Empty";
+            this.Description = "";
+            this.Tier = 0;
+            this.BodyPart = bodypart;
             this.AttribMod = "";
             this.Usage = 0;
             rand = new Random();

@@ -19,7 +19,7 @@ namespace DnD_Unit_Tests
         public void isCharacterDead()
         {
             Character hero = new Character();
-            hero.takeDamage(25);
+            hero.takeDamage(2500);
             Assert.IsTrue(hero.isDead());
         }
 
@@ -61,22 +61,12 @@ namespace DnD_Unit_Tests
         public void characterEvaluatesNewItemAndEquips()
         {
             Character hero = new Character();
-            Item item1 = new Item("cap", "Made of hair", 1, Bodypart.Head);
-            Item item2 = new Item("Helmet", "Made of metal", 3, Bodypart.Head);
+
+            Item item1 = new Item("", "Helmet", "It's story", 3, Bodypart.Head, "STRENGTH", 20);
+            Item item2 = new Item("", "Helmet", "It's story", 7, Bodypart.Head, "STRENGTH", 20);
             hero.Inventory.Remove(Bodypart.Head);
             hero.equipItem(item1);
             Assert.IsTrue(hero.evaluateNewItem(item2));
-        }
-
-        [TestMethod]
-        public void characterEvaluatesNewItemAndIgnores()
-        {
-            Character hero = new Character();
-            Item item1 = new Item("cap", "Made of hair", 1, Bodypart.Head);
-            Item item2 = new Item("Helmet", "Made of metal", 3, Bodypart.Head);
-            hero.Inventory.Remove(Bodypart.Head);
-            hero.equipItem(item2);
-            Assert.IsFalse(hero.evaluateNewItem(item1));
         }
 
         [TestMethod]
@@ -84,8 +74,8 @@ namespace DnD_Unit_Tests
         {
             Character hero = new Character();
             int invent_count = hero.Inventory.Count;
-            Item onHead;
-            hero.Inventory.TryGetValue(Bodypart.Head, out onHead);
+            Item onHead = new Item(hero.Inventory[Bodypart.Head]);
+            //hero.Inventory.TryGetValue(Bodypart.Head, out onHead);
             hero.discardItem(onHead);
             Assert.IsTrue(invent_count > hero.Inventory.Count);
         }
@@ -105,7 +95,7 @@ namespace DnD_Unit_Tests
         {
             Character hero = new Character();
             hero.Inventory.Remove(Bodypart.AttkArm);
-            Item item = new Item("Sword", "Made of metal", 3, Bodypart.AttkArm);
+            Item item = new Item("", "Helmet", "It's story", 7, Bodypart.AttkArm, "STRENGTH", 20);
             int heroSTRbeforeItem = hero.Strength;
             hero.equipItem(item);
             Assert.IsTrue(heroSTRbeforeItem < hero.Strength);
@@ -115,7 +105,7 @@ namespace DnD_Unit_Tests
         public void characterAttributesRemovedWithItem()
         {
             Character hero = new Character();
-            Item item = new Item("Sword", "Made of metal", 3, Bodypart.AttkArm);
+            Item item = new Item("", "Helmet", "It's story", 7, Bodypart.AttkArm, "STRENGTH", 20);
             hero.Inventory.Remove(Bodypart.AttkArm);
             hero.equipItem(item);
             int heroSTRafterItem = hero.Strength;

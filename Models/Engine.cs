@@ -42,6 +42,21 @@ namespace GroupProject_DD
             this.isGameOver = false;
 			this.currentlyEquippedItem = null;
         }
+        //for unit testing
+        public Engine(List<ICreature> charList, List<Item> itemDictionary, List<Monster> monsterDictionary)
+        {
+            characterList = charList;
+            item_dictionary = itemDictionary;
+            monster_dictionary = monsterDictionary;
+            battleEvent_dictionary = new List<BattleEffects>();
+            deadMonsterList = new List<ICreature>();
+            monsterList = new List<ICreature>();
+            characterDeadList = new List<ICreature>();
+            dungeonLevel = 0;
+            rand = new Random();
+            this.isGameOver = false;
+            this.currentlyEquippedItem = null;
+        }
 
         public int CheckCritical()
         {
@@ -176,24 +191,24 @@ namespace GroupProject_DD
             if (crit == 1)
             {
                 actions.Add(Attacker.Name + " cast a critical hit!");
-                int dmg = Defender.takeDamage(2 * Attacker.Attack());
+                int dmg = Defender.takeDamage(2 * Attacker.generateAttackDmg());
                 actions.Add(Defender.Name + " took " + dmg + " damage");
             }
             else
             {
-                int dmg = (Defender.takeDamage(Attacker.Attack()));
+                int dmg = (Defender.takeDamage(Attacker.generateAttackDmg()));
                 actions.Add(Defender.Name + " took " + dmg + " damage");
             }
             foreach (ICreature otherMonster in monsterList)
             {
                 if(crit == 1)
                 {
-                    int dmg = otherMonster.takeDamage(2*Attacker.Attack());
+                    int dmg = otherMonster.takeDamage(2*Attacker.generateAttackDmg());
                     actions.Add(otherMonster.Name + " took " + dmg + " damage");
                 }
                 else
                 {
-                    int dmg = (otherMonster.takeDamage(Attacker.Attack()));
+                    int dmg = (otherMonster.takeDamage(Attacker.generateAttackDmg()));
                     actions.Add(otherMonster.Name + " took " + dmg + " damage");
                 }
             }
@@ -546,7 +561,7 @@ namespace GroupProject_DD
 								}
 							}
 						}
-						dmg = Defender.takeDamage(2 * Attacker.Attack());
+						dmg = Defender.takeDamage(2 * Attacker.generateAttackDmg());
 					}
 					else
 					{
@@ -565,7 +580,7 @@ namespace GroupProject_DD
 								}
 							}
 						}
-                        dmg = Defender.takeDamage(Attacker.Attack());
+                        dmg = Defender.takeDamage(Attacker.generateAttackDmg());
 					}
 
 					if (Defender.isDead())
