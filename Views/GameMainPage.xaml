@@ -4,25 +4,23 @@
 		<Grid BackgroundColor="Black" Margin="0" Padding="0">
   			<Grid.RowDefinitions>
 				<RowDefinition Height="2*" />
-				<RowDefinition Height="1.5*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="1.5*" />
-				<RowDefinition Height="2*" />
-				<RowDefinition Height="1.5*" />
-  			</Grid.RowDefinitions>
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
   			<Grid.ColumnDefinitions>
     			<ColumnDefinition Width="3*" />
     			<ColumnDefinition Width="3*" />
   			</Grid.ColumnDefinitions>
 			<Image Source="watch.jpg" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />
-  			<Button Text="CHARACTER" Grid.Row="1" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Margin="20" Clicked="CharacterBtnClicked"/>
-            <Button Text="MONSTER" Grid.Row="1" Grid.Column="1" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Margin="20" Clicked="MonsterBtnClicked"/>
+  			<Button Text="CHARACTER" Grid.Row="1" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Clicked="CharacterBtnClicked"/>
+            <Button Text="MONSTER" Grid.Row="1" Grid.Column="1" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Clicked="MonsterBtnClicked"/>
             <Button Text="Scores" Grid.Row="2" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" Grid.ColumnSpan="1" Clicked="LeaderboardClicked"/>
             <Button Text="Settings" Grid.Row="2" Grid.Column="1" TextColor="White" BackgroundColor="Maroon" Grid.ColumnSpan="1" Clicked="SettingsClicked"/>
             <Button Text="Server Items" Grid.Row="3" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" Clicked="ServerItemClicked"/>
             <Button Text="Battle Effects" Grid.Row="3" Grid.Column="1" TextColor="White" BackgroundColor="Maroon" Clicked="BattleEffectClicked"/>
-			<Button Text="START THE GAME!" Grid.Row="4" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Margin="20" Grid.ColumnSpan="2" Clicked="StartGameBtnClicked"/>
-            <Image Source="http://dreamicus.com/data/red/red-01.jpg" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0" />		
+			<Button Text="START THE GAME!" Grid.Row="4" Grid.Column="0" TextColor="White" BackgroundColor="Maroon" BorderWidth="1" Margin="10" Grid.ColumnSpan="2" Clicked="StartGameBtnClicked"/>
 		</Grid>
 	</ContentPage.Content>
 </ContentPage>

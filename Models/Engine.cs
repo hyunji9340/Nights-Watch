@@ -470,9 +470,9 @@ namespace GroupProject_DD
 					if (Attacker is Character && attackerCrit == -1)
 					{
                         
-						//randomly picks a number between 0 and 5 to pick an item to break upon crit miss
+						//randomly picks a number between 0 and 7 to pick an item to break upon crit miss
 						Character pc = Attacker as Character;
-						int discardedIndex = rand.Next(0, 5);
+						int discardedIndex = rand.Next(0, 7);
 						if (discardedIndex == 0 && pc.Inventory[Bodypart.Head].Name != "Empty")
 						{
 							Item brokenItem = new Item(pc.Inventory[Bodypart.Head]);
