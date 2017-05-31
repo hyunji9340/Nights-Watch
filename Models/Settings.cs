@@ -113,7 +113,7 @@ namespace GroupProject_DD.Models
 
         public Settings()
         {
-            ServerItems = false;
+            ServerItems = true;
             ItemsRandom = false;
             SuperItems = false;
             DebugSettings = false;

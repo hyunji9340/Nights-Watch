@@ -1,5 +1,6 @@
 ﻿using GroupProject_DD.Models;
 using GroupProject_DD.Views;
+using GroupProject_DD.ViewModels;
 using System;
 using System.Collections.Generic;
 
@@ -13,13 +14,15 @@ namespace GroupProject_DD
     {
         private Player currentPlayer;
 		public ServerItemController serverItemController; // added
+        public BattleEffectController battleEffectCntrl;
 
 
-		public GameMainPage(Player currentPlayer, ServerItemController serverItemController) // serverItemController added
+		public GameMainPage(Player currentPlayer, ServerItemController serverItemController, BattleEffectController battleEffectCntrl) // serverItemController added
         {
             InitializeComponent();
             this.currentPlayer = currentPlayer;
 			this.serverItemController = serverItemController;
+            this.battleEffectCntrl = battleEffectCntrl;
         }
 
         async void CharacterBtnClicked(object sender, EventArgs e)
@@ -34,7 +37,7 @@ namespace GroupProject_DD
 
         async void StartGameBtnClicked(object sender, EventArgs e)
         {
-			await Navigation.PushAsync(new GameStartPage(currentPlayer, serverItemController));
+            await Navigation.PushAsync(new GameStartPage(currentPlayer, serverItemController, battleEffectCntrl));
         }
 
         async void LeaderboardClicked(object sender, EventArgs e)
@@ -51,6 +54,11 @@ namespace GroupProject_DD
 		{
 			await Navigation.PushAsync(new ItemPage(serverItemController)); // serverItemController added, setting deleted
 		}
+
+        async void BattleEffectClicked(object sender, EventArgs e)
+        {
+            //await Navigation.PushAsync(new ItemPage(battleEffectCntrl)); // serverItemController added, setting deleted
+        }
 
         protected async override void OnAppearing()
         {

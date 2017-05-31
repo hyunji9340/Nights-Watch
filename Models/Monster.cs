@@ -191,7 +191,8 @@ namespace GroupProject_DD
 
         public int Attack()
 		{
-			return ((2 * Level) / 5 + 2) * Strength;
+			//return ((2 * Level) / 5 + 2) * Strength;
+			return ((2 * Level) / 5 + 2);
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace GroupProject_DD
 {
-	public partial class ItemDetailPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ItemDetailPage : ContentPage
 	{
 		public Item Item;
 

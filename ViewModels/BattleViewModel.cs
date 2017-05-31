@@ -25,25 +25,26 @@ namespace GroupProject_DD
 
         /*****************Actual Fields**********************/
         List<Item> item_dictionary;
-        List<ICreature> CharacterList;
-        List<Monster> monster_dictionary;
+        public List<ICreature> CharacterList;
+        public List<Monster> monster_dictionary;
         List<ICreature> activeMonsterList;
         public ObservableCollection<String> actions;
         public ObservableCollection<Character> CharacterReadoutList;
         public string action;
-        Engine BattleEngine;
+        public Engine BattleEngine;
         bool steplock;
         public Player currentPlayer;
         public bool isBattleEnded;
-
+        public bool Auto;
 
         /*****************Controllers**********************/
         CharacterController characterController = new CharacterController();
         MonsterController monsterController = new MonsterController();
 		public ServerItemController serverItemController;
 
-		public BattleViewModel(Player currentPlayer, ServerItemController serverItemController)
+		public BattleViewModel(Player currentPlayer, ServerItemController serverItemController, bool auto)
         {
+            Auto = auto;
             this.currentPlayer = currentPlayer;
             this.isBattleEnded = false;
 			this.serverItemController = serverItemController;
@@ -122,7 +123,10 @@ namespace GroupProject_DD
 
         public void Enque(string log)
         {
-            if (actions.Count >= 11)
+            int LogCap = 11;
+            if (Auto)
+                LogCap = 100;
+            if (actions.Count >= LogCap)
                 actions.RemoveAt(actions.Count - 1);
             actions.Insert(0, log);
         }

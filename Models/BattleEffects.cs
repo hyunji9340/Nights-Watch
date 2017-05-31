@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace GroupProject_DD.Models
 {
-    class BattleEffects
+    public class BattleEffects
     {
+        [JsonProperty ("Name")]
         public string Name { get; set; }
+        [JsonProperty ("Description")]
         public string Description { get; set; }
+        [JsonProperty ("Tier")]
         public int Tier { get; set; }
+        [JsonProperty ("Target")]
         public string Target { get; set; }
+        [JsonProperty ("AttribMod")]
         public string AttribMod { get; set; }
 
 
@@ -25,7 +31,7 @@ namespace GroupProject_DD.Models
 
         }
 
-        public string UseEffect(List<Character> CharList, List<Monster> MonsterList)
+        public string UseEffect(List<ICreature> CharList, List<Monster> MonsterList)
         {
             if(this.Target == "ALL")
             {
@@ -35,10 +41,10 @@ namespace GroupProject_DD.Models
                         character.Speed += this.Tier;
                     if (this.AttribMod == "HP")
                         character.curHealth += this.Tier;
-                    if (this.AttribMod == "STRENGTH")
+                    /*if (this.AttribMod == "STRENGTH")
                         character.Strength += this.Tier;
                     if (this.AttribMod == "DEFENSE")
-                        character.Defense += this.Tier;
+                        character.Defense += this.Tier;*/
                 }
 
                 foreach (var monster in MonsterList)
@@ -64,10 +70,10 @@ namespace GroupProject_DD.Models
                         character.Speed += this.Tier;
                     if (this.AttribMod == "HP")
                         character.curHealth += this.Tier;
-                    if (this.AttribMod == "STRENGTH")
+                    /*if (this.AttribMod == "STRENGTH")
                         character.Strength += this.Tier;
                     if (this.AttribMod == "DEFENSE")
-                        character.Defense += this.Tier;
+                        character.Defense += this.Tier;*/
                 }
 
                 return this.Description;

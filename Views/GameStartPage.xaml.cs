@@ -1,4 +1,5 @@
 ﻿using GroupProject_DD.Models;
+using GroupProject_DD.ViewModels;
 using System;
 using System.Collections.Generic;
 
@@ -13,14 +14,17 @@ namespace GroupProject_DD
         private Player currentPlayer;
 		private ServerItemController serverItemController;
         private Settings settings;
+        private BattleEffectController battleEffects;
 
-		public GameStartPage(Player currentPlayer, ServerItemController serverItemController) // setting deleted
+        public GameStartPage(Player currentPlayer, ServerItemController serverItemController, BattleEffectController battleEffectCntrl) // setting deleted
         {
             InitializeComponent();
             this.characterController = new CharacterController();
             this.currentPlayer = currentPlayer;
 			this.serverItemController = serverItemController;
             //settings = IncomingSettings;
+            this.battleEffects = battleEffectCntrl;
+            BindingContext = this;
         }
 
         protected override void OnAppearing()
@@ -48,7 +52,12 @@ namespace GroupProject_DD
 
         async void GoBtnClicked(object sender, System.EventArgs e)
         {
-			await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController)); // setting deleted, added serverItemController
+			await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController, battleEffects, false)); // setting deleted, added serverItemController
+        }
+
+        async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BattlePage(currentPlayer, serverItemController, battleEffects, true)); // setting deleted, added serverItemController
         }
     }
 }

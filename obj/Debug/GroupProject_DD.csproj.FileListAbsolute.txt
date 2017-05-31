@@ -101,6 +101,7 @@ C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\Xamarin.Forms.Platform.pdb
 C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\Xamarin.Forms.Xaml.pdb
 C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\Xamarin.Forms.Xaml.xml
 C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\SQLite-net.xml
+C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.csprojResolveAssemblyReference.cache
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.App.xaml.g.cs
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.GroupProject_DDPage.xaml.g.cs
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.Views.StudentsInfoPage.xaml.g.cs
@@ -121,5 +122,7 @@ C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.Views.ItemPage
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.Views.ItemDetailsPage.xaml.g.cs
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.dll
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.pdb
+C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.dll.mdb
+C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\GroupProject_DD.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\obj\Debug\GroupProject_DD.dll.mdb
 C:\Users\Zach\Source\Repos\Nights-Watch\bin\Debug\GroupProject_DD.dll.mdb
