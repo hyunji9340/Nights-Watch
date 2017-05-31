@@ -13,7 +13,6 @@ namespace GroupProject_DD
         private CharacterDetailPage characterDetailPage;
         private Player currentPlayer;
 		private ServerItemController serverItemController;
-        private Settings settings;
         private BattleEffectController battleEffects;
 
         public GameStartPage(Player currentPlayer, ServerItemController serverItemController, BattleEffectController battleEffectCntrl) // setting deleted
@@ -22,7 +21,6 @@ namespace GroupProject_DD
             this.characterController = new CharacterController();
             this.currentPlayer = currentPlayer;
 			this.serverItemController = serverItemController;
-            //settings = IncomingSettings;
             this.battleEffects = battleEffectCntrl;
             BindingContext = this;
         }

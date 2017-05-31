@@ -55,10 +55,6 @@ namespace GroupProject_DD
 			await Navigation.PushAsync(new ItemPage(serverItemController)); // serverItemController added, setting deleted
 		}
 
-        async void BattleEffectClicked(object sender, EventArgs e)
-        {
-            //await Navigation.PushAsync(new ItemPage(battleEffectCntrl)); // serverItemController added, setting deleted
-        }
 
         protected async override void OnAppearing()
         {

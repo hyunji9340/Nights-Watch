@@ -17,14 +17,12 @@ namespace GroupProject_DD
         private CharacterStatsPage characterStatsPage;
         private CharacterController characterController;
         private Player currentPlayer;
-        private Settings settings;
-		public ServerItemController serverItemController;
+        public ServerItemController serverItemController;
         private BattleEffectController BattleEffects;
 
 		public BattlePage(Player currentPlayer, ServerItemController serverItemController, BattleEffectController battleEffect, bool auto)
         {
             InitializeComponent();
-			//settings = IncomingSettings;
 			this.serverItemController = serverItemController;
             DependencyService.Get<IAudioPlayerService>().Pause();
             DependencyService.Get<IAudioPlayerService>().Play("prelude");
@@ -34,8 +32,11 @@ namespace GroupProject_DD
             rand = new Random();
             this.characterController = new CharacterController();
             BattleEffects = battleEffect;
-            var randomEvent = BattleEffects.Effects[rand.Next(0, BattleEffects.Effects.Count)].UseEffect(BattleEngineView.CharacterList, BattleEngineView.monster_dictionary);
-            DisplayAlert("Battle Event!", randomEvent, "OK");
+            if (serverItemController.currentSetting.BattleEvents == true)
+            {
+                var randomEvent = BattleEffects.Effects[rand.Next(0, BattleEffects.Effects.Count)].UseEffect(BattleEngineView.CharacterList, BattleEngineView.monster_dictionary);
+                DisplayAlert("Battle Event!", randomEvent, "OK");
+            }
             if (auto)
                 runTilEnd();
         }
