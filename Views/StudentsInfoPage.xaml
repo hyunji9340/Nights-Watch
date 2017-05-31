@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="GroupProject_DD.StudentsInfoPage" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 		<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Personal Project"/>
+		<ToolbarItem Text="Night's Watch"/>
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
         <ScrollView>
