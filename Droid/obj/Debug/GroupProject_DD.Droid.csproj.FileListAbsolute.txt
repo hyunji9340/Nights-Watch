@@ -164,3 +164,4 @@ C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\res\drawable\loadingscre
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\R.cs.flag
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\uploadflags.txt
 C:\Users\Zach\Source\Repos\Nights-Watch\Droid\obj\Debug\GroupProject_DD.Droid.dll.mdb
+C:\Users\Zach\Source\Repos\Nights-Watch\Droid\bin\Debug\GroupProject_DD.Droid.dll.mdb
